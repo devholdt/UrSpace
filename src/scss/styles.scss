@@ -1,0 +1,35 @@
+// Custom variables
+@import "./variables";
+
+// Bootstrap Sass
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Custom imports
+@import "./components/logo";
+
+// Custom Sass
+.custom-link {
+    @extend .nav-link;
+
+    border: 1px solid transparent;
+    font-size: 18px;
+    font-weight: 600;
+    width: fit-content;
+
+    &:hover {
+        color: $secondary;
+    }
+}
+
+.user-profile_home {
+    img {
+        width: 70px;
+        max-height: 70px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+
+    span {
+        font-size: 16px;
+    }
+}
