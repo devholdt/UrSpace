@@ -8,7 +8,8 @@
     "build": "sass src/scss:dist/css",
     "watch": "sass --watch src/scss:dist/css",
     "start": "live-server",
-    "dev": "npm-run-all --parallel watch start"
+    "dev": "npm-run-all --parallel watch start",
+    "docs": "jsdoc -c ./conf.json -r"
   },
   "repository": {
     "type": "git",
