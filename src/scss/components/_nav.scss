@@ -1,0 +1,23 @@
+nav {
+    i, span {
+        font-size: 1.25rem;
+    }
+
+    i {
+        width: 30px;
+        text-align: center;
+    }
+}
+
+.custom-link {
+    @extend .nav-link;
+
+    border: 1px solid transparent;
+    font-size: 18px;
+    font-weight: 600;
+    width: fit-content;
+
+    &:hover {
+        color: $secondary;
+    }
+}

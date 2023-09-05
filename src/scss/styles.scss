@@ -5,31 +5,35 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 // Custom imports
+@import "./layout/main";
+@import "./layout/posts";
 @import "./components/logo";
+@import "./components/nav";
+@import "./components/form";
+@import "./components/card";
 
 // Custom Sass
-.custom-link {
-    @extend .nav-link;
+.btn-custom {
+    @extend .btn-outline-secondary;
 
-    border: 1px solid transparent;
-    font-size: 18px;
+    border-radius: 20px;
+    width: 75px;
     font-weight: 600;
-    width: fit-content;
 
     &:hover {
-        color: $secondary;
+        color: $white;
     }
 }
 
-.user-profile_home {
-    img {
-        width: 70px;
-        max-height: 70px;
-        object-fit: cover;
-        border-radius: 50%;
-    }
+.btn-post {
+    @extend .btn-secondary;
 
-    span {
-        font-size: 16px;
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    width: 75px;
+
+    &:hover {
+        color: $white;
     }
 }

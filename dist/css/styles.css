@@ -2975,7 +2975,7 @@ textarea.form-control-lg {
   --bs-btn-disabled-border-color: #1a3767;
 }
 
-.btn-secondary {
+.btn-secondary, .btn-post {
   --bs-btn-color: #000;
   --bs-btn-bg: #ff5722;
   --bs-btn-border-color: #ff5722;
@@ -3111,7 +3111,7 @@ textarea.form-control-lg {
   --bs-gradient: none;
 }
 
-.btn-outline-secondary {
+.btn-outline-secondary, .btn-custom {
   --bs-btn-color: #ff5722;
   --bs-btn-border-color: #ff5722;
   --bs-btn-hover-color: #000;
@@ -11854,8 +11854,44 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+html,
+body,
+.home-columns {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  display: flex;
+  flex-shrink: 0;
+  height: 50px;
+}
+footer p {
+  margin: auto;
+}
+
+.posts-container h3, .posts-container .h3 {
+  background-color: #eeeeee;
+}
+
 header a:hover {
   text-decoration: none;
+}
+
+nav i, nav span {
+  font-size: 1.25rem;
+}
+nav i {
+  width: 30px;
+  text-align: center;
 }
 
 .custom-link {
@@ -11868,14 +11904,61 @@ header a:hover {
   color: #ff5722;
 }
 
-.user-profile_home img {
-  width: 70px;
-  max-height: 70px;
-  object-fit: cover;
-  border-radius: 50%;
+.form-post {
+  background-color: #f8f9fa;
 }
-.user-profile_home span {
-  font-size: 16px;
+.form-post label {
+  color: #6c757d;
+}
+.form-post #postContent {
+  resize: none;
+  height: 120px;
+  border: none;
+}
+.form-post #postContent:focus {
+  box-shadow: none;
+}
+
+.form-search input {
+  border-left: none;
+  border-color: #eeeeee;
+  border-radius: 0 25px 25px 0;
+}
+.form-search input:focus {
+  box-shadow: none;
+  border-color: #eeeeee;
+}
+.form-search label {
+  background-color: #fff;
+  border-color: #eeeeee;
+  color: #1a3767;
+  border-radius: 25px 0 0 25px;
+}
+
+.card .btn-group {
+  justify-content: end;
+}
+.card .btn-group button {
+  max-width: 60px;
+}
+
+.btn-custom {
+  border-radius: 20px;
+  width: 75px;
+  font-weight: 600;
+}
+.btn-custom:hover {
+  color: #fff;
+}
+
+.btn-post {
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+  width: 75px;
+}
+.btn-post:hover {
+  color: #fff;
 }
 
 /*# sourceMappingURL=styles.css.map */
