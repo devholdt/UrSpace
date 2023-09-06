@@ -7,6 +7,10 @@ nav {
         width: 30px;
         text-align: center;
     }
+
+    .active {
+        color: $secondary;
+    }
 }
 
 .custom-link {

@@ -11893,6 +11893,9 @@ nav i {
   width: 30px;
   text-align: center;
 }
+nav .active {
+  color: #ff5722;
+}
 
 .custom-link {
   border: 1px solid transparent;
