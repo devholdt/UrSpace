@@ -1,19 +1,21 @@
-.form-post {
+.form-post, .form-login {
     background-color: $gray-100;
 
     label {
         color: $gray-600;
     }
+}
 
-    #textContent {
-        resize: none;
-        height: 120px;
-        border: none;
-
-        &:focus {
-            box-shadow: none;
-        }
+.form-login {
+    .btn-submit {
+        width: 150px;
     }
+}
+
+#textContent {
+    resize: none;
+    height: 120px;
+    border-style: hidden hidden solid hidden;
 }
 
 .form-search {

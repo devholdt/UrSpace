@@ -11917,19 +11917,21 @@ nav .active {
   color: #ff5722;
 }
 
-.form-post {
+.form-post, .form-login {
   background-color: #f8f9fa;
 }
-.form-post label {
+.form-post label, .form-login label {
   color: #6c757d;
 }
-.form-post #textContent {
+
+.form-login .btn-submit {
+  width: 150px;
+}
+
+#textContent {
   resize: none;
   height: 120px;
-  border: none;
-}
-.form-post #textContent:focus {
-  box-shadow: none;
+  border-style: hidden hidden solid hidden;
 }
 
 .form-search input {

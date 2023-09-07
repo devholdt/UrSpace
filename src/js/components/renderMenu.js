@@ -12,16 +12,16 @@ export default function renderMenu() {
       isActive: pathname === "/index.html" || pathname === "",
     },
     {
+      href: "login.html",
+      text: "Login",
+      icon: "fa-right-to-bracket",
+      isActive: pathname === "/login.html",
+    },
+    {
       href: "profile.html",
       text: "Profile",
       icon: "fa-user",
       isActive: pathname === "/profile.html",
-    },
-    {
-      href: "posts.html",
-      text: "Posts",
-      icon: "fa-envelope",
-      isActive: pathname === "/posts.html",
     },
   ];
 
