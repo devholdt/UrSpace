@@ -37,4 +37,10 @@ function submitForm(event) {
       ".message-container"
     );
   }
+
+  doLogin(emailValue, passwordValue);
+}
+
+async function doLogin(email, password) {
+  console.log("Hello");
 }

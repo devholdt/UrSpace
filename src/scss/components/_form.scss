@@ -7,6 +7,10 @@
 }
 
 .form-login {
+    input {
+        border: none;
+    }
+
     .btn-submit {
         width: 150px;
     }

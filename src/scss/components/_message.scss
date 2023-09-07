@@ -1,0 +1,8 @@
+.message-container * {
+    display: flex;
+    padding: .5rem 1rem;
+}
+
+.success {
+    background-color: $success;
+}
