@@ -11878,8 +11878,18 @@ footer p {
   margin: auto;
 }
 
-.posts-container h3, .posts-container .h3 {
+.posts h3, .posts .h3 {
   background-color: #eeeeee;
+}
+
+.loading {
+  border: 8px solid #eeeeee;
+  border-top: 8px solid #ff5722;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  margin: 5rem auto;
+  animation: spin 2s linear infinite;
 }
 
 header a:hover {
@@ -11913,12 +11923,12 @@ nav .active {
 .form-post label {
   color: #6c757d;
 }
-.form-post #postContent {
+.form-post #textContent {
   resize: none;
   height: 120px;
   border: none;
 }
-.form-post #postContent:focus {
+.form-post #textContent:focus {
   box-shadow: none;
 }
 
