@@ -12,12 +12,21 @@ export default function renderMenu() {
       isActive: pathname === "/index.html" || pathname === "",
     },
     {
+      // Don't display this if user is logged in
+      href: "signup.html",
+      text: "Sign up",
+      icon: "fa-user-plus",
+      isActive: pathname === "/signup.html",
+    },
+    {
+      // Display this if user isn't logged in
       href: "login.html",
       text: "Login",
       icon: "fa-right-to-bracket",
       isActive: pathname === "/login.html",
     },
     {
+      // Display this if user is logged in
       href: "profile.html",
       text: "Profile",
       icon: "fa-user",
