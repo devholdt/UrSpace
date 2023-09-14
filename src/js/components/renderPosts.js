@@ -15,7 +15,8 @@ export function renderPosts() {
     postsContainer.innerHTML += `
     <div class="card m-4">
         <div class="card-header">
-            Username1234
+        <img src="../../../src/images/mathiaspic-sm.jpg" class="profile-pic" alt="Profile picture">
+            <span>MatBar62953</span>
         </div>
         <div class="card-body">
             <p class="card-text">${post.content}</p>

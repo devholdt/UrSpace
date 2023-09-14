@@ -21,26 +21,68 @@
 
     <main class="container">
         <div class="row home-columns">
+
             <div class="col py-4">
+                <div class="nav-profile mb-3">
+                    <img src="./src/images/mathiaspic-sm.jpg" class="profile-pic" alt="Profile picture">
+                    <a href="profile.html">MatBar62953</a>
+                </div>
                 <nav class="nav flex-column"></nav>
             </div>
+
             <div class="col-6 border-start border-end px-0">
                 <h1 class="bg-light p-2">Profile</h1>
                 <div class="container profile-container d-flex justify-content-between">
                     <div class="d-flex align-items-center gap-3">
-                        <img src="./src/images/mathiaspic.jpg">
+                        <img src="./src/images/mathiaspic-sm.jpg" class="profile-pic" alt="Profile picture">
                         <div>
-                            <h2 class="mb-0">Username1234</h2>
-                            <p>email@address.com</p>
+                            <h2>MatBar62953</h2>
+                            <div class="profile-bio">
+                                <!-- Max 60 characters in bio -->
+                                <p>Welcome to my profile! I post about music and video games.</p>
+                            </div>
                         </div>
                     </div>
                     <button class="btn btn-dark btn-settings p-0"><i class="fa-solid fa-gear"></i></button>
                 </div>
+                <hr>
                 <div class="container">
-                    <p>Liked, reposted and commented posts</p>
+                    <h3>Your posts</h3>
+                    <div class="card m-4">
+                        <div class="card-header">
+                            <img src="./src/images/mathiaspic-sm.jpg" class="profile-pic" alt="Profile picture">
+                            <span>MatBar62953</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">This is one of the user's own posts</p>
+                        </div>
+                        <div class="btn-group m-3" role="group" aria-label="Post interaction">
+                            <button class="btn btn-custom" title="Edit">
+                                <i class="fa-regular fa-edit"></i>
+                            </button>
+                            <button class="btn btn-custom" title="Delete">
+                                <i class="fa-solid fa-x"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
+                <hr>
                 <div class="container">
-                    <p>Users own posts</p>
+                    <h3>Liked posts</h3>
+                    <div class="card m-4">
+                        <div class="card-header">
+                            <img src="./src/images/Placeholder.png" class="profile-pic" alt="Profile picture">
+                            <span>Username1234</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">This is a post you have liked</p>
+                        </div>
+                        <div class="btn-group m-3" role="group" aria-label="Post interaction">
+                            <button class="btn btn-custom" title="Unlike">
+                                <i class="fa-regular fa-thumbs-down"></i>
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col py-4">

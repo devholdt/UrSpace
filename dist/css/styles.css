@@ -11878,8 +11878,25 @@ footer p {
   margin: auto;
 }
 
+h1, .h1 {
+  font-size: 2rem;
+}
+
+h2, .h2 {
+  font-size: 1.75rem;
+}
+
+h3, .h3 {
+  font-size: 1.5rem;
+}
+
 header a:hover {
   text-decoration: none;
+}
+
+.profile-pic {
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 nav i, nav span {
@@ -11901,6 +11918,16 @@ nav .active {
 }
 .custom-link:hover {
   color: #ff5722;
+}
+
+.nav-profile .profile-pic {
+  width: 50px;
+  height: 50px;
+}
+.nav-profile a {
+  text-decoration: none;
+  color: #333333;
+  font-weight: 500;
 }
 
 .form-post, .form-login {
@@ -11939,6 +11966,10 @@ nav .active {
   border-radius: 25px 0 0 25px;
 }
 
+.card .profile-pic {
+  width: 35px;
+  height: 35px;
+}
 .card .btn-group {
   justify-content: end;
 }
@@ -11955,11 +11986,9 @@ nav .active {
   background-color: #4caf50;
 }
 
-.profile-container img {
+.profile-container .profile-pic {
   width: 130px;
   height: 130px;
-  object-fit: cover;
-  border-radius: 50%;
 }
 .profile-container .btn-settings {
   height: 30px;

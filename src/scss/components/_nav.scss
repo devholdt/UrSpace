@@ -25,3 +25,16 @@ nav {
         color: $secondary;
     }
 }
+
+.nav-profile {
+    .profile-pic {
+        width: 50px;
+        height: 50px;
+    }
+
+    a {
+        text-decoration: none;
+        color: $dark;
+        font-weight: 500;
+    }
+}

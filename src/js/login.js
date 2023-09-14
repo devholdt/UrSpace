@@ -18,6 +18,7 @@ function submitForm(event) {
   const emailValue = email.value.trim();
   const passwordValue = password.value.trim();
 
+  // If values are invalid/absent, display an error message
   if (emailValue.length === 0 && passwordValue.length === 0) {
     return message(
       "bg-warning",
