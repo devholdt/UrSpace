@@ -2,6 +2,7 @@ import renderMenu from "./components/renderMenu.js";
 // import { postContent } from "./utilities/clickEvents.js";
 import { API_BASE_URL } from "./settings/api.js";
 import message from "./components/message.js";
+import { storageGetItem } from "./utilities/storage.js";
 
 renderMenu();
 
@@ -12,7 +13,7 @@ const postsUrl = `${API_BASE_URL}/social/posts`;
 
 async function renderPosts(url) {
   try {
-    const token = localStorage.getItem("token");
+    const token = storageGetItem("token");
 
     const fetchOptions = {
       method: "GET",

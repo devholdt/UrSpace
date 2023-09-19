@@ -73,7 +73,7 @@ async function handleLogin(event) {
       console.log(error);
       message(
         "error",
-        "An error occured when attempting to call the API",
+        "An error occured when attempting to login",
         ".message-container"
       );
     }

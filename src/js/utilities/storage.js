@@ -1,36 +1,36 @@
+export function storageSetItem(obj) {
+  localStorage.setItem(obj.key, JSON.stringify(obj.value));
+}
+
+export function storageGetItem(key) {
+  const storedItem = localStorage.getItem(key);
+
+  return JSON.parse(storedItem);
+}
+
 const tokenKey = "token";
 const userKey = "user";
 
-export function storageSetItem(key, value) {
-  localStorage.setItem(key, value);
-}
-
 export function saveToken(token) {
-  storageSetItem(tokenKey, token);
+  storageSetItem({ key: tokenKey, value: token });
 }
 
 export function saveUser(user) {
-  storageSetItem(userKey, user);
+  storageSetItem({ key: userKey, value: user });
 }
 
-// export const storageKey = "posts";
+export function getToken() {
+  return storageGetItem(tokenKey);
+}
 
-// export function storageGetItem(key) {
-//   const posts = localStorage.getItem(key);
+export function getUser() {
+  const user = storageGetItem(userKey);
 
-//   if (!posts) {
-//     return [];
-//   } else {
-//     return JSON.parse(posts);
-//   }
-// }
+  if (user) {
+    return JSON.parse(user);
+  }
 
-// export function getUser() {
-//   const user = storageGetItem(userKey);
+  return null;
+}
 
-//   if (user) {
-//     return user.name;
-//   }
-
-//   return null;
-// }
+// localStorage.clear();
