@@ -5,8 +5,6 @@ import { API_BASE_URL } from "./settings/api.js";
 renderMenu();
 formValidation();
 
-// -----------------------------------------------------------------------------
-
 const form = document.querySelector("form");
 const usernameInput = document.getElementById("registerUsername");
 const emailInput = document.getElementById("registerEmail");
@@ -73,5 +71,3 @@ async function handleRegistration(event) {
     }
   }
 }
-
-// -----------------------------------------------------------------------------

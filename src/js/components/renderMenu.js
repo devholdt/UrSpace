@@ -2,6 +2,22 @@
 export default function renderMenu() {
   const { pathname } = document.location;
   const nav = document.querySelector("nav");
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  // if statement to check if a user is
+  // logged in and adds html if there is
+  if (user) {
+    const navProfile = document.querySelector(".nav-profile");
+
+    if (user.avatar === null) {
+      user.avatar =
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+    }
+
+    navProfile.innerHTML = `
+    <img src="${user.avatar}" class="profile-pic" alt="${user.name}'s profile picture">
+    <a href="profile.html">${user.name}</a>`;
+  }
 
   // Use this array to easily add more links to nav if needed
   const links = [

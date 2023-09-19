@@ -1,7 +1,8 @@
 import renderMenu from "./components/renderMenu.js";
 import { formValidation } from "./utilities/formValidation.js";
 import { API_BASE_URL } from "./settings/api.js";
-import { storageSetItem } from "./utilities/storage.js";
+import { saveToken, saveUser } from "./utilities/storage.js";
+import message from "./components/message.js";
 
 renderMenu();
 formValidation();
@@ -51,21 +52,30 @@ async function handleLogin(event) {
       console.log(response);
 
       if (response.ok) {
-        const json = await response.json();
-        console.log(json);
+        const user = await response.json();
+        console.log(user);
 
-        const token = json.accessToken;
-        storageSetItem("token", token);
+        const token = user.accessToken;
+        saveToken(token);
+        saveUser(JSON.stringify(user));
 
         // Success message here
       } else {
         // Error message here
 
-        console.log("An error has occured when attempting the user login");
+        message(
+          "error",
+          "An error occured when attempting to login",
+          ".message-container"
+        );
       }
     } catch (error) {
       console.log(error);
-      // Error message here
+      message(
+        "error",
+        "An error occured when attempting to call the API",
+        ".message-container"
+      );
     }
   }
 }

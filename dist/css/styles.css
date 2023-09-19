@@ -11977,13 +11977,18 @@ nav .active {
   max-width: 60px;
 }
 
-.message-container * {
-  display: flex;
+.message-container .message {
   padding: 0.5rem 1rem;
+  text-align: center;
+  width: fit-content;
+  margin: 3rem auto;
+  border: 2px outset rgba(255, 255, 255, 0.1882352941);
 }
-
-.success {
+.message-container .success {
   background-color: #4caf50;
+}
+.message-container .error {
+  background-color: #dc3545;
 }
 
 .profile-container .profile-pic {
