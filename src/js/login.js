@@ -1,11 +1,11 @@
 import renderMenu from "./components/renderMenu.js";
-import { formValidation } from "./utilities/formValidation.js";
 import { API_BASE_URL } from "./settings/api.js";
 import { saveToken, saveUser } from "./utilities/storage.js";
 import message from "./components/message.js";
+import { httpRequest } from "./utilities/httpRequest.js";
+import { URLS } from "./settings/constants.js";
 
 renderMenu();
-formValidation();
 
 const form = document.querySelector("form");
 const emailInput = document.getElementById("loginEmail");
@@ -32,6 +32,7 @@ async function handleLogin(event) {
   const password = passwordInput.value;
 
   if (email.length === 0 || password.length === 0) {
+    message("error", "Email and password are required", ".message-container");
     return;
   } else {
     const user = {
@@ -40,40 +41,35 @@ async function handleLogin(event) {
     };
 
     try {
-      const postData = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
-      };
+      const response = await httpRequest(loginUrl, "POST", user);
 
-      const response = await fetch(loginUrl, postData);
-      console.log(response);
-
-      if (response.ok) {
-        const user = await response.json();
-        console.log(user);
-
-        const token = user.accessToken;
-        saveToken(token);
-        saveUser(JSON.stringify(user));
-
-        // Success message here
-      } else {
-        // Error message here
-
+      if (!response) {
         message(
           "error",
-          "An error occured when attempting to login",
+          "Please provide correct login credentials",
           ".message-container"
         );
+        return;
+      } else if (response.accessToken) {
+        const token = response.accessToken;
+        saveToken(token);
+        saveUser(JSON.stringify(response));
+
+        message(
+          "success",
+          `Login successful, welcome back ${response.name}`,
+          ".message-container"
+        );
+
+        setTimeout(() => {
+          window.location.href = URLS.HOME;
+        }, 3000);
       }
     } catch (error) {
       console.log(error);
       message(
         "error",
-        "An error occured when attempting to login",
+        "An error occured when attempting to log in",
         ".message-container"
       );
     }

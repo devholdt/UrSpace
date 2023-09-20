@@ -1,9 +1,7 @@
 import renderMenu from "./components/renderMenu.js";
-import { formValidation } from "./utilities/formValidation.js";
 import { API_BASE_URL } from "./settings/api.js";
 
 renderMenu();
-formValidation();
 
 const form = document.querySelector("form");
 const usernameInput = document.getElementById("registerUsername");

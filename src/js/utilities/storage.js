@@ -15,12 +15,12 @@ export function saveToken(token) {
   storageSetItem({ key: tokenKey, value: token });
 }
 
-export function saveUser(user) {
-  storageSetItem({ key: userKey, value: user });
-}
-
 export function getToken() {
   return storageGetItem(tokenKey);
+}
+
+export function saveUser(user) {
+  storageSetItem({ key: userKey, value: user });
 }
 
 export function getUser() {

@@ -11921,6 +11921,7 @@ nav .active {
 }
 
 .nav-profile {
+  display: none;
   border: 1px solid rgba(0, 0, 0, 0.244);
   padding: 1em;
 }
