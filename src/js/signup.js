@@ -1,5 +1,9 @@
 import renderMenu from "./components/renderMenu.js";
 import { API_BASE_URL } from "./settings/api.js";
+import { httpRequest } from "./utilities/httpRequest.js";
+import message from "./components/message.js";
+import { URLS } from "./settings/constants.js";
+import { saveToken, saveUser } from "./utilities/storage.js";
 
 renderMenu();
 
@@ -30,42 +34,75 @@ async function handleRegistration(event) {
   const password = passwordInput.value;
 
   if (username.length === 0 || email.length === 0 || password.length === 0) {
+    message(
+      "error",
+      "Username, email and password required",
+      ".message-container"
+    );
     return;
-  } else {
-    const user = {
-      name: username,
-      email: email,
-      password: password,
-    };
+  }
 
-    try {
-      const postData = {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(user),
+  const user = {
+    name: username,
+    email: email,
+    password: password,
+  };
+
+  try {
+    const response = await httpRequest(registerUrl, "POST", user);
+
+    if (response) {
+      const loginUrl = `${API_BASE_URL}/social/auth/login`;
+      const loginData = {
+        email: email,
+        password: password,
       };
 
-      const response = await fetch(registerUrl, postData);
-      console.log(response);
+      try {
+        const loginResponse = await httpRequest(loginUrl, "POST", loginData);
 
-      if (response.ok) {
-        const json = await response.json();
-        console.log(json);
-        // Success message here
+        if (loginResponse.accessToken) {
+          const token = loginResponse.accessToken;
+          saveToken(token);
+          saveUser(JSON.stringify(loginResponse));
 
-        console.log("User registration was successful");
-      } else {
-        // Error message here
+          message(
+            "success",
+            `User registration was successful, welcome ${loginResponse.name}`,
+            ".message-container"
+          );
 
-        console.log(
-          "An error has occurred when attempting the user registration"
+          setTimeout(() => {
+            window.location.href = URLS.HOME;
+          }, 3000);
+        } else {
+          message(
+            "error",
+            "An error occured during auto-login",
+            ".message-container"
+          );
+        }
+      } catch (loginError) {
+        console.log(loginError);
+        message(
+          "error",
+          "An error occured during auto-login",
+          ".message-container"
         );
       }
-    } catch (error) {
-      console.log(error);
-      // Error message here
+    } else {
+      message(
+        "error",
+        "Please provide correct registration credentials",
+        ".message-container"
+      );
     }
+  } catch (error) {
+    console.log(error);
+    message(
+      "error",
+      "An error occured when attempting user registration",
+      ".message-container"
+    );
   }
 }
