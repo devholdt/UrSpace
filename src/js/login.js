@@ -75,7 +75,3 @@ async function handleLogin(event) {
     }
   }
 }
-
-// mathi_test
-// mathi_test@noroff.no
-// password123bad

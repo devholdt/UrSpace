@@ -2,20 +2,34 @@ import { API_BASE_URL } from "./settings/api.js";
 import renderMenu from "./components/renderMenu.js";
 import message from "./components/message.js";
 import { httpRequest } from "./utilities/httpRequest.js";
+import { getUser } from "./utilities/storage.js";
 
 renderMenu();
 
-const postsUrl = `${API_BASE_URL}/social/posts`;
-
+/**
+ * Handles HTTP GET request to API to fetch posts and display them.
+ *
+ * @param {string} url The URL to send the HTTP request to.
+ */
 async function renderPosts(url) {
+  const postsContainer = document.querySelector(".posts-container");
+  const user = getUser();
+
+  if (!user) {
+    postsContainer.innerHTML = `<p class="posts-message">Log in to read posts here</p>`;
+    document.querySelector(".posts-message").style.display = "block";
+
+    return;
+  }
+
   try {
     const posts = await httpRequest(url, "GET");
+    const numberOfPosts = 10;
 
-    const postsContainer = document.querySelector(".posts-container");
-    postsContainer.innerHTML = "";
-
-    if ((posts.length = 10)) {
-      posts.forEach((post) => {
+    if (posts.length >= numberOfPosts) {
+      postsContainer.innerHTML = "";
+      for (let i = 0; i < numberOfPosts; i++) {
+        const post = posts[i];
         postsContainer.innerHTML += `
           <div class="card m-4">
             <div class="card-header">
@@ -36,7 +50,7 @@ async function renderPosts(url) {
               </button>
             </div>
           </div>`;
-      });
+      }
     }
   } catch (error) {
     console.log(error);
@@ -47,5 +61,7 @@ async function renderPosts(url) {
     );
   }
 }
+
+const postsUrl = `${API_BASE_URL}/social/posts`;
 
 renderPosts(postsUrl);

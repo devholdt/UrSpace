@@ -32,5 +32,3 @@ export function getUser() {
 
   return null;
 }
-
-// localStorage.clear();
