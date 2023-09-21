@@ -1,9 +1,9 @@
 import renderMenu from "./components/renderMenu.js";
 import { API_BASE_URL } from "./settings/api.js";
 import { httpRequest } from "./utilities/httpRequest.js";
-import message from "./components/message.js";
+import { saveToken, saveUser, getUser } from "./utilities/storage.js";
 import { URLS } from "./settings/constants.js";
-import { saveToken, saveUser } from "./utilities/storage.js";
+import message from "./components/message.js";
 
 renderMenu();
 
@@ -11,6 +11,12 @@ const form = document.querySelector("form");
 const usernameInput = document.getElementById("registerUsername");
 const emailInput = document.getElementById("registerEmail");
 const passwordInput = document.getElementById("registerPassword");
+
+// If user is already logged in, redirect to profile
+const userData = getUser();
+if (userData) {
+  window.location.href = URLS.PROFILE;
+}
 
 form.addEventListener("submit", handleRegistration);
 

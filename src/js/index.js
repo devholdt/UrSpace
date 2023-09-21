@@ -1,8 +1,8 @@
-import { API_BASE_URL } from "./settings/api.js";
 import renderMenu from "./components/renderMenu.js";
-import message from "./components/message.js";
+import { API_BASE_URL } from "./settings/api.js";
 import { httpRequest } from "./utilities/httpRequest.js";
 import { getUser } from "./utilities/storage.js";
+import message from "./components/message.js";
 
 renderMenu();
 
@@ -13,9 +13,9 @@ renderMenu();
  */
 async function renderPosts(url) {
   const postsContainer = document.querySelector(".posts-container");
-  const user = getUser();
+  const userData = getUser();
 
-  if (!user) {
+  if (!userData) {
     postsContainer.innerHTML = `<p class="posts-message">Log in to read posts here</p>`;
     document.querySelector(".posts-message").style.display = "block";
 

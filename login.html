@@ -13,17 +13,20 @@
 </head>
 
 <body>
-    <header class="container text-bg-primary p-3">
-        <a href="index.html">
-            <p class="text-white h1">UrSpace</p>
-        </a>
+    <header class="bg-primary">
+        <div class="container d-flex justify-content-between align-items-center p-3">
+            <div>
+                <a href="index.html">
+                    <p class="text-white h1">UrSpace</p>
+                </a>
+            </div>
+        </div>
     </header>
 
     <main class="container">
-        <div class="row home-columns">
+        <div class="row page-columns">
 
             <div class="col py-4">
-                <div class="nav-profile mb-3"></div>
                 <nav class="nav flex-column"></nav>
             </div>
 
@@ -40,7 +43,7 @@
                     </div>
 
                     <div class="form-floating mb-4">
-                        <input type="text" class="form-control border-bottom shadow-none" placeholder="Password"
+                        <input type="password" class="form-control border-bottom shadow-none" placeholder="Password"
                             id="loginPassword">
                         <label for="loginPassword" class="form-label">Password</label>
                     </div>
@@ -66,8 +69,10 @@
         </div>
     </main>
 
-    <footer class="container text-center bg-primary text-white">
-        <p>UrSpace©2023</p>
+    <footer class="bg-primary align-items-center">
+        <div class="container text-center text-white">
+            <p>UrSpace©2023</p>
+        </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"

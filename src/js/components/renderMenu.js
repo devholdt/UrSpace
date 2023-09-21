@@ -13,10 +13,12 @@ export default function renderMenu() {
     { href: URLS.SIGNUP, text: "Sign up", icon: "fa-solid fa-user-plus" },
   ];
 
-  const navProfile = document.querySelector(".nav-profile");
+  const navProfile = document.querySelector(".user-info");
 
   if (user) {
     navProfile.style.display = "block";
+
+    navProfile.style.display = "flex";
 
     // Removes login and signup links and
     // adds profile link for logged-in users
@@ -29,15 +31,17 @@ export default function renderMenu() {
 
     if (user.avatar === null) {
       user.avatar =
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png";
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-avatarture-973460_1280.png";
     }
 
     navProfile.innerHTML = `
     <div>
-      <img src="${user.avatar}" class="profile-pic" alt="${user.name}'s profile picture">
+      <img src="${user.avatar}" class="avatar" alt="${user.name}'s profile picture">
       <a href="${URLS.PROFILE}">${user.name}</a>
     </div>
-    <button id="btnLogout" class="btn btn-custom">Log out</button>`;
+    <div>
+      <button id="btnLogout">Log out</button>
+    </div>`;
 
     const logoutButton = document.getElementById("btnLogout");
     logoutButton.addEventListener("click", handleLogout);

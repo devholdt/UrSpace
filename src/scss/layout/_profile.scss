@@ -1,0 +1,29 @@
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+
+    &_banner {
+        .banner {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+    }
+
+    &_info {
+        .avatar {
+            width: 130px;
+            height: 130px;
+        }
+    
+        .btn-settings {
+            height: 30px;
+            width: 30px;
+        }
+    
+        .profile-email {
+            font-size: 14px;
+        }
+    }
+}

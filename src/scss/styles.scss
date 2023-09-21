@@ -6,13 +6,13 @@
 
 // Custom imports
 @import "./layout/main";
-@import "./components/logo";
+@import "./layout/profile";
+@import "./layout/nav";
+@import "./layout/footer";
 @import "./components/image";
-@import "./components/nav";
 @import "./components/form";
 @import "./components/card";
 @import "./components/message";
-@import "./components/profile";
 
 // Custom Sass
 .btn-custom {

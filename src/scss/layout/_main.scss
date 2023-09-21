@@ -1,6 +1,6 @@
 html,
 body,
-.home-columns {
+.page-columns {
     height: 100%;
 }
 
@@ -9,18 +9,41 @@ body {
     flex-direction: column;
 }
 
-main {
-    flex: 1 0 auto;
+header {
+    a {
+        text-decoration: none;
+    }
+    
+    .user-info {
+        display: none;
+        align-items: center;
+        gap: 2em;
+    
+        .avatar {
+            width: 35px;
+            height: 35px;
+        }
+    
+        a {
+            text-decoration: none;
+            font-weight: 500;
+            color: white;
+        }
+    
+        #btnLogout {
+            background-color: transparent;
+            border: none;
+            color: white;
+    
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
 }
 
-footer {
-    display: flex;
-    flex-shrink: 0;
-    height: 50px;
-
-    p {
-        margin: auto;
-    }
+main {
+    flex: 1 0 auto;
 }
 
 h1 {

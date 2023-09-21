@@ -11856,7 +11856,7 @@ textarea.form-control-lg {
 }
 html,
 body,
-.home-columns {
+.page-columns {
   height: 100%;
 }
 
@@ -11865,17 +11865,34 @@ body {
   flex-direction: column;
 }
 
-main {
-  flex: 1 0 auto;
+header a {
+  text-decoration: none;
+}
+header .user-info {
+  display: none;
+  align-items: center;
+  gap: 2em;
+}
+header .user-info .avatar {
+  width: 35px;
+  height: 35px;
+}
+header .user-info a {
+  text-decoration: none;
+  font-weight: 500;
+  color: white;
+}
+header .user-info #btnLogout {
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+header .user-info #btnLogout:hover {
+  text-decoration: underline;
 }
 
-footer {
-  display: flex;
-  flex-shrink: 0;
-  height: 50px;
-}
-footer p {
-  margin: auto;
+main {
+  flex: 1 0 auto;
 }
 
 h1, .h1 {
@@ -11890,13 +11907,26 @@ h3, .h3 {
   font-size: 1.5rem;
 }
 
-header a:hover {
-  text-decoration: none;
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
 }
-
-.profile-pic {
+.profile-container_banner .banner {
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 50%;
+}
+.profile-container_info .avatar {
+  width: 130px;
+  height: 130px;
+}
+.profile-container_info .btn-settings {
+  height: 30px;
+  width: 30px;
+}
+.profile-container_info .profile-email {
+  font-size: 14px;
 }
 
 nav i, nav span {
@@ -11920,23 +11950,18 @@ nav .active {
   color: #ff5722;
 }
 
-.nav-profile {
-  display: none;
-  border: 1px solid rgba(0, 0, 0, 0.244);
-  padding: 1em;
-}
-.nav-profile .profile-pic {
-  width: 50px;
+footer {
+  display: flex;
+  flex-shrink: 0;
   height: 50px;
 }
-.nav-profile a {
-  text-decoration: none;
-  color: #333333;
-  font-weight: 500;
+footer p {
+  margin: auto;
 }
-.nav-profile .btn {
-  width: 100px;
-  margin-top: 1.5em;
+
+.avatar {
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .form-post, .form-login {
@@ -11975,7 +12000,7 @@ nav .active {
   border-radius: 25px 0 0 25px;
 }
 
-.card .profile-pic {
+.card .avatar {
   width: 35px;
   height: 35px;
 }
@@ -12005,15 +12030,6 @@ nav .active {
 }
 .message-container .error {
   background-color: #dc3545;
-}
-
-.profile-container .profile-pic {
-  width: 130px;
-  height: 130px;
-}
-.profile-container .btn-settings {
-  height: 30px;
-  width: 30px;
 }
 
 .btn-custom {

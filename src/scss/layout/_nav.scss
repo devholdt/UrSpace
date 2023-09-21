@@ -25,25 +25,3 @@ nav {
         color: $secondary;
     }
 }
-
-.nav-profile {
-    display: none;
-    border: 1px solid rgba(0, 0, 0, 0.244);
-    padding: 1em;
-
-    .profile-pic {
-        width: 50px;
-        height: 50px;
-    }
-
-    a {
-        text-decoration: none;
-        color: $dark;
-        font-weight: 500;
-    }
-
-    .btn {
-        width: 100px;
-        margin-top: 1.5em;
-    }
-}
