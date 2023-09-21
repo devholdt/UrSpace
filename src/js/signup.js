@@ -7,18 +7,27 @@ import message from "./components/message.js";
 
 renderMenu();
 
-const form = document.querySelector("form");
-const usernameInput = document.getElementById("registerUsername");
-const emailInput = document.getElementById("registerEmail");
-const passwordInput = document.getElementById("registerPassword");
-
 // If user is already logged in, redirect to profile
 const userData = getUser();
 if (userData) {
   window.location.href = URLS.PROFILE;
 }
 
+const form = document.querySelector("form");
 form.addEventListener("submit", handleRegistration);
+
+const clearAvatarBtn = document.getElementById("clearAvatarUrl");
+const clearBannerBtn = document.getElementById("clearBannerUrl");
+const avatarInput = document.getElementById("registerAvatar");
+const bannerInput = document.getElementById("registerBanner");
+
+clearAvatarBtn.addEventListener("click", () => {
+  avatarInput.value = "";
+});
+
+clearBannerBtn.addEventListener("click", () => {
+  bannerInput.value = "";
+});
 
 /**
  * Handles the submission of a user registration form.
@@ -35,16 +44,25 @@ async function handleRegistration(event) {
 
   const registerUrl = `${API_BASE_URL}/social/auth/register`;
 
-  const username = usernameInput.value;
-  const email = emailInput.value;
-  const password = passwordInput.value;
+  // Retrieve input values
+  const username = document.getElementById("registerUsername").value;
+  const email = document.getElementById("registerEmail").value;
+  const password = document.getElementById("registerPassword").value;
+  const avatar = avatarInput.value;
+  const banner = bannerInput.value;
 
+  // Validate required input values
   if (username.length === 0 || email.length === 0 || password.length === 0) {
-    message(
-      "error",
-      "Username, email and password required",
-      ".message-container"
-    );
+    message("error", "Username, email and password required");
+    return;
+  }
+
+  // Validate image URLs
+  if (
+    (avatar && !(await isValidImageUrl(avatar))) ||
+    (banner && !(await isValidImageUrl(banner)))
+  ) {
+    message("error", "Invalid image URL");
     return;
   }
 
@@ -52,10 +70,14 @@ async function handleRegistration(event) {
     name: username,
     email: email,
     password: password,
+    avatar: avatar || null,
+    banner: avatar || null,
   };
 
   try {
     const response = await httpRequest(registerUrl, "POST", user);
+
+    console.log(response);
 
     if (response) {
       const loginUrl = `${API_BASE_URL}/social/auth/login`;
@@ -74,41 +96,40 @@ async function handleRegistration(event) {
 
           message(
             "success",
-            `User registration was successful, welcome ${loginResponse.name}`,
-            ".message-container"
+            `User registration was successful, welcome ${loginResponse.name}`
           );
 
           setTimeout(() => {
             window.location.href = URLS.HOME;
           }, 3000);
         } else {
-          message(
-            "error",
-            "An error occured during auto-login",
-            ".message-container"
-          );
+          message("error", "An error occured during auto-login");
         }
       } catch (loginError) {
         console.log(loginError);
-        message(
-          "error",
-          "An error occured during auto-login",
-          ".message-container"
-        );
+        message("error", "An error occured during user registration");
       }
     } else {
-      message(
-        "error",
-        "Please provide correct registration credentials",
-        ".message-container"
-      );
+      message("error", "Please provide correct registration credentials");
     }
   } catch (error) {
     console.log(error);
-    message(
-      "error",
-      "An error occured when attempting user registration",
-      ".message-container"
-    );
+    message("error", "An error occured when attempting user registration");
+  }
+}
+
+async function isValidImageUrl(url) {
+  try {
+    const response = await fetch(url, { method: "HEAD" });
+
+    if (response.ok) {
+      const contentType = response.headers.get("content-type");
+      return contentType && contentType.startsWith("image/");
+    }
+
+    return;
+  } catch (error) {
+    console.log(error);
+    return;
   }
 }

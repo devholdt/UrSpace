@@ -35,28 +35,52 @@
                 <h1 class="bg-light p-2 mb-0">Sign up</h1>
 
                 <form class="form-login py-3 px-5">
-
-                    <div class="form-floating mb-4">
+                    <div class="form-floating mb-3">
                         <input type="text" class="form-control border-bottom shadow-none" placeholder="Username"
-                            id="registerUsername">
+                            id="registerUsername" pattern="[a-zA-Z0-9_]+"
+                            title="Username can only include letters, numbers, and underscores">
                         <label for="registerUsername" class="form-label">Username</label>
                     </div>
 
-                    <div class="form-floating mb-4">
+                    <div class="form-floating mb-3">
                         <input type="text" class="form-control border-bottom shadow-none" placeholder="E-mail"
                             id="registerEmail">
                         <label for="registerEmail" class="form-label">E-mail</label>
                     </div>
 
-                    <div class="form-floating mb-4">
+                    <div class="form-floating mb-5">
                         <input type="password" class="form-control border-bottom shadow-none" placeholder="Password"
-                            id="registerPassword">
-                        <label for="registerPassword" class="form-label">Password</label>
+                            id="registerPassword" minlength="8">
+                        <label for="registerPassword" class="form-label">Password (min. 8 characters)</label>
                     </div>
 
-                    <button class="btn btn-custom btn-submit d-flex justify-content-center mx-auto"
-                        type="submit">Submit</button>
+                    <hr>
 
+                    <div class="d-flex flex-row mt-5 mb-3">
+                        <div class="form-floating w-100">
+                            <input type="text" class="form-control border-bottom shadow-none rounded-0 rounded-start"
+                                placeholder="Avatar" id="registerAvatar">
+                            <label for="registerAvatar" class="form-label">Avatar URL (Optional)</label>
+                        </div>
+                        <button type="button" class="btn btn-light rounded-0 rounded-end" id="clearAvatarUrl">X</button>
+                    </div>
+
+                    <div class="d-flex flex-row mb-5">
+                        <div class="form-floating w-100">
+                            <input type="text" class="form-control border-bottom shadow-none rounded-0 rounded-start"
+                                placeholder="Banner" id="registerBanner">
+                            <label for="registerBanner" class="form-label">Banner URL (Optional)</label>
+                        </div>
+                        <button type="button" class="btn btn-light rounded-0 rounded-end" id="clearBannerUrl">X</button>
+                    </div>
+
+                    <button type="submit"
+                        class="btn btn-custom btn-submit d-flex justify-content-center mx-auto">Submit</button>
+
+                    <p class="d-flex gap-1 justify-content-center mt-4">
+                        Already have an account?
+                        <a href="profile.html">Click here to log in</a>.
+                    </p>
                 </form>
 
                 <div class="message-container"></div>

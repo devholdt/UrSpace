@@ -7,16 +7,13 @@ import message from "./components/message.js";
 
 renderMenu();
 
-const form = document.querySelector("form");
-const emailInput = document.getElementById("loginEmail");
-const passwordInput = document.getElementById("loginPassword");
-
 // If user is already logged in, redirect to profile
 const userData = getUser();
 if (userData) {
   window.location.href = URLS.PROFILE;
 }
 
+const form = document.querySelector("form");
 form.addEventListener("submit", handleLogin);
 
 /**
@@ -34,11 +31,11 @@ async function handleLogin(event) {
 
   const loginUrl = `${API_BASE_URL}/social/auth/login`;
 
-  const email = emailInput.value;
-  const password = passwordInput.value;
+  const email = document.getElementById("loginEmail").value;
+  const password = document.getElementById("loginPassword").value;
 
   if (email.length === 0 || password.length === 0) {
-    message("error", "Email and password are required", ".message-container");
+    message("error", "Email and password are required");
     return;
   } else {
     const user = {
@@ -50,22 +47,14 @@ async function handleLogin(event) {
       const response = await httpRequest(loginUrl, "POST", user);
 
       if (!response) {
-        message(
-          "error",
-          "Please provide correct login credentials",
-          ".message-container"
-        );
+        message("error", "Please provide correct login credentials");
         return;
       } else if (response.accessToken) {
         const token = response.accessToken;
         saveToken(token);
         saveUser(JSON.stringify(response));
 
-        message(
-          "success",
-          `Login successful, welcome back ${response.name}`,
-          ".message-container"
-        );
+        message("success", `Login successful, welcome back ${response.name}`);
 
         setTimeout(() => {
           window.location.href = URLS.HOME;
@@ -73,11 +62,7 @@ async function handleLogin(event) {
       }
     } catch (error) {
       console.log(error);
-      message(
-        "error",
-        "An error occured when attempting to log in",
-        ".message-container"
-      );
+      message("error", "An error occured when attempting to log in");
     }
   }
 }

@@ -54,11 +54,7 @@ async function renderPosts(url) {
     }
   } catch (error) {
     console.log(error);
-    message(
-      "error",
-      "An error occured with the API call",
-      ".message-container"
-    );
+    message("error", "An error occured with the API call");
   }
 }
 

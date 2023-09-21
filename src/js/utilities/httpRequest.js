@@ -34,17 +34,9 @@ export async function httpRequest(url, method = "GET", body = null) {
       return json;
     } else {
       const errorData = await response.json();
-      message(
-        "error",
-        errorData.message || "Request failed",
-        ".message-container"
-      );
+      message("error", errorData.message || "Request failed");
     }
   } catch (error) {
-    message(
-      "error",
-      "An error occured with the API call",
-      ".message-container"
-    );
+    message("error", "An error occured with the API call");
   }
 }
