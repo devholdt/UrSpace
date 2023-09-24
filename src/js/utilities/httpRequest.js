@@ -2,6 +2,7 @@ import { getToken } from "./storage.js";
 import message from "../components/message.js";
 
 /**
+ * A flexible and dynamic function for HTTP Requests.
  *
  * @param {string} url - The URL to send the HTTP request to.
  * @param {string} [method="GET"] - The HTTP method for the request (e.g., "GET", "POST", etc.).

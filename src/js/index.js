@@ -1,5 +1,5 @@
 import renderMenu from "./components/renderMenu.js";
-import { API_BASE_URL } from "./settings/api.js";
+import { API_BASE_URL } from "./settings/constants.js";
 import { httpRequest } from "./utilities/httpRequest.js";
 import { getUser } from "./utilities/storage.js";
 import message from "./components/message.js";
@@ -58,6 +58,6 @@ async function renderPosts(url) {
   }
 }
 
-const postsUrl = `${API_BASE_URL}/social/posts`;
+const postsUrl = `${API_BASE_URL}social/posts`;
 
 renderPosts(postsUrl);

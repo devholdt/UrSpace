@@ -1,5 +1,5 @@
 import renderMenu from "./components/renderMenu.js";
-import { API_BASE_URL } from "./settings/api.js";
+import { API_BASE_URL } from "./settings/constants.js";
 import { httpRequest } from "./utilities/httpRequest.js";
 import { saveToken, saveUser, getUser } from "./utilities/storage.js";
 import { URLS } from "./settings/constants.js";
@@ -42,7 +42,7 @@ clearBannerBtn.addEventListener("click", () => {
 async function handleRegistration(event) {
   event.preventDefault();
 
-  const registerUrl = `${API_BASE_URL}/social/auth/register`;
+  const registerUrl = `${API_BASE_URL}social/auth/register`;
 
   // Retrieve input values
   const username = document.getElementById("registerUsername").value;
@@ -80,7 +80,7 @@ async function handleRegistration(event) {
     console.log(response);
 
     if (response) {
-      const loginUrl = `${API_BASE_URL}/social/auth/login`;
+      const loginUrl = `${API_BASE_URL}social/auth/login`;
       const loginData = {
         email: email,
         password: password,

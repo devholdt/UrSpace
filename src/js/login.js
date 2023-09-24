@@ -1,5 +1,5 @@
 import renderMenu from "./components/renderMenu.js";
-import { API_BASE_URL } from "./settings/api.js";
+import { API_BASE_URL } from "./settings/constants.js";
 import { httpRequest } from "./utilities/httpRequest.js";
 import { saveToken, saveUser, getUser } from "./utilities/storage.js";
 import { URLS } from "./settings/constants.js";
@@ -29,7 +29,7 @@ form.addEventListener("submit", handleLogin);
 async function handleLogin(event) {
   event.preventDefault();
 
-  const loginUrl = `${API_BASE_URL}/social/auth/login`;
+  const loginUrl = `${API_BASE_URL}social/auth/login`;
 
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;

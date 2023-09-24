@@ -11,6 +11,13 @@ export default function renderMenu() {
     { href: URLS.HOME, text: "Home", icon: "fa-solid fa-house" },
     { href: URLS.LOGIN, text: "Login", icon: "fa-solid fa-right-to-bracket" },
     { href: URLS.SIGNUP, text: "Sign up", icon: "fa-solid fa-user-plus" },
+    // ----------- REMOVE THIS WHEN DONE TESTING -----------
+    {
+      href: URLS.TESTLOGIN,
+      text: "Test Login",
+      icon: "fa-solid fa-right-to-bracket",
+    },
+    // ----------- REMOVE THIS WHEN DONE TESTING -----------
   ];
 
   const navProfile = document.querySelector(".user-info");
