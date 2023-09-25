@@ -10,7 +10,7 @@ async function renderProfile() {
   const userData = getUser();
 
   if (!userData) {
-    window.location.href = URLS.LOGIN;
+    window.location.href = URLS.INDEX;
 
     return;
   }

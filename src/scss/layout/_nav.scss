@@ -12,16 +12,3 @@ nav {
         color: $secondary;
     }
 }
-
-.custom-link {
-    @extend .nav-link;
-
-    border: 1px solid transparent;
-    font-size: 18px;
-    font-weight: 600;
-    width: fit-content;
-
-    &:hover {
-        color: $secondary;
-    }
-}

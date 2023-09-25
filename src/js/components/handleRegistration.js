@@ -1,20 +1,8 @@
-import renderMenu from "./components/renderMenu.js";
-import { API_BASE_URL } from "./settings/constants.js";
-import { httpRequest } from "./utilities/httpRequest.js";
-import { saveToken, saveUser, getUser } from "./utilities/storage.js";
-import { URLS } from "./settings/constants.js";
-import message from "./components/message.js";
-
-renderMenu();
-
-// If user is already logged in, redirect to profile
-const userData = getUser();
-if (userData) {
-  window.location.href = URLS.PROFILE;
-}
-
-const form = document.querySelector("form");
-form.addEventListener("submit", handleRegistration);
+import { API_BASE_URL } from "../settings/constants.js";
+import { httpRequest } from "../utilities/httpRequest.js";
+import { saveToken, saveUser } from "../utilities/storage.js";
+import { URLS } from "../settings/constants.js";
+import message from "../components/message.js";
 
 const clearAvatarBtn = document.getElementById("clearAvatarUrl");
 const clearBannerBtn = document.getElementById("clearBannerUrl");
@@ -39,7 +27,7 @@ clearBannerBtn.addEventListener("click", () => {
  * @param {Event} event The event object representing the form submission.
  * @returns {Promise<void>} A Promise that resolves when the registration is complete.
  */
-async function handleRegistration(event) {
+export async function handleRegistration(event) {
   event.preventDefault();
 
   const registerUrl = `${API_BASE_URL}social/auth/register`;
@@ -71,13 +59,11 @@ async function handleRegistration(event) {
     email: email,
     password: password,
     avatar: avatar || null,
-    banner: avatar || null,
+    banner: banner || null,
   };
 
   try {
     const response = await httpRequest(registerUrl, "POST", user);
-
-    console.log(response);
 
     if (response) {
       const loginUrl = `${API_BASE_URL}social/auth/login`;
@@ -100,7 +86,7 @@ async function handleRegistration(event) {
           );
 
           setTimeout(() => {
-            window.location.href = URLS.HOME;
+            window.location.href = URLS.FEED;
           }, 3000);
         } else {
           message("error", "An error occured during auto-login");

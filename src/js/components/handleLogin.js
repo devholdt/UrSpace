@@ -1,20 +1,8 @@
-import renderMenu from "./components/renderMenu.js";
-import { API_BASE_URL } from "./settings/constants.js";
-import { httpRequest } from "./utilities/httpRequest.js";
-import { saveToken, saveUser, getUser } from "./utilities/storage.js";
-import { URLS } from "./settings/constants.js";
-import message from "./components/message.js";
-
-renderMenu();
-
-// If user is already logged in, redirect to profile
-const userData = getUser();
-if (userData) {
-  window.location.href = URLS.PROFILE;
-}
-
-const form = document.querySelector("form");
-form.addEventListener("submit", handleLogin);
+import { API_BASE_URL } from "../settings/constants.js";
+import { httpRequest } from "../utilities/httpRequest.js";
+import { saveToken, saveUser } from "../utilities/storage.js";
+import { URLS } from "../settings/constants.js";
+import message from "../components/message.js";
 
 /**
  * Handles the submission of a user login form.
@@ -26,7 +14,7 @@ form.addEventListener("submit", handleLogin);
  * @param {Event} event The event object representing the form submission.
  * @returns {Promise<void>} A Promise that resolves when the login is complete.
  */
-async function handleLogin(event) {
+export async function handleLogin(event) {
   event.preventDefault();
 
   const loginUrl = `${API_BASE_URL}social/auth/login`;
@@ -57,7 +45,7 @@ async function handleLogin(event) {
         message("success", `Login successful, welcome back ${response.name}`);
 
         setTimeout(() => {
-          window.location.href = URLS.HOME;
+          window.location.href = URLS.FEED;
         }, 3000);
       }
     } catch (error) {

@@ -8,16 +8,8 @@ export default function renderMenu() {
   const user = getUser();
 
   const links = [
-    { href: URLS.HOME, text: "Home", icon: "fa-solid fa-house" },
-    { href: URLS.LOGIN, text: "Login", icon: "fa-solid fa-right-to-bracket" },
-    { href: URLS.SIGNUP, text: "Sign up", icon: "fa-solid fa-user-plus" },
-    // ----------- REMOVE THIS WHEN DONE TESTING -----------
-    {
-      href: URLS.TESTLOGIN,
-      text: "Test Login",
-      icon: "fa-solid fa-right-to-bracket",
-    },
-    // ----------- REMOVE THIS WHEN DONE TESTING -----------
+    { href: URLS.FEED, text: "Home", icon: "fa-solid fa-house" },
+    { href: URLS.PROFILE, text: "Profile", icon: "fa-solid fa-user" },
   ];
 
   const navProfile = document.querySelector(".user-info");
@@ -26,15 +18,6 @@ export default function renderMenu() {
     navProfile.style.display = "block";
 
     navProfile.style.display = "flex";
-
-    // Removes login and signup links and
-    // adds profile link for logged-in users
-    links.splice(1, 2);
-    links.push({
-      href: URLS.PROFILE,
-      text: "Profile",
-      icon: "fa-solid fa-user",
-    });
 
     if (user.avatar === null) {
       user.avatar =
@@ -58,7 +41,7 @@ export default function renderMenu() {
   nav.innerHTML = links
     .map(
       (link) => `
-      <a href="${link.href}" class="custom-link ${
+      <a href="${link.href}" class="link-custom ${
         pathname === `/${link.href}` ? "active" : ""
       }"><i class="${link.icon}"></i> <span>${link.text}</span></a>`
     )

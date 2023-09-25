@@ -5,6 +5,7 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 // Custom imports
+@import "./layout/index";
 @import "./layout/main";
 @import "./layout/profile";
 @import "./layout/nav";
@@ -15,6 +16,19 @@
 @import "./components/message";
 
 // Custom Sass
+.link-custom {
+    @extend .nav-link;
+
+    border: 1px solid transparent;
+    font-size: 18px;
+    font-weight: 600;
+    width: fit-content;
+
+    &:hover {
+        color: $secondary;
+    }
+}
+
 .btn-custom {
     @extend .btn-outline-secondary;
 
