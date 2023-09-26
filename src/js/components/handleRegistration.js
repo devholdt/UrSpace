@@ -1,21 +1,19 @@
 import { API_BASE_URL } from "../settings/constants.js";
 import { httpRequest } from "../utilities/httpRequest.js";
+import { isValidImageUrl } from "../utilities/urlValidation.js";
 import { saveToken, saveUser } from "../utilities/storage.js";
 import { URLS } from "../settings/constants.js";
 import message from "../components/message.js";
+import { clearUrl } from "../utilities/clickEvents.js";
 
 const clearAvatarBtn = document.getElementById("clearAvatarUrl");
-const clearBannerBtn = document.getElementById("clearBannerUrl");
 const avatarInput = document.getElementById("registerAvatar");
+
+const clearBannerBtn = document.getElementById("clearBannerUrl");
 const bannerInput = document.getElementById("registerBanner");
 
-clearAvatarBtn.addEventListener("click", () => {
-  avatarInput.value = "";
-});
-
-clearBannerBtn.addEventListener("click", () => {
-  bannerInput.value = "";
-});
+clearUrl(clearAvatarBtn, avatarInput);
+clearUrl(clearBannerBtn, bannerInput);
 
 /**
  * Handles the submission of a user registration form.
@@ -32,20 +30,17 @@ export async function handleRegistration(event) {
 
   const registerUrl = `${API_BASE_URL}social/auth/register`;
 
-  // Retrieve input values
   const username = document.getElementById("registerUsername").value;
   const email = document.getElementById("registerEmail").value;
   const password = document.getElementById("registerPassword").value;
   const avatar = avatarInput.value;
   const banner = bannerInput.value;
 
-  // Validate required input values
   if (username.length === 0 || email.length === 0 || password.length === 0) {
     message("error", "Username, email and password required");
     return;
   }
 
-  // Validate image URLs
   if (
     (avatar && !(await isValidImageUrl(avatar))) ||
     (banner && !(await isValidImageUrl(banner)))
@@ -87,7 +82,7 @@ export async function handleRegistration(event) {
 
           setTimeout(() => {
             window.location.href = URLS.FEED;
-          }, 3000);
+          }, 2000);
         } else {
           message("error", "An error occured during auto-login");
         }
@@ -101,21 +96,5 @@ export async function handleRegistration(event) {
   } catch (error) {
     console.log(error);
     message("error", "An error occured when attempting user registration");
-  }
-}
-
-async function isValidImageUrl(url) {
-  try {
-    const response = await fetch(url, { method: "HEAD" });
-
-    if (response.ok) {
-      const contentType = response.headers.get("content-type");
-      return contentType && contentType.startsWith("image/");
-    }
-
-    return;
-  } catch (error) {
-    console.log(error);
-    return;
   }
 }

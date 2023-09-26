@@ -15,22 +15,22 @@
 <body>
     <main class="container forms-container">
 
-        <img src="images/UrSpace Logo.svg" alt="UrSpace Logo">
+        <img src="images/UrSpace Logo.svg" alt="UrSpace Logo" id="logoIndex">
 
         <div class="d-flex justify-content-center mt-3 mb-5">
-            <div class="message-container"></div>
+            <p class="message-container message-index"></p>
         </div>
 
         <form id="loginForm">
             <h1 class="text-center">Login</h1>
 
             <div class="mb-2">
-                <label for="loginEmail" class="form-label">Email</label>
+                <label for="loginEmail" class="form-label m-0">Email</label>
                 <input type="text" class="form-control shadow-none" id="loginEmail">
             </div>
 
             <div class="mb-4">
-                <label for="loginPassword" class="form-label">Password</label>
+                <label for="loginPassword" class="form-label m-0">Password</label>
                 <input type="password" class="form-control shadow-none" id="loginPassword">
             </div>
 
@@ -48,33 +48,35 @@
             <h1 class="text-center">Sign up</h1>
 
             <div class="mb-2">
-                <label for="registerUsername" class="form-label">Username</label>
+                <label for="registerUsername" class="form-label m-0">Username</label>
                 <input type="text" class="form-control shadow-none" id="registerUsername">
             </div>
 
             <div class="mb-2">
-                <label for="registerEmail" class="form-label">Email</label>
+                <label for="registerEmail" class="form-label m-0">Email</label>
                 <input type="text" class="form-control shadow-none" id="registerEmail">
             </div>
 
             <div class="mb-4">
-                <label for="registerPassword" class="form-label">Password</label>
+                <label for="registerPassword" class="form-label m-0">Password</label>
                 <input type="password" class="form-control shadow-none" id="registerPassword">
             </div>
 
             <div class="mb-2">
-                <label for="registerAvatar" class="form-label d-block">Avatar URL (Optional)</label>
+                <label for="registerAvatar" class="form-label m-0">Avatar URL (Optional)</label>
                 <div class="d-flex">
-                    <input type="text" class="form-control shadow-none" id="registerAvatar">
-                    <button type="button" class="btn btn-light" id="clearAvatarUrl">X</button>
+                    <input type="text" class="form-control shadow-none url-input" id="registerAvatar">
+                    <button type="button" class="btn btn-light btn-clear" id="clearAvatarUrl"><i
+                            class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
 
             <div class="mb-4">
-                <label for="registerBanner" class="form-label d-block">Banner URL (Optional)</label>
+                <label for="registerBanner" class="form-label m-0">Banner URL (Optional)</label>
                 <div class="d-flex">
-                    <input type="text" class="form-control shadow-none" id="registerBanner">
-                    <button type="button" class="btn btn-light" id="clearBannerUrl">X</button>
+                    <input type="text" class="form-control shadow-none url-input" id="registerBanner">
+                    <button type="button" class="btn btn-light btn-clear" id="clearBannerUrl"><i
+                            class="fa-solid fa-xmark"></i></button>
                 </div>
             </div>
 
@@ -87,7 +89,6 @@
                 <button class="toggle-form p-0" id="toggleLogin">Click here to log in</button>
             </p>
         </form>
-
     </main>
 
     <footer class="align-items-center">

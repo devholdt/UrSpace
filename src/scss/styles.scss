@@ -5,14 +5,15 @@
 @import "../../node_modules/bootstrap/scss/bootstrap";
 
 // Custom imports
-@import "./layout/index";
 @import "./layout/main";
+@import "./layout/index";
+@import "./layout/feed";
 @import "./layout/profile";
-@import "./layout/nav";
 @import "./layout/footer";
-@import "./components/image";
+@import "./components/nav";
 @import "./components/form";
 @import "./components/card";
+@import "./components/image";
 @import "./components/message";
 
 // Custom Sass

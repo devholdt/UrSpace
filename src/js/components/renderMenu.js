@@ -37,7 +37,6 @@ export default function renderMenu() {
     logoutButton.addEventListener("click", handleLogout);
   }
 
-  // Generate menu links with dynamic classes for "active" state
   nav.innerHTML = links
     .map(
       (link) => `

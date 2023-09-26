@@ -36,22 +36,36 @@
                 <h1 class="bg-light p-2 mb-0">Home</h1>
 
                 <form class="border-bottom form-post px-5 py-3">
-                    <div class="form-floating">
-                        <textarea class="form-control mb-3 shadow-none" id="textContent"
-                            placeholder="Make a post"></textarea>
-                        <label for="textContent" class="form-label">Make a post</label>
+
+                    <div class="mb-2">
+                        <label for="postTitle" class="form-label m-0">Title</label>
+                        <input type="text" class="form-control shadow-none" id="postTitle">
                     </div>
+
+                    <div class="mb-2">
+                        <label for="postBody" class="form-label m-0">Body (Optional)</label>
+                        <textarea class="form-control mb-3 shadow-none" id="postBody"></textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="postMedia" class="form-label m-0">Media URL (Optional)</label>
+                        <div class="d-flex">
+                            <input type="text" class="form-control shadow-none url-input" id="postMedia">
+                            <button type="button" class="btn btn-light btn-clear" id="clearMediaUrl"><i
+                                    class="fa-solid fa-xmark"></i></button>
+                        </div>
+                    </div>
+
                     <div class="d-flex justify-content-between">
                         <button type="submit" class="btn btn-post" title="Post">Post</button>
+                        <p class="message-container"></p>
                     </div>
+
                 </form>
 
                 <div class="posts">
                     <h2 class="bg-light p-2">Posts</h2>
-                    <div class="posts-container">
-                        <div class="message-container"></div>
-                        <!-- <div class="loading"></div> -->
-                    </div>
+                    <div class="posts-container"></div>
                 </div>
             </div>
 

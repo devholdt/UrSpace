@@ -5,5 +5,5 @@ export default function message(type, content) {
 
   setTimeout(() => {
     element.innerHTML = "";
-  }, 3000);
+  }, 2000);
 }

@@ -18,8 +18,6 @@ const messageContainer = document.querySelector(".message-container");
 loginForm.addEventListener("submit", handleLogin);
 registrationForm.addEventListener("submit", handleRegistration);
 
-// isValidImageUrl();
-
 toggleFormButtons.forEach((btn) => {
   btn.addEventListener("click", (event) => {
     event.preventDefault();

@@ -3,38 +3,21 @@
     flex-direction: column;
     justify-content: center;
 
-    img {
-        display: flex;
-        justify-content: center;
-        margin: 0 auto;
-        max-width: 450px;
-    }
-
-    form {
-        margin: 0 auto;
-
-        label {
-            margin-bottom: 4px;
-        }
-
-        div {
-            width: 350px;
-        }
-
-        input {
-            padding: 8px;
-            border-radius: 3px;
-            font-size: 16px;
-        }
-
-        button {
-            width: 200px;
-        }
+    form div {
+        width: 300px;
+        margin: auto;
     }
 
     h1 {
         color: $primary;
     }
+}
+
+#logoIndex {
+    display: flex;
+        justify-content: center;
+        margin: 0 auto;
+        max-width: 450px;
 }
 
 .toggle-form {
@@ -45,12 +28,6 @@
     text-decoration: underline;
 }
 
-#registerAvatar, #registerBanner {
-    border-radius: 3px 0 0 3px;
-}
-
-#clearAvatarUrl, #clearBannerUrl {
-    border-radius: 0 3px 3px 0;
-    max-width: 40px;
-    text-align: center;
-}
+// #registerAvatar, #registerBanner {
+//     border-radius: 3px 0 0 3px;
+// }
