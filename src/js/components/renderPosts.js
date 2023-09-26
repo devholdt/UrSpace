@@ -29,8 +29,8 @@ export async function renderPosts(url) {
         }
 
         postsContainer.innerHTML += `
-          <div class="card m-4">
-            <div class="card-header">
+          <div class="card m-4 border-0">
+            <div class="card-header border-0 bg-white">
               <p>${post.title}</p>
             </div>
             <div class="card-body">
@@ -48,7 +48,8 @@ export async function renderPosts(url) {
                 <i class="fa-regular fa-comment"></i>
               </button>
             </div>
-          </div>`;
+          </div>
+          <hr>`;
       }
     }
   } catch (error) {

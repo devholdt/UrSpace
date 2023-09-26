@@ -1,8 +1,9 @@
 .card {
-
-    &-header p {
-        margin: 0;
-        font-size: 20px;
+    &-header {
+        p {
+            margin: 0;
+            font-size: 20px;
+        }
     }
 
     &-body img {
