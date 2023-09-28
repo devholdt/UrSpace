@@ -25,6 +25,11 @@
     }
 }
 
+.bottom-pagination {
+    z-index: 1;
+    background-color: $white;
+}
+
 .form-search {
     input {
         border-left: none;

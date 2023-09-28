@@ -1,4 +1,5 @@
 import { httpRequest } from "../utilities/httpRequest.js";
+import { isValidImageUrl } from "../utilities/urlValidation.js";
 import message from "./message.js";
 
 /**
@@ -13,43 +14,47 @@ export async function renderPosts(url) {
 
   try {
     const posts = await httpRequest(url, "GET");
-    const numberOfPosts = 10;
 
-    if (posts.length >= numberOfPosts) {
-      postsContainer.innerHTML = "";
+    if (posts.length === 0) {
+      postsContainer.innerHTML = `<p class="no-posts">No posts found</p>`;
+    }
 
-      for (const post of posts) {
-        let postMedia;
-        let modalContent;
+    postsContainer.innerHTML = "";
 
-        if (post.media) {
-          const modalId = `modal-${post.id}`;
-          postMedia = `
+    for (const post of posts) {
+      let postMedia = "";
+      let modalContent = "";
+
+      if (post.media) {
+        const modalId = `modal-${post.id}`;
+        postMedia = `
           <div class="thumbnail">
-            <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}"
+            <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}">
           </div>`;
-          modalContent = `
+        modalContent = `
             <div class="modal" id="${modalId}">
               <span class="close-btn" data-modal-id="${modalId}">&times;</span>
                 <img src="${post.media}" alt="Full-sized post media" class="modal-content">
             </div>`;
-        } else {
-          postMedia = "";
-          modalContent = "";
-        }
+      }
 
-        postsContainer.innerHTML += `
-          <div class="card m-4 rounded-0 post">
+      postsContainer.innerHTML += `
+          <div class="card m-4 post">
             <div class="card-header border-0 bg-white">
               <p>${post.title}</p>
             </div>
-            <div class="card-body">
-              <p class="card-text">${post.body}</p>
-              ${postMedia}
-              ${modalContent}
+            <div class="card-content">
+              <div class="card-body">
+                <p class="card-text">${post.body}</p>
+                ${postMedia}
+                ${modalContent}
+              </div>
+              <div class="btn-group" role="group" aria-label="Post interaction">
+                <button type="button" class="btn btn-outline-secondary"><i class="fa-regular fa-thumbs-up"></i></button>
+                <button type="button" class="btn btn-outline-secondary"><i class="fa-regular fa-comment"></i></button>
+              </div>
             </div>
           </div>`;
-      }
     }
   } catch (error) {
     console.log(error);

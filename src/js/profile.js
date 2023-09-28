@@ -1,19 +1,22 @@
 import renderMenu from "./components/renderMenu.js";
-import { URLS } from "./settings/constants.js";
+import { API_BASE_URL, URLS } from "./settings/constants.js";
 import { getUser } from "./utilities/storage.js";
+import { renderPosts } from "./components/renderPosts.js";
 
+const userData = getUser();
+if (!userData) {
+  window.location.href = URLS.INDEX;
+}
+
+const postsUrl = `${API_BASE_URL}social/profiles/${userData.name}/posts`;
+
+renderPosts(postsUrl);
 renderMenu();
+renderProfile();
 
 async function renderProfile() {
   const profileBanner = document.querySelector(".profile-container_banner");
   const profileInfo = document.querySelector(".profile-container_info");
-  const userData = getUser();
-
-  if (!userData) {
-    window.location.href = URLS.INDEX;
-
-    return;
-  }
 
   if (userData.avatar === null) {
     userData.avatar =
@@ -42,5 +45,3 @@ async function renderProfile() {
         </div>
     </div>`;
 }
-
-renderProfile();

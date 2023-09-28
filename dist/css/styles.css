@@ -11958,6 +11958,11 @@ h3, .h3 {
   border-radius: 3px;
 }
 
+.bottom-pagination {
+  z-index: 1;
+  background-color: #fff;
+}
+
 .form-search input {
   border-left: none;
   border-color: #eeeeee;
@@ -11994,6 +11999,13 @@ h3, .h3 {
 }
 .profile-container_info .profile-email {
   font-size: 14px;
+}
+
+.no-posts {
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+  font-size: 20px;
 }
 
 footer {
@@ -12043,15 +12055,16 @@ form .url-input {
   max-height: 400px;
   object-fit: cover;
 }
+.card-content {
+  display: flex;
+  align-items: center;
+}
 .card .btn-group {
-  justify-content: end;
+  align-self: flex-end;
+  margin: 1em;
 }
 .card .btn-group button {
-  max-width: 60px;
-}
-
-.card.post {
-  height: 270px;
+  width: 60px;
 }
 
 .thumbnail {

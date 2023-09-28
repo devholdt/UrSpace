@@ -38,8 +38,6 @@ export async function handlePost(event) {
   try {
     const response = await httpRequest(postsUrl, "POST", post);
 
-    console.log(response);
-
     if (response) {
       message("success", "Post successful");
 
