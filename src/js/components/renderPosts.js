@@ -1,5 +1,5 @@
+import { API_BASE_URL } from "../settings/constants.js";
 import { httpRequest } from "../utilities/httpRequest.js";
-import { isValidImageUrl } from "../utilities/urlValidation.js";
 import message from "./message.js";
 
 /**
@@ -24,6 +24,7 @@ export async function renderPosts(url) {
     for (const post of posts) {
       let postMedia = "";
       let modalContent = "";
+      let buttonGroup = "";
 
       if (post.media) {
         const modalId = `modal-${post.id}`;
@@ -38,6 +39,20 @@ export async function renderPosts(url) {
             </div>`;
       }
 
+      if (location.pathname === "/profile.html") {
+        buttonGroup = `
+        <div class="btn-group" role="group" aria-label="Post interaction">
+          <button class="btn btn-outline-secondary btn-edit" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
+          <button class="btn btn-outline-secondary btn-delete" title="Delete" data-id="${post.id}"><i class="fa-regular fa-trash-can" data-id="${post.id}"></i></button>
+        </div>`;
+      } else {
+        buttonGroup = `
+        <div class="btn-group" role="group" aria-label="Post interaction">
+          <button class="btn btn-outline-secondary btn-like" title="Like"><i class="fa-regular fa-thumbs-up"></i></button>
+          <button class="btn btn-outline-secondary btn-comment" title="Comment"><i class="fa-regular fa-comment"></i></button>
+        </div>`;
+      }
+
       postsContainer.innerHTML += `
           <div class="card m-4 post">
             <div class="card-header border-0 bg-white">
@@ -49,10 +64,7 @@ export async function renderPosts(url) {
                 ${postMedia}
                 ${modalContent}
               </div>
-              <div class="btn-group" role="group" aria-label="Post interaction">
-                <button type="button" class="btn btn-outline-secondary"><i class="fa-regular fa-thumbs-up"></i></button>
-                <button type="button" class="btn btn-outline-secondary"><i class="fa-regular fa-comment"></i></button>
-              </div>
+              ${buttonGroup}
             </div>
           </div>`;
     }
@@ -60,6 +72,12 @@ export async function renderPosts(url) {
     console.log(error);
     message("error", "An error occured with the API call");
   }
+
+  const deleteButtons = document.querySelectorAll(".btn-delete");
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", handleDelete);
+  });
 
   attachEventListeners();
 }
@@ -94,4 +112,25 @@ function attachEventListeners() {
       openModal(modalId);
     });
   });
+}
+
+async function handleDelete(event) {
+  const postId = event.target.dataset.id;
+  const deleteUrl = `${API_BASE_URL}social/posts/${postId}`;
+
+  try {
+    const response = await httpRequest(deleteUrl, "DELETE");
+
+    if (response === 204) {
+      console.log("Post successfully deleted");
+
+      setTimeout(() => {
+        location.reload();
+      }, 2000);
+    } else {
+      console.log("Ejjoj");
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
