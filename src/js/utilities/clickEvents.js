@@ -22,11 +22,7 @@ export async function handleDelete(event) {
       const response = await httpRequest(deleteUrl, "DELETE");
 
       if (response === 204) {
-        console.log("Post successfully deleted");
-
-        setTimeout(() => {
-          location.reload();
-        }, 2000);
+        location.reload();
       }
     } catch (error) {
       console.log(error);

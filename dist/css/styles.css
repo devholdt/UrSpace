@@ -11937,7 +11937,10 @@ h3, .h3 {
 }
 
 .form-post {
-  height: 350px;
+  height: 380px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .form-post div {
   max-width: 400px;
