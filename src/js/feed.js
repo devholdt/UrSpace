@@ -35,12 +35,12 @@ const paginationTop = document.querySelector(".top-pagination");
 const paginationBottom = document.querySelector(".bottom-pagination");
 
 document.onscroll = () => {
-  if (window.scrollY >= 650) {
+  if (window.scrollY >= 550) {
     if (paginationTop && paginationBottom) {
       paginationBottom.style.position = "sticky";
       paginationBottom.style.bottom = "1em";
     }
-  } else if (window.scrollY < 650) {
+  } else if (window.scrollY < 550) {
     paginationBottom.style.position = "relative";
   }
 };

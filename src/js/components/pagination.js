@@ -2,12 +2,12 @@ import { API_BASE_URL } from "../settings/constants.js";
 import { renderPosts } from "./renderPosts.js";
 
 export let currentPage = 1;
-let totalPages = 10;
 const INITIAL_LIMIT = 10;
+let totalPages = 10;
 
 export function generatePostsUrl(page) {
   const offset = (page - 1) * INITIAL_LIMIT;
-  return `${API_BASE_URL}social/posts?limit=${INITIAL_LIMIT}&offset=${offset}`;
+  return `${API_BASE_URL}social/posts?_author=true&limit=${INITIAL_LIMIT}&offset=${offset}`;
 }
 
 function createButton(text, clickHandler) {

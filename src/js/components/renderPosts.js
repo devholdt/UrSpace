@@ -1,6 +1,9 @@
-import { API_BASE_URL } from "../settings/constants.js";
 import { httpRequest } from "../utilities/httpRequest.js";
+import { handleDelete } from "../utilities/clickEvents.js";
+import { getUser } from "../utilities/storage.js";
 import message from "./message.js";
+
+const userData = getUser();
 
 /**
  * Renders posts from the API by sending an HTTP GET request and
@@ -26,6 +29,16 @@ export async function renderPosts(url) {
       let modalContent = "";
       let buttonGroup = "";
 
+      const postDate = new Date(post.created);
+
+      const day = postDate.getDate().toString().padStart(2, "0");
+      const month = (postDate.getMonth() + 1).toString().padStart(2, "0");
+      const year = postDate.getFullYear().toString().slice(-2);
+      const hours = postDate.getHours().toString().padStart(2, "0");
+      const minutes = postDate.getMinutes().toString().padStart(2, "0");
+
+      const formattedPostDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+
       if (post.media) {
         const modalId = `modal-${post.id}`;
         postMedia = `
@@ -39,34 +52,76 @@ export async function renderPosts(url) {
             </div>`;
       }
 
-      if (location.pathname === "/profile.html") {
+      if (post.author.name === userData.name) {
         buttonGroup = `
-        <div class="btn-group" role="group" aria-label="Post interaction">
-          <button class="btn btn-outline-secondary btn-edit" title="Edit"><i class="fa-regular fa-pen-to-square"></i></button>
-          <button class="btn btn-outline-secondary btn-delete" title="Delete" data-id="${post.id}"><i class="fa-regular fa-trash-can" data-id="${post.id}"></i></button>
+        <div class="btn-group m-0" role="group" aria-label="Post interaction">
+          <button class="btn btn-light p-0 btn-edit" title="Edit" data-id="${post.id}"><i class="fa-regular fa-pen-to-square" data-id="${post.id}"></i></button>
+          <button class="btn btn-light p-0 btn-delete" title="Delete" data-id="${post.id}"><i class="fa-regular fa-trash-can" data-id="${post.id}"></i></button>
         </div>`;
       } else {
         buttonGroup = `
-        <div class="btn-group" role="group" aria-label="Post interaction">
-          <button class="btn btn-outline-secondary btn-like" title="Like"><i class="fa-regular fa-thumbs-up"></i></button>
-          <button class="btn btn-outline-secondary btn-comment" title="Comment"><i class="fa-regular fa-comment"></i></button>
+        <div class="btn-group m-0" role="group" aria-label="Post interaction">
+          <button class="btn btn-outline-secondary p-0 btn-like" title="Like"><i class="fa-regular fa-thumbs-up"></i></button>
+          <button class="btn btn-outline-secondary p-0 btn-comment" title="Comment"><i class="fa-regular fa-comment"></i></button>
         </div>`;
       }
 
       postsContainer.innerHTML += `
           <div class="card m-4 post">
-            <div class="card-header border-0 bg-white">
-              <p>${post.title}</p>
+
+            <div class="card-header border-0">
+              <div class="d-flex justify-content-between align-items-center">
+                <p class="fs-6 card-header_name">${post.author.name}</p>
+                <div class="card-follow">
+                  <i class="fa-regular fa-square-plus" title="Follow" data-name="${post.author.name}"></i>
+                  <i class="fa-solid fa-square-plus" title="Unfollow" data-name="${post.author.name}"></i>
+                </div>
+              </div>
             </div>
-            <div class="card-content">
+
+            <div class="card-content border-bottom">
               <div class="card-body">
+                <p class="fs-4">${post.title}</p>
                 <p class="card-text">${post.body}</p>
                 ${postMedia}
                 ${modalContent}
               </div>
-              ${buttonGroup}
             </div>
+
+            <div class="d-flex justify-content-between align-items-center">
+            <p class="d-flex justify-content-end mx-2 mt-0 mb-1 post-date">${formattedPostDate}</p>
+            ${buttonGroup}
+            </div>
+            
           </div>`;
+
+      const followIcons = document.querySelectorAll(".card-follow");
+
+      followIcons.forEach((icon) => {
+        const hollowIcon = icon.querySelector(".fa-regular");
+        const solidIcon = icon.querySelector(".fa-solid");
+
+        icon.addEventListener("click", (e) => {
+          if (
+            hollowIcon.style.display === "block" ||
+            hollowIcon.style.display === ""
+          ) {
+            hollowIcon.style.display = "none";
+            solidIcon.style.display = "block";
+
+            console.log("Followed", e.target.dataset.name);
+          } else {
+            hollowIcon.style.display = "block";
+            solidIcon.style.display = "none";
+
+            console.log("Unfollowed", e.target.dataset.name);
+          }
+        });
+
+        if (post.author.name === userData.name) {
+          hollowIcon.style.display = "none";
+        }
+      });
     }
   } catch (error) {
     console.log(error);
@@ -112,25 +167,4 @@ function attachEventListeners() {
       openModal(modalId);
     });
   });
-}
-
-async function handleDelete(event) {
-  const postId = event.target.dataset.id;
-  const deleteUrl = `${API_BASE_URL}social/posts/${postId}`;
-
-  try {
-    const response = await httpRequest(deleteUrl, "DELETE");
-
-    if (response === 204) {
-      console.log("Post successfully deleted");
-
-      setTimeout(() => {
-        location.reload();
-      }, 2000);
-    } else {
-      console.log("Ejjoj");
-    }
-  } catch (error) {
-    console.log(error);
-  }
 }

@@ -8,7 +8,7 @@ if (!userData) {
   window.location.href = URLS.INDEX;
 }
 
-const postsUrl = `${API_BASE_URL}social/profiles/${userData.name}/posts`;
+const postsUrl = `${API_BASE_URL}social/profiles/${userData.name}/posts?_author=true`;
 
 renderPosts(postsUrl);
 renderMenu();
@@ -37,7 +37,7 @@ async function renderProfile() {
     <div class="d-flex align-items-center gap-3">
         <img src="${userData.avatar}" class="avatar" alt="${userData.name}'s avatar">
         <div>
-            <h2 class="m-0">${userData.name}</h2>
+            <h1 class="m-0">${userData.name}</h1>
             <p class="profile-email">${userData.email}</p>
             <div class="profile-bio">
                 <p>Changeable profile bio here, max 60 characters</p>
