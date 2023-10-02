@@ -39,9 +39,6 @@ async function renderProfile() {
         <div>
             <h1 class="m-0">${userData.name}</h1>
             <p class="profile-email">${userData.email}</p>
-            <div class="profile-bio">
-                <p>Changeable profile bio here, max 60 characters</p>
-            </div>
         </div>
     </div>`;
 }

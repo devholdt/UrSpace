@@ -15,10 +15,6 @@
                 cursor: pointer;
             }
         }
-
-        // .card-follow .fa-solid {
-        //     display: none;
-        // }
     }
 
     &-body img {
@@ -99,5 +95,14 @@
 
     &:hover {
         color: $dark;
+    }
+}
+
+#editForm {
+    width: 350px;
+
+    textarea {
+        resize: none;
+        height: 150px;
     }
 }

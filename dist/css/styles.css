@@ -12137,6 +12137,14 @@ form .url-input {
   color: #333333;
 }
 
+#editForm {
+  width: 350px;
+}
+#editForm textarea {
+  resize: none;
+  height: 150px;
+}
+
 .avatar {
   object-fit: cover;
   border-radius: 50%;
