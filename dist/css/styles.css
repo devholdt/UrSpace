@@ -12063,9 +12063,6 @@ form .url-input {
 .card-header .card-follow:hover {
   cursor: pointer;
 }
-.card-header .card-follow .fa-solid {
-  display: none;
-}
 .card-body img {
   width: 100%;
   max-height: 400px;

@@ -2,6 +2,7 @@ import { httpRequest } from "../utilities/httpRequest.js";
 import { handleDelete } from "../utilities/clickEvents.js";
 import { getUser } from "../utilities/storage.js";
 import message from "./message.js";
+import { API_BASE_URL } from "../settings/constants.js";
 
 const userData = getUser();
 
@@ -72,9 +73,8 @@ export async function renderPosts(url) {
             <div class="card-header border-0">
               <div class="d-flex justify-content-between align-items-center">
                 <p class="fs-6 card-header_name">${post.author.name}</p>
-                <div class="card-follow">
-                  <i class="fa-regular fa-square-plus" title="Follow" data-name="${post.author.name}"></i>
-                  <i class="fa-solid fa-square-plus" title="Unfollow" data-name="${post.author.name}"></i>
+                <div class="card-follow" data-name="${post.author.name}">
+                  <i class="fa-regular fa-square-plus follow-button" title="Follow" data-name="${post.author.name}"></i>
                 </div>
               </div>
             </div>
@@ -95,31 +95,50 @@ export async function renderPosts(url) {
             
           </div>`;
 
+      const usersFollowed = await handleFollowing();
+
+      function checkFollowed(usersFollowed, postAuthor) {
+        if (usersFollowed.includes(postAuthor)) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
       const followIcons = document.querySelectorAll(".card-follow");
 
       followIcons.forEach((icon) => {
-        const hollowIcon = icon.querySelector(".fa-regular");
-        const solidIcon = icon.querySelector(".fa-solid");
+        const followButton = icon.querySelector(".follow-button");
+        const username = icon.dataset.name;
 
-        icon.addEventListener("click", (e) => {
-          if (
-            hollowIcon.style.display === "block" ||
-            hollowIcon.style.display === ""
-          ) {
-            hollowIcon.style.display = "none";
-            solidIcon.style.display = "block";
+        if (checkFollowed(usersFollowed, username)) {
+          followButton.classList.add("fa-solid", "unfollow-user");
+          followButton.classList.remove("fa-regular", "follow-user");
 
-            console.log("Followed", e.target.dataset.name);
-          } else {
-            hollowIcon.style.display = "block";
-            solidIcon.style.display = "none";
+          const unfollowUser = icon.querySelector(".unfollow-user");
 
-            console.log("Unfollowed", e.target.dataset.name);
-          }
-        });
+          unfollowUser.addEventListener("click", (e) => {
+            const username = e.target.dataset.name;
 
-        if (post.author.name === userData.name) {
-          hollowIcon.style.display = "none";
+            handleUnfollow(username);
+
+            unfollowUser.classList.remove("fa-solid", "unfollow-user");
+            unfollowUser.classList.add("fa-regular", "follow-user");
+          });
+        } else {
+          followButton.classList.remove("fa-solid", "unfollow-user");
+          followButton.classList.add("fa-regular", "follow-user");
+
+          const followUser = icon.querySelector(".follow-user");
+
+          followUser.addEventListener("click", (e) => {
+            const username = e.target.dataset.name;
+
+            handleFollow(username);
+
+            followUser.classList.add("fa-solid", "unfollow-user");
+            followUser.classList.remove("fa-regular", "follow-user");
+          });
         }
       });
     }
@@ -167,4 +186,59 @@ function attachEventListeners() {
       openModal(modalId);
     });
   });
+}
+
+// -------------------------------------------------------------
+
+async function handleFollowing() {
+  const url = `${API_BASE_URL}social/profiles/${userData.name}?_following=true`;
+
+  try {
+    const response = await httpRequest(url, "GET");
+    const usersFollowed = response.following;
+    const usernames = usersFollowed.map((user) => user.name);
+    return usernames;
+  } catch (error) {
+    console.log(error);
+    return [];
+  }
+}
+
+// function updateButtonState(username) {
+//   const followIcons = document.querySelectorAll(".card-follow");
+
+//   followIcons.forEach((icon) => {
+//     const followUser = icon.querySelector(".follow-user");
+//     const unfollowUser = icon.querySelector(".unfollow-user");
+//     const userFollowed = icon.dataset.name === username;
+
+//     followUser.style.display = userFollowed ? "none" : "block";
+//     unfollowUser.style.display = userFollowed ? "block" : "none";
+//   });
+// }
+
+async function handleFollow(username) {
+  const followUrl = `${API_BASE_URL}social/profiles/${username}/follow`;
+
+  try {
+    const response = httpRequest(followUrl, "PUT", {});
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function handleUnfollow(username) {
+  const unfollowUrl = `${API_BASE_URL}social/profiles/${username}/unfollow`;
+
+  try {
+    const response = httpRequest(unfollowUrl, "PUT", {});
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+{
+  /* <i class="fa-solid fa-square-plus unfollow-user" title="Unfollow" data-name="${post.author.name}"></i> */
 }
