@@ -1,5 +1,5 @@
 import renderMenu from "./components/renderMenu.js";
-import { API_BASE_URL, URLS } from "./settings/constants.js";
+import { API_URLS, URLS } from "./settings/constants.js";
 import { getUser } from "./utilities/storage.js";
 import { renderPosts } from "./components/renderPosts.js";
 
@@ -8,7 +8,7 @@ if (!userData) {
   window.location.href = URLS.INDEX;
 }
 
-const postsUrl = `${API_BASE_URL}social/profiles/${userData.name}/posts?_author=true`;
+const postsUrl = `${API_URLS.PROFILES}/${userData.name}/posts?_author=true`;
 
 renderPosts(postsUrl);
 renderMenu();

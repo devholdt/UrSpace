@@ -1,15 +1,15 @@
-import { API_BASE_URL } from "../settings/constants.js";
+import { API_URLS } from "../settings/constants.js";
 import { httpRequest } from "../utilities/httpRequest.js";
 import { isValidImageUrl } from "../utilities/urlValidation.js";
 import message from "./message.js";
-
-const postsUrl = `${API_BASE_URL}social/posts`;
 
 export async function handlePost(event) {
   event.preventDefault();
 
   const titleInput = document.getElementById("postTitle");
+  const tagsInput = document.getElementById("postTags");
 
+  const tags = tagsInput.value.split(",").map((tag) => tag.trim());
   const title = titleInput.value;
   const body = document.getElementById("postBody").value;
   const media = document.getElementById("postMedia").value;
@@ -33,10 +33,11 @@ export async function handlePost(event) {
     title: title,
     body: body,
     media: media,
+    tags: tags,
   };
 
   try {
-    const response = await httpRequest(postsUrl, "POST", post);
+    const response = await httpRequest(API_URLS.POSTS, "POST", post);
 
     if (response) {
       message("success", "Post successful");

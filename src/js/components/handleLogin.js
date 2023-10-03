@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../settings/constants.js";
+import { API_URLS } from "../settings/constants.js";
 import { httpRequest } from "../utilities/httpRequest.js";
 import { saveToken, saveUser } from "../utilities/storage.js";
 import { URLS } from "../settings/constants.js";
@@ -17,8 +17,6 @@ import message from "../components/message.js";
 export async function handleLogin(event) {
   event.preventDefault();
 
-  const loginUrl = `${API_BASE_URL}social/auth/login`;
-
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
 
@@ -32,7 +30,7 @@ export async function handleLogin(event) {
     };
 
     try {
-      const response = await httpRequest(loginUrl, "POST", user);
+      const response = await httpRequest(API_URLS.LOGIN, "POST", user);
 
       if (!response) {
         message("error", "Please provide correct login credentials");

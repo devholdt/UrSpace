@@ -90,19 +90,37 @@
     top: 15px;
     right: 15px;
     font-size: 30px;
-    color: $light;
+    color: $dark;
     cursor: pointer;
 
     &:hover {
-        color: $dark;
+        color: $secondary;
     }
 }
 
-#editForm {
-    width: 350px;
+#editModal .modal-content {
+    height: 560px;
 
-    textarea {
-        resize: none;
-        height: 150px;
+    #editForm {
+        width: 350px;
+    
+        textarea {
+            resize: none;
+            height: 150px;
+        }
+
+        button.btn-post {
+            width: 100px;
+            height: 40px;
+        }
     }
+}
+
+.tag {
+    display: inline-block;
+    padding: 4px 8px;
+    margin-right: 5px;
+    background-color: #e0e0e0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }

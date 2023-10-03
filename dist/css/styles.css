@@ -11937,7 +11937,7 @@ h3, .h3 {
 }
 
 .form-post {
-  height: 380px;
+  height: 440px;
   background-color: #f8f9fa;
   border-radius: 5px;
   box-shadow: 1px 2px 4px rgba(0, 0, 0, 0.1);
@@ -12130,19 +12130,35 @@ form .url-input {
   top: 15px;
   right: 15px;
   font-size: 30px;
-  color: #eeeeee;
+  color: #333333;
   cursor: pointer;
 }
 .close-btn:hover {
-  color: #333333;
+  color: #ff5722;
 }
 
-#editForm {
+#editModal .modal-content {
+  height: 560px;
+}
+#editModal .modal-content #editForm {
   width: 350px;
 }
-#editForm textarea {
+#editModal .modal-content #editForm textarea {
   resize: none;
   height: 150px;
+}
+#editModal .modal-content #editForm button.btn-post {
+  width: 100px;
+  height: 40px;
+}
+
+.tag {
+  display: inline-block;
+  padding: 4px 8px;
+  margin-right: 5px;
+  background-color: #e0e0e0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .avatar {

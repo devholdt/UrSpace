@@ -48,13 +48,18 @@
                             <textarea class="form-control mb-3 shadow-none" id="postBody"></textarea>
                         </div>
 
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <label for="postMedia" class="form-label m-0">Media URL (Optional)</label>
                             <div class="d-flex">
                                 <input type="text" class="form-control shadow-none url-input" id="postMedia">
                                 <button type="button" class="btn btn-light btn-clear" id="clearMediaUrl"><i
                                         class="fa-solid fa-xmark"></i></button>
                             </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="postTags" class="form-label m-0">Tags (Optional)</label>
+                            <input type="text" class="form-control shadow-none" id="postTags">
                         </div>
 
                         <div class="d-flex justify-content-between">
@@ -71,6 +76,7 @@
                             <li class="list-group-item ps-1">Max 280 characters for body text</li>
                             <li class="list-group-item ps-1">Media URL must link to a live and publicly accessible image
                             </li>
+                            <li class="list-group-item ps-1">Separate tags using commas ( , )</li>
                             <li class="list-group-item ps-1">Be appropriate and respectful</li>
                         </ul>
                     </div>
@@ -100,7 +106,7 @@
                         <label for="search" class="input-group-text" aria-label="search">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </label>
-                        <input type="search" class="form-control" id="search" placeholder="Search...">
+                        <input type="search" class="form-control" id="searchInput" placeholder="Search...">
                     </div>
                 </form>
             </div>

@@ -1,8 +1,8 @@
+import { API_URLS } from "../settings/constants.js";
 import { httpRequest } from "../utilities/httpRequest.js";
 import { handleDelete, clearUrl } from "../utilities/clickEvents.js";
 import { getUser } from "../utilities/storage.js";
 import message from "./message.js";
-import { API_BASE_URL } from "../settings/constants.js";
 
 const userData = getUser();
 
@@ -30,6 +30,8 @@ export async function renderPosts(url) {
       let modalContent = "";
       let buttonGroup = "";
 
+      let postTags = [];
+
       const postDate = new Date(post.created);
 
       const day = postDate.getDate().toString().padStart(2, "0");
@@ -48,7 +50,7 @@ export async function renderPosts(url) {
           </div>`;
         modalContent = `
             <div class="modal" id="${modalId}">
-              <span class="close-btn" data-modal-id="${modalId}">&times;</span>
+              <i class="fa-solid fa-circle-xmark close-btn" data-modal-id="${modalId}"></i>
                 <img src="${post.media}" alt="Full-sized post media" class="modal-content">
             </div>`;
       }
@@ -56,14 +58,22 @@ export async function renderPosts(url) {
       if (post.author.name === userData.name) {
         buttonGroup = `
         <div class="btn-group m-0" role="group" aria-label="Post interaction">
-          <button class="btn btn-light p-0 btn-edit" title="Edit" data-id="${post.id}" data-name="${post.author.name}"><i class="fa-regular fa-pen-to-square" data-id="${post.id}" data-name="${post.author.name}"></i></button>
-          <button class="btn btn-light p-0 btn-delete" title="Delete" data-id="${post.id}"><i class="fa-regular fa-trash-can" data-id="${post.id}"></i></button>
+          <button class="btn btn-light p-0 btn-edit" title="Edit" data-id="${post.id}" data-name="${post.author.name}">
+            <i class="fa-regular fa-pen-to-square" data-id="${post.id}" data-name="${post.author.name}"></i>
+          </button>
+          <button class="btn btn-light p-0 btn-delete" title="Delete" data-id="${post.id}">
+            <i class="fa-regular fa-trash-can" data-id="${post.id}"></i>
+          </button>
         </div>`;
       } else {
         buttonGroup = `
         <div class="btn-group m-0" role="group" aria-label="Post interaction">
-          <button class="btn btn-outline-secondary p-0 btn-like" title="Like"><i class="fa-regular fa-thumbs-up"></i></button>
-          <button class="btn btn-outline-secondary p-0 btn-comment" title="Comment"><i class="fa-regular fa-comment"></i></button>
+          <button class="btn btn-outline-secondary p-0 btn-like" title="Like">
+            <i class="fa-regular fa-thumbs-up"></i>
+          </button>
+          <button class="btn btn-outline-secondary p-0 btn-comment" title="Comment">
+            <i class="fa-regular fa-comment"></i>
+          </button>
         </div>`;
       }
 
@@ -73,9 +83,12 @@ export async function renderPosts(url) {
             <div class="card-header border-0">
               <div class="d-flex justify-content-between align-items-center">
                 <p class="fs-6 card-header_name">${post.author.name}</p>
-                <div class="card-follow" data-name="${post.author.name}">
-                  <i class="fa-regular fa-square-plus follow-button" title="Follow" data-name="${post.author.name}"></i>
+                <div class="post-tags">
+                  <span class="badge bg-light text-dark py-1 px-2">${post.tags}</span>
                 </div>
+               <!-- <div class="card-follow" data-name="${post.author.name}">
+                  <i class="fa-regular fa-square-plus follow-button" title="Follow" data-name="${post.author.name}"></i>
+                </div> -->
               </div>
             </div>
 
@@ -194,56 +207,60 @@ function attachEventListeners() {
   });
 }
 
-// ---------------------------------------------------------------------------
-
-const modalHtml = `
-  <div id="editModal" class="modal">
-    <div class="modal-content py-5">
-      <span class="close-btn" id="closeEditModal">&times;</span>
-
-      <form id="editForm" class="d-flex flex-column mx-auto">
-
-      <h2>Edit Post</h2>
-
-      <div class="mb-2">
-        <label for="editTitle" class="form-label m-0">Title</label>
-        <input type="text" class="form-control shadow-none" id="editTitle" name="editTitle">
-      </div>
-
-      <div class="mb-2">
-        <label for="editBody" class="form-label m-0">Body:</label>
-        <textarea class="form-control shadow-none" id="editBody" name="editBody"></textarea>
-      </div>
-
-      <div class="mb-4">
-        <label for="editMedia" class="form-label m-0">Media URL:</label>
-        <div class="d-flex">
-            <input type="text" class="form-control shadow-none url-input" id="editMedia" name="editMedia">
-            <button type="button" class="btn btn-light btn-clear" id="clearEditMediaUrl"><i
-                    class="fa-solid fa-xmark"></i></button>
-        </div>
-      </div>
-
-      <div class="d-flex justify-content-center">
-        <button type="submit" class="btn btn-post" title="Edit">Save</button>
-      </div>
-
-      </form>
-    </div>
-  </div>
-`;
-
-document.body.insertAdjacentHTML("beforeend", modalHtml);
-
-const editMedia = document.getElementById("editMedia");
-const editMediaUrl = document.getElementById("clearEditMediaUrl");
-
-clearUrl(editMediaUrl, editMedia);
-
 async function handleEdit(event) {
   const postId = event.target.getAttribute("data-id");
-  const postUrl = `${API_BASE_URL}social/posts/${postId}`;
+  const postUrl = `${API_URLS.POSTS}/${postId}`;
+
+  const modalHtml = `
+    <div id="editModal" class="modal flex-column justify-content-center">
+      <div class="modal-content py-5">
+        <i class="fa-solid fa-circle-xmark close-btn" id="closeEditModal"></i>
+
+        <form id="editForm" class="d-flex flex-column mx-auto">
+
+        <h2>Edit Post</h2>
+
+        <div class="mb-2">
+          <label for="editTitle" class="form-label m-0">Title</label>
+          <input type="text" class="form-control shadow-none" id="editTitle" name="editTitle">
+        </div>
+
+        <div class="mb-2">
+          <label for="editBody" class="form-label m-0">Body</label>
+          <textarea class="form-control shadow-none" id="editBody" name="editBody"></textarea>
+        </div>
+
+        <div class="mb-2">
+          <label for="editMedia" class="form-label m-0">Media URL</label>
+          <div class="d-flex">
+              <input type="text" class="form-control shadow-none url-input" id="editMedia" name="editMedia">
+              <button type="button" class="btn btn-light btn-clear" id="clearEditMediaUrl"><i
+                      class="fa-solid fa-xmark"></i></button>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="editTags" class="form-label m-0">Tags</label>
+          <input type="text" class="form-control shadow-none" id="editTags" name="editTags">
+        </div>
+
+        <div class="d-flex justify-content-between edit-submit">
+          <div class="message-container d-flex justify-content-center"></div>
+          <button type="submit" class="btn btn-post" title="Edit">Save</button>
+        </div>
+
+        </form>
+
+      </div>
+    </div>`;
+
+  document.body.insertAdjacentHTML("beforeend", modalHtml);
+
   const editModal = document.getElementById("editModal");
+  const editMedia = document.getElementById("editMedia");
+  const editMediaUrl = document.getElementById("clearEditMediaUrl");
+
+  clearUrl(editMediaUrl, editMedia);
 
   try {
     const post = await httpRequest(postUrl, "GET");
@@ -254,14 +271,29 @@ async function handleEdit(event) {
     }
 
     const postName = event.target.dataset.name;
+
     const modalContent = editModal.querySelector(".modal-content");
+
+    const closeButton = editModal.querySelector("#closeEditModal");
+    if (closeButton) {
+      closeButton.addEventListener("click", () => {
+        editModal.style.display = "none";
+      });
+    }
 
     if (postName === userData.name) {
       modalContent.querySelector("#editTitle").value = post.title;
       modalContent.querySelector("#editBody").value = post.body;
       modalContent.querySelector("#editMedia").value = post.media || "";
 
-      editModal.style.display = "block";
+      const editTagsInput = modalContent.querySelector("#editTags");
+
+      if (post.tags && post.tags.length > 0) {
+        const tagsString = post.tags.join(", ");
+        editTagsInput.value = tagsString;
+      }
+
+      editModal.style.display = "flex";
 
       modalContent
         .querySelector("form")
@@ -271,37 +303,31 @@ async function handleEdit(event) {
             title: modalContent.querySelector("#editTitle").value,
             body: modalContent.querySelector("#editBody").value,
             media: modalContent.querySelector("#editMedia").value,
+            tags: editTagsInput.value.split(",").map((tag) => tag.trim()),
           };
 
-          const updateResponse = await httpRequest(
-            `${API_BASE_URL}social/posts/${postId}`,
-            "PUT",
-            editedPost
-          );
+          const updateResponse = await httpRequest(postUrl, "PUT", editedPost);
 
           if (updateResponse.updated) {
-            post.title = editedPost.title;
-            post.body = editedPost.body;
-            post.media = editedPost.media;
-            updatePostUI(postId, post);
+            message("success", "Post edited successfully");
 
-            editModal.style.display = "none";
-
-            location.reload();
+            setTimeout(() => {
+              post.title = editedPost.title;
+              post.body = editedPost.body;
+              post.media = editedPost.media;
+              post.tags = editedPost.tags;
+              updatePostUI(postId, post);
+              editModal.style.display = "none";
+            }, 1000);
           }
         });
     } else {
       console.error("Unauthorized to edit this post.");
+      message("error", "Unauthorized to edit this post.");
     }
   } catch (error) {
     console.error("Error fetching post data:", error);
-  }
-
-  const closeButton = editModal.querySelector(".close");
-  if (closeButton) {
-    closeButton.addEventListener("click", () => {
-      editModal.style.display = "none";
-    });
+    message("error", `Error fetching post data: ${error}`);
   }
 }
 
@@ -310,9 +336,11 @@ function updatePostUI(postId, post) {
   const titleElement = postContainer.querySelector(".fs-4");
   const bodyElement = postContainer.querySelector(".card-text");
   const mediaElement = postContainer.querySelector(".thumbnail-img");
+  const tagsElement = postContainer.querySelector(".post-tags");
 
   titleElement.textContent = post.title;
   bodyElement.textContent = post.body;
+  tagsElement.textContent = post.tags.join(" ");
 
   if (mediaElement) {
     if (post.media) {

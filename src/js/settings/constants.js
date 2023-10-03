@@ -1,4 +1,11 @@
-export const API_BASE_URL = "https://api.noroff.dev/api/v1/";
+const API_BASE_URL = "https://api.noroff.dev/api/v1/";
+
+export const API_URLS = {
+  REGISTER: `${API_BASE_URL}social/auth/register`,
+  LOGIN: `${API_BASE_URL}social/auth/login`,
+  POSTS: `${API_BASE_URL}social/posts`,
+  PROFILES: `${API_BASE_URL}social/profiles`,
+};
 
 export const URLS = {
   FEED: "feed.html",

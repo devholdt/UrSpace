@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../settings/constants.js";
+import { API_URLS } from "../settings/constants.js";
 import { httpRequest } from "../utilities/httpRequest.js";
 import { isValidImageUrl } from "../utilities/urlValidation.js";
 import { saveToken, saveUser } from "../utilities/storage.js";
@@ -28,8 +28,6 @@ clearUrl(clearBannerBtn, bannerInput);
 export async function handleRegistration(event) {
   event.preventDefault();
 
-  const registerUrl = `${API_BASE_URL}social/auth/register`;
-
   const username = document.getElementById("registerUsername").value;
   const email = document.getElementById("registerEmail").value;
   const password = document.getElementById("registerPassword").value;
@@ -58,17 +56,20 @@ export async function handleRegistration(event) {
   };
 
   try {
-    const response = await httpRequest(registerUrl, "POST", user);
+    const response = await httpRequest(API_URLS.REGISTER, "POST", user);
 
     if (response) {
-      const loginUrl = `${API_BASE_URL}social/auth/login`;
       const loginData = {
         email: email,
         password: password,
       };
 
       try {
-        const loginResponse = await httpRequest(loginUrl, "POST", loginData);
+        const loginResponse = await httpRequest(
+          API_URLS.LOGIN,
+          "POST",
+          loginData
+        );
 
         if (loginResponse.accessToken) {
           const token = loginResponse.accessToken;

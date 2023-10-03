@@ -1,4 +1,4 @@
-import { API_BASE_URL } from "../settings/constants.js";
+import { API_URLS } from "../settings/constants.js";
 import { httpRequest } from "./httpRequest.js";
 
 export function handleLogout() {
@@ -15,11 +15,13 @@ export function clearUrl(button, input) {
 
 export async function handleDelete(event) {
   const postId = event.target.dataset.id;
-  const deleteUrl = `${API_BASE_URL}social/posts/${postId}`;
 
   if (confirm("Are you sure you want to delete this post?") === true) {
     try {
-      const response = await httpRequest(deleteUrl, "DELETE");
+      const response = await httpRequest(
+        `${API_URLS.POSTS}/${postId}`,
+        "DELETE"
+      );
 
       if (response === 204) {
         location.reload();

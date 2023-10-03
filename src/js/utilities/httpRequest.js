@@ -32,6 +32,9 @@ export async function httpRequest(url, method = "GET", body = null) {
 
     if (response.ok) {
       const json = await response.json();
+
+      console.log("JSON (httpRequest):", json);
+
       return json;
     } else {
       const errorData = await response.json();
