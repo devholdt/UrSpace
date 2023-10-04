@@ -13,9 +13,14 @@
         color: $success-secondary;
     }
     
+    // .error {
+    //     border: 3px solid $danger;
+    //     color: $danger-secondary;
+    // }
+
     .error {
         border: 3px solid $danger;
-        color: $danger-secondary;
+        background-color: $danger-secondary;
     }
 }
 

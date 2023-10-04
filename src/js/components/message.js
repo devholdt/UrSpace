@@ -1,9 +1,11 @@
-export default function message(type, content) {
-  const element = document.querySelector(".message-container");
+export default function message(type, content, target, duration = 2000) {
+  const element = document.querySelector(target);
 
   element.innerHTML = `<p class="message ${type}">${content}</p>`;
 
-  setTimeout(() => {
-    element.innerHTML = "";
-  }, 2000);
+  if (duration !== null) {
+    setTimeout(() => {
+      element.innerHTML = "";
+    }, duration);
+  }
 }

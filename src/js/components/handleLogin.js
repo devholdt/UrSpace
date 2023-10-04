@@ -21,7 +21,7 @@ export async function handleLogin(event) {
   const password = document.getElementById("loginPassword").value;
 
   if (email.length === 0 || password.length === 0) {
-    message("error", "Email and password are required");
+    message("error", "Email and password are required", ".message-index");
     return;
   } else {
     const user = {
@@ -33,14 +33,22 @@ export async function handleLogin(event) {
       const response = await httpRequest(API_URLS.LOGIN, "POST", user);
 
       if (!response) {
-        message("error", "Please provide correct login credentials");
+        message(
+          "error",
+          "Please provide correct login credentials",
+          ".message-index"
+        );
         return;
       } else if (response.accessToken) {
         const token = response.accessToken;
         saveToken(token);
         saveUser(JSON.stringify(response));
 
-        message("success", `Login successful, welcome back ${response.name}`);
+        message(
+          "success",
+          `Login successful, welcome back ${response.name}`,
+          ".message-index"
+        );
 
         setTimeout(() => {
           window.location.href = URLS.FEED;
@@ -48,7 +56,11 @@ export async function handleLogin(event) {
       }
     } catch (error) {
       console.log(error);
-      message("error", "An error occured when attempting to log in");
+      message(
+        "error",
+        "An error occured when attempting to log in",
+        ".message-index"
+      );
     }
   }
 }

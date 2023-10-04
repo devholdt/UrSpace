@@ -25,7 +25,7 @@
     </header>
 
     <main class="container">
-        <div class="row page-columns">
+        <div class="row page-columns gap-3">
 
             <div class="col-lg-2 py-4">
                 <nav class="nav flex-column"></nav>
@@ -33,11 +33,13 @@
 
             <div class="container col-lg-7">
 
-                <h1 class="mt-3">Home</h1>
+                <h1 class="feed-welcome my-5">Welcome to <img src="images/UrSpace Logo.svg" alt="UrSpace Logo">
+                </h1>
 
-                <div class="row mt-4">
+                <div class="form-container row bg-primary text-white p-4 rounded">
 
-                    <form class="form-post col-sm-7 p-3">
+                    <form class="form-container_post col-sm-7">
+                        <h2 class="mb-4">Create a post</h2>
                         <div class="mb-2">
                             <label for="postTitle" class="form-label m-0">Title</label>
                             <input type="text" class="form-control shadow-none" id="postTitle">
@@ -64,52 +66,69 @@
 
                         <div class="d-flex justify-content-between">
                             <button type="submit" class="btn btn-post" title="Post">Post</button>
-                            <p class="message-container"></p>
+                            <p class="message-container message-post"></p>
                         </div>
                     </form>
 
-                    <div class="col-sm-5 pe-0 mt-4">
-                        <p class="fw-semibold fs-5 mb-1">Rules and requirements</p>
+                    <div class="form-container_list col-sm-5">
+                        <p class="fw-semibold fs-5 mb-0">Rules and requirements</p>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item ps-1">Title is required</li>
-                            <li class="list-group-item ps-1">Body text and media are optional</li>
-                            <li class="list-group-item ps-1">Max 280 characters for body text</li>
-                            <li class="list-group-item ps-1">Media URL must link to a live and publicly accessible image
+                            <li class="list-group-item ps-1">Body text and media are optional
                             </li>
-                            <li class="list-group-item ps-1">Separate tags using commas ( , )</li>
-                            <li class="list-group-item ps-1">Be appropriate and respectful</li>
+                            <li class="list-group-item ps-1">Max 280 characters for body text
+                            </li>
+                            <li class="list-group-item ps-1">Media URL must link to a live and
+                                publicly accessible image
+                            </li>
+                            <li class="list-group-item ps-1">Max 6 tags per post</li>
+                            <li class="list-group-item ps-1">Tags are separated using commas
+                                (tag 1, tag 2, tag 3)
+                            </li>
+                            <li class="list-group-item ps-1">Be appropriate and respectful
+                            </li>
                         </ul>
                     </div>
 
                 </div>
 
-                <h2 class="mt-5">Feed</h2>
+                <h3 class="mt-5 h2">Feed</h3>
 
-                <div class="posts">
-                    <div class="pagination top-pagination btn-group mt-3" role="group" aria-label="Pagination">
+                <div class="posts message-container message-posts">
+                    <div class="pagination pagination-top btn-group mt-3 bg-white py-3 sticky-top" role="group"
+                        aria-label="Pagination">
                         <button id="prevPageTop" class="btn btn-outline-primary" title="Previous">Prev</button>
                         <button id="nextPageTop" class="btn btn-outline-primary" title="Next">Next</button>
                     </div>
 
                     <div class="posts-container"></div>
+                    <div class="search-results"></div>
+                    <button id="loadMoreButton" class="btn btn-outline-secondary rounded-0" style="display: none;">More
+                        results</button>
 
-                    <div class="pagination bottom-pagination btn-group mb-4" role="group" aria-label="Pagination">
+                    <div class="pagination pagination-bottom btn-group mb-4 bg-white" role="group"
+                        aria-label="Pagination">
                         <button id="prevPageBottom" class="btn btn-outline-primary" title="Previous">Prev</button>
                         <button id="nextPageBottom" class="btn btn-outline-primary" title="Next">Next</button>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-3 py-4">
-                <form class="form-search px-2">
-                    <div class="input-group">
-                        <label for="search" class="input-group-text" aria-label="search">
-                            <i class="fa-solid fa-magnifying-glass"></i>
-                        </label>
-                        <input type="search" class="form-control" id="searchInput" placeholder="Search...">
+            <div class="col">
+                <form class="form-search mt-4 sticky-top">
+                    <label for="search" class="form-label mb-0 hide-label" aria-label="search">
+                        Search:
+                    </label>
+                    <div class="d-flex">
+                        <button class="btn btn-primary text-white rounded-0 rounded-start" id="searchButton"><i
+                                class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="search" class="form-control shadow-none border-primary rounded-0 rounded-end"
+                            id="searchInput" placeholder="Search...">
                     </div>
                 </form>
             </div>
+
+        </div>
 
         </div>
     </main>

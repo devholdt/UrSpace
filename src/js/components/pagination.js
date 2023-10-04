@@ -2,7 +2,7 @@ import { API_URLS } from "../settings/constants.js";
 import { renderPosts } from "./renderPosts.js";
 
 export let currentPage = 1;
-const INITIAL_LIMIT = 10;
+export const INITIAL_LIMIT = 10;
 let totalPages = 10;
 
 export function generatePostsUrl(page) {
@@ -42,11 +42,14 @@ export function setupPaginationContainers() {
   const containers = document.querySelectorAll(".pagination");
 
   containers.forEach((container) => {
+    container.style.display = "flex";
     if (container) {
       container.innerHTML = "";
-      container.appendChild(
-        createButton("Prev", () => handlePageClick(currentPage - 1))
+      const prevButton = createButton("prev", () =>
+        handlePageClick(currentPage - 1)
       );
+      prevButton.classList.add("rounded-start");
+      container.appendChild(prevButton);
 
       for (let page = 1; page <= totalPages; page++) {
         const pageButton = createButton(page.toString(), () =>
@@ -57,9 +60,11 @@ export function setupPaginationContainers() {
         container.appendChild(pageButton);
       }
 
-      container.appendChild(
-        createButton("Next", () => handlePageClick(currentPage + 1))
+      const nextButton = createButton("next", () =>
+        handlePageClick(currentPage + 1)
       );
+      nextButton.classList.add("rounded-end");
+      container.appendChild(nextButton);
     }
   });
 }

@@ -1,8 +1,16 @@
-import { API_URLS } from "../settings/constants.js";
 import { httpRequest } from "../utilities/httpRequest.js";
-import { handleDelete, clearUrl } from "../utilities/clickEvents.js";
+import { handleDelete } from "../utilities/clickEvents.js";
+import { handleEdit } from "./editPost.js";
 import { getUser } from "../utilities/storage.js";
+import { formatDate } from "../utilities/formatDate.js";
 import message from "./message.js";
+import { API_URLS } from "../settings/constants.js";
+import {
+  currentPage,
+  INITIAL_LIMIT,
+  generatePostsUrl,
+  setupPaginationContainers,
+} from "./pagination.js";
 
 const userData = getUser();
 
@@ -30,23 +38,21 @@ export async function renderPosts(url) {
       let modalContent = "";
       let buttonGroup = "";
 
-      let postTags = [];
-
       const postDate = new Date(post.created);
+      const updateDate = new Date(post.updated);
+      const formattedPostDate = formatDate(postDate);
+      const formattedUpdateDate = formatDate(updateDate);
+      let updatedTime = `(<i>Edit ${formattedUpdateDate}</i>)`;
 
-      const day = postDate.getDate().toString().padStart(2, "0");
-      const month = (postDate.getMonth() + 1).toString().padStart(2, "0");
-      const year = postDate.getFullYear().toString().slice(-2);
-      const hours = postDate.getHours().toString().padStart(2, "0");
-      const minutes = postDate.getMinutes().toString().padStart(2, "0");
-
-      const formattedPostDate = `${day}/${month}/${year} ${hours}:${minutes}`;
+      if (formattedPostDate === formattedUpdateDate) {
+        updatedTime = "";
+      }
 
       if (post.media) {
         const modalId = `modal-${post.id}`;
         postMedia = `
           <div class="thumbnail">
-            <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}">
+          <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}">
           </div>`;
         modalContent = `
             <div class="modal" id="${modalId}">
@@ -59,105 +65,69 @@ export async function renderPosts(url) {
         buttonGroup = `
         <div class="btn-group m-0" role="group" aria-label="Post interaction">
           <button class="btn btn-light p-0 btn-edit" title="Edit" data-id="${post.id}" data-name="${post.author.name}">
-            <i class="fa-regular fa-pen-to-square" data-id="${post.id}" data-name="${post.author.name}"></i>
+          <i class="fa-regular fa-pen-to-square" data-id="${post.id}" data-name="${post.author.name}"></i>
           </button>
           <button class="btn btn-light p-0 btn-delete" title="Delete" data-id="${post.id}">
-            <i class="fa-regular fa-trash-can" data-id="${post.id}"></i>
+          <i class="fa-regular fa-trash-can" data-id="${post.id}"></i>
           </button>
         </div>`;
       } else {
         buttonGroup = `
         <div class="btn-group m-0" role="group" aria-label="Post interaction">
-          <button class="btn btn-outline-secondary p-0 btn-like" title="Like">
-            <i class="fa-regular fa-thumbs-up"></i>
+        <button class="btn btn-outline-secondary p-0 btn-like" title="Like">
+        <i class="fa-regular fa-thumbs-up"></i>
           </button>
           <button class="btn btn-outline-secondary p-0 btn-comment" title="Comment">
-            <i class="fa-regular fa-comment"></i>
+          <i class="fa-regular fa-comment"></i>
           </button>
         </div>`;
       }
 
       postsContainer.innerHTML += `
-          <div class="card m-4 post" data-id="${post.id}">
+      <div class="card m-4 post" data-id="${post.id}">
 
-            <div class="card-header border-0">
-              <div class="d-flex justify-content-between align-items-center">
-                <p class="fs-6 card-header_name">${post.author.name}</p>
-                <div class="post-tags">
-                  <span class="badge bg-light text-dark py-1 px-2">${post.tags}</span>
-                </div>
-               <!-- <div class="card-follow" data-name="${post.author.name}">
-                  <i class="fa-regular fa-square-plus follow-button" title="Follow" data-name="${post.author.name}"></i>
-                </div> -->
+        <div class="card-header border-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="fs-6 card-header_name">${post.author.name}</p>
+            <div class="card-follow" data-name="${post.author.name}">
+              <i class="fa-regular fa-square-plus follow-button" title="Follow" data-name="${
+                post.author.name
+              }"></i>
               </div>
-            </div>
-
-            <div class="card-content border-bottom">
-              <div class="card-body">
-                <p class="fs-4">${post.title}</p>
-                <p class="card-text">${post.body}</p>
-                ${postMedia}
-                ${modalContent}
+          </div>
+        </div>
+        
+        <div class="card-content border-bottom">
+        <div class="card-body">
+            <div class="row d-flex justify-content-between">
+            <p class="col-8 fs-4">${post.title}</p>
+              <div class="col-4 p-0 d-flex align-items-start justify-content-end flex-wrap gap-1 post-tags">
+              ${post.tags
+                .map((tag) => `<span class="badge bg-dark">${tag}</span>`)
+                .join(" ")}
               </div>
+              </div>
+            <p class="card-text">${post.body}</p>
+            ${postMedia}
+            ${modalContent}
             </div>
-
+            </div>
+            
             <div class="d-flex justify-content-between align-items-center">
-            <p class="d-flex justify-content-end mx-2 mt-0 mb-1 post-date">${formattedPostDate}</p>
+            <p class="d-flex justify-content-end mx-2 mt-0 mb-1 post-date">${formattedPostDate} ${updatedTime}</p>
             ${buttonGroup}
             </div>
             
-          </div>`;
-
-      // const usersFollowed = await handleFollowing();
-
-      // function checkFollowed(usersFollowed, postAuthor) {
-      //   if (usersFollowed.includes(postAuthor)) {
-      //     return true;
-      //   } else {
-      //     return false;
-      //   }
-      // }
-
-      // const followIcons = document.querySelectorAll(".card-follow");
-
-      // followIcons.forEach((icon) => {
-      //   const followButton = icon.querySelector(".follow-button");
-      //   const username = icon.dataset.name;
-
-      //   if (checkFollowed(usersFollowed, username)) {
-      //     followButton.classList.add("fa-solid", "unfollow-user");
-      //     followButton.classList.remove("fa-regular", "follow-user");
-
-      //     const unfollowUser = icon.querySelector(".unfollow-user");
-
-      //     unfollowUser.addEventListener("click", (e) => {
-      //       const username = e.target.dataset.name;
-
-      //       handleUnfollow(username);
-
-      //       unfollowUser.classList.remove("fa-solid", "unfollow-user");
-      //       unfollowUser.classList.add("fa-regular", "follow-user");
-      //     });
-      //   } else {
-      //     followButton.classList.remove("fa-solid", "unfollow-user");
-      //     followButton.classList.add("fa-regular", "follow-user");
-
-      //     const followUser = icon.querySelector(".follow-user");
-
-      //     followUser.addEventListener("click", (e) => {
-      //       const username = e.target.dataset.name;
-
-      //       handleFollow(username);
-
-      //       followUser.classList.add("fa-solid", "unfollow-user");
-      //       followUser.classList.remove("fa-regular", "follow-user");
-      //     });
-      //   }
-      // });
+            </div>`;
     }
   } catch (error) {
     console.log(error);
-    message("error", "An error occured with the API call");
+    message(
+      "error",
+      "An error occured with the API call",
+      ".message-posts",
+      null
+    );
   }
 
   const deleteButtons = document.querySelectorAll(".btn-delete");
@@ -207,198 +177,180 @@ function attachEventListeners() {
   });
 }
 
-async function handleEdit(event) {
-  const postId = event.target.getAttribute("data-id");
-  const postUrl = `${API_URLS.POSTS}/${postId}`;
+let allPosts = [];
+let filteredPosts = [];
+let searchPage = 1;
 
-  const modalHtml = `
-    <div id="editModal" class="modal flex-column justify-content-center">
-      <div class="modal-content py-5">
-        <i class="fa-solid fa-circle-xmark close-btn" id="closeEditModal"></i>
+function searchPosts(query) {
+  if (!query) {
+    renderPosts(generatePostsUrl(currentPage));
+  } else {
+    filteredPosts = allPosts.filter((post) => {
+      return (
+        post.author.name.toLowerCase().includes(query) ||
+        post.title.toLowerCase().includes(query) ||
+        post.tags.some((tag) => tag.toLowerCase().includes(query))
+      );
+    });
+  }
+  return filteredPosts;
+}
 
-        <form id="editForm" class="d-flex flex-column mx-auto">
+function loadMoreResults() {
+  searchPage++;
+  displaySearchResults(filteredPosts, searchPage);
+}
 
-        <h2>Edit Post</h2>
+async function fetchAllPosts() {
+  const url = `${API_URLS.POSTS}?_author=true`;
+  allPosts = await httpRequest(url, "GET");
+  filteredPosts = [...allPosts];
+  renderPosts(url);
+}
 
-        <div class="mb-2">
-          <label for="editTitle" class="form-label m-0">Title</label>
-          <input type="text" class="form-control shadow-none" id="editTitle" name="editTitle">
-        </div>
+function displaySearchResults(results, page) {
+  const startIndex = (page - 1) * INITIAL_LIMIT;
+  const endIndex = startIndex + INITIAL_LIMIT;
 
-        <div class="mb-2">
-          <label for="editBody" class="form-label m-0">Body</label>
-          <textarea class="form-control shadow-none" id="editBody" name="editBody"></textarea>
-        </div>
+  const postsContainer = document.querySelector(".posts-container");
+  const searchResults = document.querySelector(".search-results");
+  const loadMoreButton = document.getElementById("loadMoreButton");
 
-        <div class="mb-2">
-          <label for="editMedia" class="form-label m-0">Media URL</label>
-          <div class="d-flex">
-              <input type="text" class="form-control shadow-none url-input" id="editMedia" name="editMedia">
-              <button type="button" class="btn btn-light btn-clear" id="clearEditMediaUrl"><i
-                      class="fa-solid fa-xmark"></i></button>
+  searchResults.innerHTML = "";
+  postsContainer.innerHTML = "";
+
+  if (results.length === 0) {
+    searchResults.innerHTML = "<p>No results found.</p>";
+    return;
+  }
+
+  for (
+    let i = startIndex;
+    i < results.length && i < startIndex + INITIAL_LIMIT;
+    i++
+  ) {
+    const post = results[i];
+
+    let postMedia = "";
+    let modalContent = "";
+    let buttonGroup = "";
+
+    const postDate = new Date(post.created);
+    const updateDate = new Date(post.updated);
+    const formattedPostDate = formatDate(postDate);
+    const formattedUpdateDate = formatDate(updateDate);
+    let updatedTime = `(<i>Edit ${formattedUpdateDate}</i>)`;
+
+    if (formattedPostDate === formattedUpdateDate) {
+      updatedTime = "";
+    }
+
+    if (post.media) {
+      const modalId = `modal-${post.id}`;
+      postMedia = `
+          <div class="thumbnail">
+            <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}">
+          </div>`;
+      modalContent = `
+            <div class="modal" id="${modalId}">
+              <i class="fa-solid fa-circle-xmark close-btn" data-modal-id="${modalId}"></i>
+                <img src="${post.media}" alt="Full-sized post media" class="modal-content">
+            </div>`;
+    }
+
+    if (post.author.name === userData.name) {
+      buttonGroup = `
+        <div class="btn-group m-0" role="group" aria-label="Post interaction">
+          <button class="btn btn-light p-0 btn-edit" title="Edit" data-id="${post.id}" data-name="${post.author.name}">
+            <i class="fa-regular fa-pen-to-square" data-id="${post.id}" data-name="${post.author.name}"></i>
+          </button>
+          <button class="btn btn-light p-0 btn-delete" title="Delete" data-id="${post.id}">
+            <i class="fa-regular fa-trash-can" data-id="${post.id}"></i>
+          </button>
+        </div>`;
+    } else {
+      buttonGroup = `
+        <div class="btn-group m-0" role="group" aria-label="Post interaction">
+          <button class="btn btn-outline-secondary p-0 btn-like" title="Like">
+            <i class="fa-regular fa-thumbs-up"></i>
+          </button>
+          <button class="btn btn-outline-secondary p-0 btn-comment" title="Comment">
+            <i class="fa-regular fa-comment"></i>
+          </button>
+        </div>`;
+    }
+
+    searchResults.innerHTML += `
+      <div class="card m-4 post" data-id="${post.id}">
+
+        <div class="card-header border-0">
+          <div class="d-flex justify-content-between align-items-center">
+            <p class="fs-6 card-header_name">${post.author.name}</p>
+            <div class="card-follow" data-name="${post.author.name}">
+              <i class="fa-regular fa-square-plus follow-button" title="Follow" data-name="${
+                post.author.name
+              }"></i>
+            </div>
           </div>
         </div>
 
-        <div class="mb-4">
-          <label for="editTags" class="form-label m-0">Tags</label>
-          <input type="text" class="form-control shadow-none" id="editTags" name="editTags">
+        <div class="card-content border-bottom">
+          <div class="card-body">
+            <div class="row d-flex justify-content-between">
+              <p class="col-8 fs-4">${post.title}</p>
+              <div class="col-4 p-0 d-flex align-items-start justify-content-end flex-wrap gap-1 post-tags">
+                  ${post.tags
+                    .map((tag) => `<span class="badge bg-dark">${tag}</span>`)
+                    .join(" ")}
+              </div>
+            </div>
+            <p class="card-text">${post.body}</p>
+            ${postMedia}
+            ${modalContent}
+          </div>
         </div>
 
-        <div class="d-flex justify-content-between edit-submit">
-          <div class="message-container d-flex justify-content-center"></div>
-          <button type="submit" class="btn btn-post" title="Edit">Save</button>
+        <div class="d-flex justify-content-between align-items-center">
+        <p class="d-flex justify-content-end mx-2 mt-0 mb-1 post-date">${formattedPostDate} ${updatedTime}</p>
+        ${buttonGroup}
         </div>
+        
+      </div>`;
+  }
 
-        </form>
+  if (endIndex < results.length) {
+    loadMoreButton.style.display = "block";
 
-      </div>
-    </div>`;
-
-  document.body.insertAdjacentHTML("beforeend", modalHtml);
-
-  const editModal = document.getElementById("editModal");
-  const editMedia = document.getElementById("editMedia");
-  const editMediaUrl = document.getElementById("clearEditMediaUrl");
-
-  clearUrl(editMediaUrl, editMedia);
-
-  try {
-    const post = await httpRequest(postUrl, "GET");
-
-    if (!post) {
-      console.error("Post not found or API response is invalid");
-      return;
-    }
-
-    const postName = event.target.dataset.name;
-
-    const modalContent = editModal.querySelector(".modal-content");
-
-    const closeButton = editModal.querySelector("#closeEditModal");
-    if (closeButton) {
-      closeButton.addEventListener("click", () => {
-        editModal.style.display = "none";
-      });
-    }
-
-    if (postName === userData.name) {
-      modalContent.querySelector("#editTitle").value = post.title;
-      modalContent.querySelector("#editBody").value = post.body;
-      modalContent.querySelector("#editMedia").value = post.media || "";
-
-      const editTagsInput = modalContent.querySelector("#editTags");
-
-      if (post.tags && post.tags.length > 0) {
-        const tagsString = post.tags.join(", ");
-        editTagsInput.value = tagsString;
-      }
-
-      editModal.style.display = "flex";
-
-      modalContent
-        .querySelector("form")
-        .addEventListener("submit", async (e) => {
-          e.preventDefault();
-          const editedPost = {
-            title: modalContent.querySelector("#editTitle").value,
-            body: modalContent.querySelector("#editBody").value,
-            media: modalContent.querySelector("#editMedia").value,
-            tags: editTagsInput.value.split(",").map((tag) => tag.trim()),
-          };
-
-          const updateResponse = await httpRequest(postUrl, "PUT", editedPost);
-
-          if (updateResponse.updated) {
-            message("success", "Post edited successfully");
-
-            setTimeout(() => {
-              post.title = editedPost.title;
-              post.body = editedPost.body;
-              post.media = editedPost.media;
-              post.tags = editedPost.tags;
-              updatePostUI(postId, post);
-              editModal.style.display = "none";
-            }, 1000);
-          }
-        });
-    } else {
-      console.error("Unauthorized to edit this post.");
-      message("error", "Unauthorized to edit this post.");
-    }
-  } catch (error) {
-    console.error("Error fetching post data:", error);
-    message("error", `Error fetching post data: ${error}`);
+    loadMoreButton.removeEventListener("click", loadMoreResults);
+    loadMoreButton.addEventListener("click", loadMoreResults);
+  } else {
+    loadMoreButton.style.display = "none";
   }
 }
 
-function updatePostUI(postId, post) {
-  const postContainer = document.querySelector(`.post[data-id="${postId}"]`);
-  const titleElement = postContainer.querySelector(".fs-4");
-  const bodyElement = postContainer.querySelector(".card-text");
-  const mediaElement = postContainer.querySelector(".thumbnail-img");
-  const tagsElement = postContainer.querySelector(".post-tags");
+if (location.pathname === "/feed.html") {
+  const searchInput = document.getElementById("searchInput");
+  const searchButton = document.getElementById("searchButton");
 
-  titleElement.textContent = post.title;
-  bodyElement.textContent = post.body;
-  tagsElement.textContent = post.tags.join(" ");
+  searchInput.addEventListener("input", () => {
+    const query = searchInput.value.toLowerCase();
+    const results = searchPosts(query);
+    displaySearchResults(results, searchPage);
+  });
 
-  if (mediaElement) {
-    if (post.media) {
-      mediaElement.setAttribute("src", post.media);
-      mediaElement.style.display = "block";
-    } else {
-      mediaElement.style.display = "none";
-    }
+  searchButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    searchPage = 1;
+    const query = searchInput.value.toLowerCase();
+    const results = searchPosts(query);
+    displaySearchResults(results, searchPage);
+  });
+
+  async function initializePage() {
+    await fetchAllPosts();
+    setupPaginationContainers();
+    renderPosts(generatePostsUrl(currentPage));
   }
+
+  initializePage();
 }
-
-// async function handleFollowing() {
-//   const url = `${API_BASE_URL}social/profiles/${userData.name}?_following=true`;
-
-//   try {
-//     const response = await httpRequest(url, "GET");
-//     const usersFollowed = response.following;
-//     const usernames = usersFollowed.map((user) => user.name);
-//     return usernames;
-//   } catch (error) {
-//     console.log(error);
-//     return [];
-//   }
-// }
-
-// function updateButtonState(username) {
-//   const followIcons = document.querySelectorAll(".card-follow");
-
-//   followIcons.forEach((icon) => {
-//     const followUser = icon.querySelector(".follow-user");
-//     const unfollowUser = icon.querySelector(".unfollow-user");
-//     const userFollowed = icon.dataset.name === username;
-
-//     followUser.style.display = userFollowed ? "none" : "block";
-//     unfollowUser.style.display = userFollowed ? "block" : "none";
-//   });
-// }
-
-// async function handleFollow(username) {
-//   const followUrl = `${API_BASE_URL}social/profiles/${username}/follow`;
-
-//   try {
-//     const response = httpRequest(followUrl, "PUT", {});
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// async function handleUnfollow(username) {
-//   const unfollowUrl = `${API_BASE_URL}social/profiles/${username}/unfollow`;
-
-//   try {
-//     const response = httpRequest(unfollowUrl, "PUT", {});
-//     return response;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
-
-// <i class="fa-solid fa-square-plus unfollow-user" title="Unfollow" data-name="${post.author.name}"></i>

@@ -35,7 +35,7 @@ export async function handleRegistration(event) {
   const banner = bannerInput.value;
 
   if (username.length === 0 || email.length === 0 || password.length === 0) {
-    message("error", "Username, email and password required");
+    message("error", "Username, email and password required", ".message-index");
     return;
   }
 
@@ -43,7 +43,7 @@ export async function handleRegistration(event) {
     (avatar && !(await isValidImageUrl(avatar))) ||
     (banner && !(await isValidImageUrl(banner)))
   ) {
-    message("error", "Invalid image URL");
+    message("error", "Invalid image URL", ".message-index");
     return;
   }
 
@@ -78,24 +78,41 @@ export async function handleRegistration(event) {
 
           message(
             "success",
-            `User registration was successful, welcome ${loginResponse.name}`
+            `User registration was successful, welcome ${loginResponse.name}`,
+            ".message-index"
           );
 
           setTimeout(() => {
             window.location.href = URLS.FEED;
           }, 2000);
         } else {
-          message("error", "An error occured during auto-login");
+          message(
+            "error",
+            "An error occured during auto-login",
+            ".message-index"
+          );
         }
       } catch (loginError) {
         console.log(loginError);
-        message("error", "An error occured during user registration");
+        message(
+          "error",
+          "An error occured during user registration",
+          ".message-index"
+        );
       }
     } else {
-      message("error", "Please provide correct registration credentials");
+      message(
+        "error",
+        "Please provide correct registration credentials",
+        ".message-index"
+      );
     }
   } catch (error) {
     console.log(error);
-    message("error", "An error occured when attempting user registration");
+    message(
+      "error",
+      "An error occured when attempting user registration",
+      ".message-index"
+    );
   }
 }

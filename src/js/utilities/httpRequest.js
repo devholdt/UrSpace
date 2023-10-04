@@ -33,14 +33,28 @@ export async function httpRequest(url, method = "GET", body = null) {
     if (response.ok) {
       const json = await response.json();
 
-      console.log("JSON (httpRequest):", json);
-
       return json;
     } else {
       const errorData = await response.json();
-      message("error", errorData.message || "Request failed");
+      message(
+        "error",
+        errorData.message || "Request failed",
+        ".message-posts",
+        null
+      );
+
+      throw new Error("HTTP Request failed");
     }
   } catch (error) {
-    message("error", "An error occured with the API call");
+    console.error("An error occured with the API call:", error);
+
+    message(
+      "error",
+      "An error occured with the API call",
+      ".message-posts",
+      null
+    );
+
+    throw error;
   }
 }
