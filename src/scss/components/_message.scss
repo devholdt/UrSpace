@@ -12,15 +12,15 @@
         border: 3px solid $success;
         color: $success-secondary;
     }
-    
-    // .error {
-    //     border: 3px solid $danger;
-    //     color: $danger-secondary;
-    // }
 
     .error {
         border: 3px solid $danger;
         background-color: $danger-secondary;
+    }
+
+    .info {
+        border: 3px solid $info;
+        background-color: $info-secondary;
     }
 }
 
