@@ -11949,7 +11949,6 @@ main {
 }
 
 .pagination-top {
-  top: 50px;
   z-index: 2;
 }
 .pagination-bottom {
@@ -12028,6 +12027,9 @@ footer p {
   margin: auto;
 }
 
+nav {
+  top: 50px;
+}
 nav i, nav span {
   font-size: 1.25rem;
 }
