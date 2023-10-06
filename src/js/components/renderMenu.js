@@ -10,6 +10,7 @@ export default function renderMenu() {
   const links = [
     { href: URLS.FEED, text: "Home", icon: "fa-solid fa-house" },
     { href: URLS.PROFILE, text: "Profile", icon: "fa-solid fa-user" },
+    { href: URLS.SEARCH, text: "Search", icon: "fa-solid fa-search" },
   ];
 
   const navProfile = document.querySelector(".user-info");

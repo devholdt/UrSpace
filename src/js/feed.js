@@ -4,11 +4,11 @@ import { getUser } from "./utilities/storage.js";
 import { renderPosts } from "./components/renderPosts.js";
 import { clearUrl } from "./utilities/clickEvents.js";
 import { handlePost } from "./components/handlePost.js";
+import { displayScrollButton } from "./utilities/scrollEvents.js";
 import {
+  currentPage,
   generatePostsUrl,
   setupPaginationContainers,
-  updatePaginationUI,
-  currentPage,
 } from "./components/pagination.js";
 
 const user = getUser();
@@ -19,14 +19,11 @@ if (!user) {
 const btnPost = document.querySelector(".btn-post");
 const mediaInput = document.getElementById("postMedia");
 const clearMediaUrl = document.getElementById("clearMediaUrl");
-const paginationContainers = document.querySelectorAll(".pagination");
-
-paginationContainers.forEach((container) => {
-  setupPaginationContainers(container, renderPosts, updatePaginationUI);
-});
 
 btnPost.addEventListener("click", handlePost);
-renderPosts(generatePostsUrl(currentPage));
 
 renderMenu();
 clearUrl(clearMediaUrl, mediaInput);
+renderPosts(generatePostsUrl(currentPage));
+setupPaginationContainers();
+displayScrollButton(1500);

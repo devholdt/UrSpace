@@ -4,8 +4,6 @@ import { handleEdit } from "./editPost.js";
 import { getUser } from "../utilities/storage.js";
 import { formatDate } from "../utilities/formatDate.js";
 import message from "./message.js";
-import { API_URLS } from "../settings/constants.js";
-import { renderFilteredPosts } from "./handleSearch.js";
 
 /**
  * Renders posts from the API by sending an HTTP GET request and
@@ -16,23 +14,9 @@ import { renderFilteredPosts } from "./handleSearch.js";
  */
 export async function renderPosts(url) {
   const postsContainer = document.querySelector(".posts-container");
-  const searchForm = document.querySelector(".form-search");
-  const input = document.getElementById("searchInput");
   const userData = getUser();
 
   try {
-    if (location.pathname === "/feed.html") {
-      renderFilteredPosts(
-        searchForm,
-        input,
-        postsContainer,
-        await httpRequest(
-          `${API_URLS.POSTS}?_author=true&_tag=${input.value}`,
-          "GET"
-        )
-      );
-    }
-
     const posts = await httpRequest(url, "GET");
 
     if (posts.length === 0) {
@@ -96,12 +80,11 @@ export async function renderPosts(url) {
 
         <div class="card-header border-0">
           <div class="d-flex justify-content-between align-items-center">
-            <p class="fs-6 card-header_name">${post.author.name}</p>
-            <div class="card-follow" data-name="${post.author.name}">
-              <i class="fa-regular fa-square-plus follow-button" title="Follow" data-name="${
-                post.author.name
-              }"></i>
+            <div class="d-flex gap-2 align-items-end">
+              <p class="card-header_name fs-5">${post.author.name}</p>
+              <a href="#" class="fst-italic fw-light">visit profile</a>
             </div>
+            <p class="fst-italic fw-light">id: ${post.id}</p>
           </div>
         </div>
         

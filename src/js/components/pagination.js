@@ -13,16 +13,12 @@ export function generatePostsUrl(page) {
 function createButton(text, clickHandler) {
   const button = document.createElement("button");
   button.textContent = text;
-  button.classList.add("btn", "btn-outline-primary");
+  button.classList.add("btn", "btn-primary");
   button.addEventListener("click", clickHandler);
   return button;
 }
 
-export function setTotalPages(totalPosts) {
-  totalPages = Math.max(Math.ceil(totalPosts / INITIAL_LIMIT), 10);
-}
-
-export function updatePaginationUI() {
+function updatePaginationUI() {
   const pageButtons = document.querySelectorAll(".pagination button");
   pageButtons.forEach((button) => {
     const page = parseInt(button.textContent);
@@ -30,12 +26,16 @@ export function updatePaginationUI() {
   });
 }
 
-export function handlePageClick(page) {
+function handlePageClick(page) {
   if (page >= 1 && page <= totalPages && page !== currentPage) {
     currentPage = page;
     renderPosts(generatePostsUrl(currentPage));
     updatePaginationUI();
   }
+
+  const heading = document.querySelector("h3");
+
+  heading.scrollIntoView();
 }
 
 export function setupPaginationContainers() {
@@ -43,6 +43,8 @@ export function setupPaginationContainers() {
 
   containers.forEach((container) => {
     container.style.display = "flex";
+    currentPage = 1;
+
     if (container) {
       container.innerHTML = "";
       const prevButton = createButton("prev", () =>

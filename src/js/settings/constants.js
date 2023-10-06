@@ -11,4 +11,5 @@ export const URLS = {
   FEED: "feed.html",
   INDEX: "index.html",
   PROFILE: "profile.html",
+  SEARCH: "searchResults.html",
 };

@@ -11949,8 +11949,8 @@ main {
 }
 
 .pagination-top {
-  top: 25px;
-  z-index: 1;
+  top: 50px;
+  z-index: 2;
 }
 .pagination-bottom {
   z-index: 1;
@@ -12009,6 +12009,16 @@ main {
   font-size: 20px;
 }
 
+.scroll-button {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  background-color: white;
+}
+.scroll-button:hover {
+  background-color: #ff5722;
+}
+
 footer {
   display: flex;
   flex-shrink: 0;
@@ -12049,7 +12059,6 @@ form .url-input {
 
 .card {
   border-radius: 0;
-  max-width: 650px;
 }
 .card-header p {
   margin: 0;
