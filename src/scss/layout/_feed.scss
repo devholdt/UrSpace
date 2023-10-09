@@ -35,30 +35,3 @@
         z-index: 1;
     }
 }
-
-.form-search {
-    top: 40px;
-
-    button {
-        height: 40px;
-        width: 45px;
-        color: $dark;
-    }
-
-    input {
-        height: 40px;
-        border-left: none;
-    }
-
-    .hide-label {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        padding: 0;
-        margin: -1px;
-        overflow: hidden;
-        clip: rect(0, 0, 0, 0);
-        white-space: nowrap;
-        border: 0;
-    }
-}

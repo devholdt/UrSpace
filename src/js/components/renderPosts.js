@@ -1,60 +1,48 @@
-import { httpRequest } from "../utilities/httpRequest.js";
-import { handleDelete } from "../utilities/clickEvents.js";
-import { handleEdit } from "./editPost.js";
-import { getUser } from "../utilities/storage.js";
 import { formatDate } from "../utilities/formatDate.js";
-import message from "./message.js";
+import { handleEdit } from "./editPost.js";
+import { handleDelete } from "../utilities/clickEvents.js";
 
 /**
- * Renders posts from the API by sending an HTTP GET request and
- * displays them in the DOM.
+ * Renders an array of posts to a specified container.
  *
- * @param {string} url - The URL to send the HTTP Request to fetch posts.
- * @returns
+ * @param {Array} posts - An array of post objects to render.
+ * @param {Object} userData - User data for the currently logged-in user.
+ * @param {HTMLElement} container - The container ellement where the posts will be rendered.
+ * @returns {void}
  */
-export async function renderPosts(url) {
+export function renderPosts(posts, userData) {
   const postsContainer = document.querySelector(".posts-container");
-  const userData = getUser();
 
-  try {
-    const posts = await httpRequest(url, "GET");
+  for (const post of posts) {
+    let postMedia = "";
+    let modalContent = "";
+    let buttonGroup = "";
 
-    if (posts.length === 0) {
-      postsContainer.innerHTML = `<p class="no-posts">No posts found</p>`;
+    const postDate = new Date(post.created);
+    const updateDate = new Date(post.updated);
+    const formattedPostDate = formatDate(postDate);
+    const formattedUpdateDate = formatDate(updateDate);
+    let updatedTime = `(<i>Edit ${formattedUpdateDate}</i>)`;
+
+    if (formattedPostDate === formattedUpdateDate) {
+      updatedTime = "";
     }
 
-    postsContainer.innerHTML = "";
+    if (post.media) {
+      const modalId = `modal-${post.id}`;
+      postMedia = `
+        <div class="thumbnail">
+          <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}">
+        </div>`;
+      modalContent = `
+        <div class="modal" id="${modalId}">
+          <i class="fa-solid fa-circle-xmark close-btn" data-modal-id="${modalId}"></i>
+          <img src="${post.media}" alt="Full-sized post media" class="modal-content">
+        </div>`;
+    }
 
-    for (const post of posts) {
-      let postMedia = "";
-      let modalContent = "";
-      let buttonGroup = "";
-
-      const postDate = new Date(post.created);
-      const updateDate = new Date(post.updated);
-      const formattedPostDate = formatDate(postDate);
-      const formattedUpdateDate = formatDate(updateDate);
-      let updatedTime = `(<i>Edit ${formattedUpdateDate}</i>)`;
-
-      if (formattedPostDate === formattedUpdateDate) {
-        updatedTime = "";
-      }
-
-      if (post.media) {
-        const modalId = `modal-${post.id}`;
-        postMedia = `
-          <div class="thumbnail">
-            <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}">
-          </div>`;
-        modalContent = `
-          <div class="modal" id="${modalId}">
-            <i class="fa-solid fa-circle-xmark close-btn" data-modal-id="${modalId}"></i>
-            <img src="${post.media}" alt="Full-sized post media" class="modal-content">
-          </div>`;
-      }
-
-      if (post.author.name === userData.name) {
-        buttonGroup = `
+    if (post.author.name === userData.name) {
+      buttonGroup = `
         <div class="btn-group m-0" role="group" aria-label="Post interaction">
           <button class="btn btn-light p-0 btn-edit" title="Edit" data-id="${post.id}" data-name="${post.author.name}">
           <i class="fa-regular fa-pen-to-square" data-id="${post.id}" data-name="${post.author.name}"></i>
@@ -63,8 +51,8 @@ export async function renderPosts(url) {
           <i class="fa-regular fa-trash-can" data-id="${post.id}"></i>
           </button>
         </div>`;
-      } else {
-        buttonGroup = `
+    } else {
+      buttonGroup = `
         <div class="btn-group m-0" role="group" aria-label="Post interaction">
           <button class="btn btn-outline-secondary p-0 btn-like" title="Like">
           <i class="fa-regular fa-thumbs-up"></i>
@@ -73,9 +61,9 @@ export async function renderPosts(url) {
           <i class="fa-regular fa-comment"></i>
           </button>
         </div>`;
-      }
+    }
 
-      postsContainer.innerHTML += `
+    postsContainer.innerHTML += `
       <div class="card m-4 post" data-id="${post.id}">
 
         <div class="card-header border-0">
@@ -110,15 +98,6 @@ export async function renderPosts(url) {
         </div>
             
       </div>`;
-    }
-  } catch (error) {
-    console.log(error);
-    message(
-      "error",
-      "An error occured with the API call",
-      ".message-posts",
-      null
-    );
   }
 
   const deleteButtons = document.querySelectorAll(".btn-delete");
@@ -131,39 +110,5 @@ export async function renderPosts(url) {
 
   editButtons.forEach((button) => {
     button.addEventListener("click", handleEdit);
-  });
-
-  attachEventListeners();
-}
-
-function openModal(modalId) {
-  const modal = document.getElementById(modalId);
-  modal.classList.add("modal-active");
-  modal.addEventListener("click", closeModal);
-  modal.querySelector(".modal-content").addEventListener("click", (e) => {
-    e.stopPropagation();
-  });
-}
-
-function closeModal(e) {
-  if (
-    e.target.classList.contains("modal") ||
-    e.target.classList.contains("close-btn")
-  ) {
-    const modals = document.querySelectorAll(".modal");
-    modals.forEach((modal) => {
-      modal.classList.remove("modal-active");
-    });
-  }
-}
-
-function attachEventListeners() {
-  const thumbnailImages = document.querySelectorAll(".thumbnail-img");
-
-  thumbnailImages.forEach((thumbnail) => {
-    thumbnail.addEventListener("click", () => {
-      const modalId = thumbnail.getAttribute("data-modal-id");
-      openModal(modalId);
-    });
   });
 }

@@ -1,18 +1,18 @@
 import renderMenu from "./components/renderMenu.js";
 import { URLS } from "./settings/constants.js";
 import { getUser } from "./utilities/storage.js";
-import { renderPosts } from "./components/renderPosts.js";
+import { fetchPosts } from "./components/fetchPosts.js";
 import { clearUrl } from "./utilities/clickEvents.js";
 import { handlePost } from "./components/handlePost.js";
 import { displayScrollButton } from "./utilities/scrollEvents.js";
 import {
   currentPage,
-  generatePostsUrl,
+  paginationUrl,
   setupPaginationContainers,
 } from "./components/pagination.js";
 
-const user = getUser();
-if (!user) {
+const userData = getUser();
+if (!userData) {
   window.location.href = URLS.INDEX;
 }
 
@@ -24,6 +24,6 @@ btnPost.addEventListener("click", handlePost);
 
 renderMenu();
 clearUrl(clearMediaUrl, mediaInput);
-renderPosts(generatePostsUrl(currentPage));
+fetchPosts(paginationUrl(currentPage));
 setupPaginationContainers();
 displayScrollButton(1500);

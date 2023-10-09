@@ -1,11 +1,11 @@
 import { API_URLS } from "../settings/constants.js";
-import { renderPosts } from "./renderPosts.js";
+import { fetchPosts } from "./fetchPosts.js";
 
 export let currentPage = 1;
 export const INITIAL_LIMIT = 10;
 let totalPages = 10;
 
-export function generatePostsUrl(page) {
+export function paginationUrl(page) {
   const offset = (page - 1) * INITIAL_LIMIT;
   return `${API_URLS.POSTS}?_author=true&limit=${INITIAL_LIMIT}&offset=${offset}`;
 }
@@ -29,7 +29,7 @@ function updatePaginationUI() {
 function handlePageClick(page) {
   if (page >= 1 && page <= totalPages && page !== currentPage) {
     currentPage = page;
-    renderPosts(generatePostsUrl(currentPage));
+    fetchPosts(paginationUrl(currentPage));
     updatePaginationUI();
   }
 

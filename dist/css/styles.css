@@ -11955,30 +11955,6 @@ main {
   z-index: 1;
 }
 
-.form-search {
-  top: 40px;
-}
-.form-search button {
-  height: 40px;
-  width: 45px;
-  color: #333333;
-}
-.form-search input {
-  height: 40px;
-  border-left: none;
-}
-.form-search .hide-label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
 .profile-container {
   display: flex;
   flex-direction: column;
@@ -12006,6 +11982,29 @@ main {
   justify-content: center;
   margin-top: 3em;
   font-size: 20px;
+}
+
+.form-search {
+  top: 40px;
+  z-index: 2;
+}
+.form-search button {
+  height: 40px;
+  width: 45px;
+}
+.form-search input {
+  height: 40px;
+}
+.form-search .hide-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .scroll-button {

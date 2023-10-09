@@ -32,8 +32,9 @@ export async function handleEdit(event) {
             <label for="editMedia" class="form-label m-0">Media URL</label>
             <div class="d-flex">
                 <input type="text" class="form-control shadow-none url-input" id="editMedia" name="editMedia">
-                <button type="button" class="btn btn-light btn-clear" id="clearEditMediaUrl"><i
-                        class="fa-solid fa-xmark"></i></button>
+                <button type="button" class="btn btn-light btn-clear" id="clearEditMediaUrl">
+                  <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
           </div>
   
@@ -122,6 +123,8 @@ export async function handleEdit(event) {
               post.tags = editedPost.tags;
               updatePostUI(postId, post);
               editModal.style.display = "none";
+
+              location.reload();
             }, 1000);
           }
         });
