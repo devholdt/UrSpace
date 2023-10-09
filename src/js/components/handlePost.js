@@ -26,7 +26,8 @@ export async function handlePost(event) {
     titleInput.style.borderWidth = "3px";
 
     setTimeout(() => {
-      titleInput.style.borderColor = "white";
+      titleInput.style.borderColor = "#dee2e6";
+      titleInput.style.borderWidth = "1px";
     }, 1900);
     return;
   }

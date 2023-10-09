@@ -1,17 +1,17 @@
 import renderMenu from "./components/renderMenu.js";
 import message from "./components/message.js";
 import { httpRequest } from "./utilities/httpRequest.js";
-import { getUser } from "./utilities/storage.js";
 import { API_URLS } from "./settings/constants.js";
 import { displayScrollButton } from "./utilities/scrollEvents.js";
-import { renderPosts } from "./components/renderPosts.js";
 import { handleImageModal } from "./components/handleImageModal.js";
+import { handleDelete } from "./utilities/clickEvents.js";
+import { handleEdit } from "./components/editPost.js";
+import { postInnerHtml } from "./components/renderPosts.js";
 
 const postsContainer = document.querySelector(".posts-container");
 const searchForm = document.querySelector(".form-search");
 const searchInput = document.getElementById("searchInput");
 const messageContainer = document.querySelector(".message-container");
-const userData = getUser();
 const url = `${API_URLS.POSTS}?_author=true&_tag=${searchInput.value}`;
 
 renderMenu();
@@ -75,7 +75,22 @@ async function getResults(httpRequest) {
     );
   }
 
-  renderPosts(filteredPosts, userData, postsContainer);
+  for (const post of filteredPosts) {
+    postInnerHtml(post, postsContainer);
+  }
+
+  const deleteButtons = document.querySelectorAll(".btn-delete");
+
+  deleteButtons.forEach((button) => {
+    button.addEventListener("click", handleDelete);
+  });
+
+  const editButtons = document.querySelectorAll(".btn-edit");
+
+  editButtons.forEach((button) => {
+    button.addEventListener("click", handleEdit);
+  });
+
   handleImageModal();
 }
 

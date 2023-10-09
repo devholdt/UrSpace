@@ -1,7 +1,7 @@
 import renderMenu from "./components/renderMenu.js";
 import { API_URLS, URLS } from "./settings/constants.js";
 import { getUser } from "./utilities/storage.js";
-import { fetchPosts } from "./components/fetchPosts.js";
+import { displayPosts } from "./components/renderPosts.js";
 
 const userData = getUser();
 if (!userData) {
@@ -10,7 +10,7 @@ if (!userData) {
 
 const postsUrl = `${API_URLS.PROFILES}/${userData.name}/posts?_author=true`;
 
-fetchPosts(postsUrl);
+displayPosts(postsUrl);
 renderMenu();
 renderProfile();
 

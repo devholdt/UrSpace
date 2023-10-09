@@ -140,7 +140,7 @@ export async function handleEdit(event) {
 
 function updatePostUI(postId, post) {
   const postContainer = document.querySelector(`.post[data-id="${postId}"]`);
-  const titleElement = postContainer.querySelector(".fs-4");
+  const titleElement = postContainer.querySelector(".post-title");
   const bodyElement = postContainer.querySelector(".card-text");
   const mediaElement = postContainer.querySelector(".thumbnail-img");
   const tagsElement = postContainer.querySelector(".post-tags");

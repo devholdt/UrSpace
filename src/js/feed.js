@@ -1,15 +1,10 @@
 import renderMenu from "./components/renderMenu.js";
-import { URLS } from "./settings/constants.js";
+import { API_URLS, URLS } from "./settings/constants.js";
 import { getUser } from "./utilities/storage.js";
-import { fetchPosts } from "./components/fetchPosts.js";
 import { clearUrl } from "./utilities/clickEvents.js";
 import { handlePost } from "./components/handlePost.js";
 import { displayScrollButton } from "./utilities/scrollEvents.js";
-import {
-  currentPage,
-  paginationUrl,
-  setupPaginationContainers,
-} from "./components/pagination.js";
+import { displayPosts } from "./components/renderPosts.js";
 
 const userData = getUser();
 if (!userData) {
@@ -24,6 +19,13 @@ btnPost.addEventListener("click", handlePost);
 
 renderMenu();
 clearUrl(clearMediaUrl, mediaInput);
-fetchPosts(paginationUrl(currentPage));
-setupPaginationContainers();
+
 displayScrollButton(1500);
+
+const url = `${API_URLS.POSTS}?_author=true`;
+
+displayPosts(url);
+
+loadMoreButton.addEventListener("click", () => {
+  displayPosts(url);
+});

@@ -28,7 +28,17 @@
         <div class="row page-columns gap-3">
 
             <div class="col-lg-2 py-4">
-                <nav class="nav flex-column position-sticky"></nav>
+                <div class="feed-left-column position-sticky">
+                    <nav class="nav flex-column"></nav>
+                    <div class="sort mt-5">
+                        <p class="mb-1 fw-semibold">Sort by:</p>
+                        <button class="btn btn-light rounded-0 mb-1">Date</button>
+                        <button class="btn btn-light rounded-0 mb-1">ID</button>
+                        <button class="btn btn-light rounded-0 mb-1">Likes</button>
+                        <button class="btn btn-light rounded-0 mb-1">Followers</button>
+                        <button class="btn btn-light rounded-0 mb-1">Length</button>
+                    </div>
+                </div>
             </div>
 
             <div class="container col-lg-7">
@@ -95,30 +105,23 @@
                 <h3 class="mt-5 h2 scroll-target">Feed</h3>
 
                 <div class="posts message-container message-posts">
-                    <div class="pagination pagination-top btn-group bg-primary p-2" role="group"
-                        aria-label="Pagination">
-                        <button id="prevPageTop" class="btn btn-outline-primary" title="Previous">Prev</button>
-                        <button id="nextPageTop" class="btn btn-outline-primary" title="Next">Next</button>
-                    </div>
 
                     <div class="posts-container"></div>
 
+                    <button id="loadMoreButton" class="btn btn-outline-primary justify-content-center m-auto">
+                        More posts
+                    </button>
+
                     <div class="d-flex justify-content-end">
-                        <button class="scroll-button btn btn-outline-secondary rounded-5" style="display: none;"><i
-                                class="fa-solid fa-arrow-up"></i></button>
+                        <button class="scroll-button btn btn-outline-secondary rounded-5" style="display: none;">
+                            <i class="fa-solid fa-arrow-up"></i>
+                        </button>
                     </div>
 
-                    <div class=" pagination pagination-bottom btn-group mb-4 bg-primary p-2" role="group"
-                        aria-label="Pagination">
-                        <button id="prevPageBottom" class="btn btn-outline-primary" title="Previous">Prev</button>
-                        <button id="nextPageBottom" class="btn btn-outline-primary" title="Next">Next</button>
-                    </div>
                 </div>
             </div>
 
             <div class="col"></div>
-
-        </div>
 
         </div>
     </main>
