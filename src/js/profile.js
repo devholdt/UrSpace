@@ -15,7 +15,7 @@ if (!localUserData) {
 
 // The URL to fetch the logged-in user's posts and data
 const postsUrl = `${API_URLS.PROFILES}/${localUserData.name}/posts?_author=true`;
-const userUrl = `${API_URLS.PROFILES}/${localUserData.name}`;
+const userUrl = `${API_URLS.PROFILES}/${localUserData.name}?_followers=true&_following=true`;
 
 // Render the navigation menu
 renderMenu();
@@ -57,16 +57,29 @@ async function renderProfile() {
 
     // Update the profile info HTML with the user's avatar and name
     profileInfo.innerHTML = `
-      <div class="d-flex align-items-center gap-3">
-          <img src="${apiUserData.avatar}" class="avatar" id="userAvatar" alt="${apiUserData.name}'s avatar">
-          <div>
-              <h1 class="m-0">${apiUserData.name}</h1>
-              <p class="profile-email">${apiUserData.email}</p>
+        <div class="text-center pb-5 bg-dark text-light">
+          <div class="d-flex justify-content-end">
+            <button id="userSettingsButton" class="btn btn-light rounded-0">Settings</button>
           </div>
-      </div>`;
+          <div class="d-flex gap-4 align-items-center justify-content-evenly p-4">
+              <img src="${apiUserData.avatar}" class="avatar border border-2 border-light" id="userAvatar" alt="${apiUserData.name}'s avatar">
+              <div>
+                  <h1 class="m-0">${apiUserData.name}</h1>
+                  <p class="profile-email">${apiUserData.email}</p>
+                  <hr class="my-3">
+                  <div>
+                    <p class="m-0">${apiUserData._count.posts} posts</p>
+                    <p class="m-0">${apiUserData._count.followers} followers</p>
+                    <p class="m-0">${apiUserData._count.following} followed</p>
+                </div>
+              </div>
+            </div>
+        </div>`;
 
+    // Get the user settings button
     const userSettingsButton = document.getElementById("userSettingsButton");
 
+    // Run handleUserSettings function on button click
     userSettingsButton.addEventListener("click", () => {
       handleUserSettings();
     });
