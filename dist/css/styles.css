@@ -11885,7 +11885,6 @@ header .user-info a {
 }
 header .user-info #btnLogout {
   background-color: transparent;
-  border: none;
   color: white;
 }
 header .user-info #btnLogout:hover {
@@ -11972,12 +11971,39 @@ main {
 .profile-container_info .profile-email {
   font-size: 14px;
 }
+.profile-container #btnSetting {
+  border-radius: 50%;
+  border: 2px solid #333333;
+  border: none;
+  font-size: 1.3em;
+  background-color: transparent;
+  width: fit-content;
+  color: #333333;
+  border-color: #333333;
+}
+.profile-container #btnSetting:hover {
+  color: #495057;
+  border-color: #495057;
+}
 
 .no-posts {
   display: flex;
   justify-content: center;
   margin-top: 3em;
   font-size: 20px;
+}
+
+#userSettingsModal .modal-content {
+  width: 475px;
+  height: 325px;
+  margin: auto;
+}
+#userSettingsModal .modal-content #userSettingsForm {
+  width: 400px;
+}
+#userSettingsModal .modal-content #userSettingsForm button.btn-post {
+  width: 100px;
+  height: 40px;
 }
 
 .form-search {
@@ -12027,7 +12053,7 @@ nav {
   top: 50px;
 }
 nav i, nav span {
-  font-size: 1.25rem;
+  font-size: 1rem;
 }
 nav i {
   width: 30px;
@@ -12037,6 +12063,11 @@ nav .active {
   color: #ff5722;
 }
 
+@media (min-width: 992px) {
+  nav {
+    flex-direction: column;
+  }
+}
 form input {
   padding: 4px 8px;
   height: 35px;

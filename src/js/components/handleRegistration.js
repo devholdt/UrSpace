@@ -1,17 +1,20 @@
+import message from "../components/message.js";
 import { API_URLS } from "../settings/constants.js";
 import { httpRequest } from "../utilities/httpRequest.js";
 import { isValidImageUrl } from "../utilities/urlValidation.js";
 import { saveToken, saveUser } from "../utilities/storage.js";
 import { URLS } from "../settings/constants.js";
-import message from "../components/message.js";
 import { clearUrl } from "../utilities/clickEvents.js";
 
-const clearAvatarBtn = document.getElementById("clearAvatarUrl");
+// Get input and clear button for avatar URL
 const avatarInput = document.getElementById("registerAvatar");
+const clearAvatarBtn = document.getElementById("clearAvatarUrl");
 
-const clearBannerBtn = document.getElementById("clearBannerUrl");
+// Get input and clear button for banner URL
 const bannerInput = document.getElementById("registerBanner");
+const clearBannerBtn = document.getElementById("clearBannerUrl");
 
+// Clears URL inputs on button click
 clearUrl(clearAvatarBtn, avatarInput);
 clearUrl(clearBannerBtn, bannerInput);
 
@@ -26,19 +29,23 @@ clearUrl(clearBannerBtn, bannerInput);
  * @returns {Promise<void>} A Promise that resolves when the registration is complete.
  */
 export async function handleRegistration(event) {
+  // Prevent the default form submission behavior
   event.preventDefault();
 
+  // Collect user input values from the registration form
   const username = document.getElementById("registerUsername").value;
   const email = document.getElementById("registerEmail").value;
   const password = document.getElementById("registerPassword").value;
   const avatar = avatarInput.value;
   const banner = bannerInput.value;
 
+  // Check if username, email, and password are provided
   if (username.length === 0 || email.length === 0 || password.length === 0) {
     message("error", "Username, email and password required", ".message-index");
     return;
   }
 
+  // Check if provided image URLs are valid
   if (
     (avatar && !(await isValidImageUrl(avatar))) ||
     (banner && !(await isValidImageUrl(banner)))
@@ -47,6 +54,7 @@ export async function handleRegistration(event) {
     return;
   }
 
+  // Create a user object with registration data
   const user = {
     name: username,
     email: email,
@@ -56,15 +64,18 @@ export async function handleRegistration(event) {
   };
 
   try {
+    // Send a POST request to the server for user registration
     const response = await httpRequest(API_URLS.REGISTER, "POST", user);
 
     if (response) {
+      // Create login data for auto-login
       const loginData = {
         email: email,
         password: password,
       };
 
       try {
+        // Send a login request to the server for auto-login
         const loginResponse = await httpRequest(
           API_URLS.LOGIN,
           "POST",
@@ -72,10 +83,12 @@ export async function handleRegistration(event) {
         );
 
         if (loginResponse.accessToken) {
+          // Save the access token and user data on successful auto-login
           const token = loginResponse.accessToken;
           saveToken(token);
           saveUser(JSON.stringify(loginResponse));
 
+          // Display a success message and redirect after a delay
           message(
             "success",
             `User registration was successful, welcome ${loginResponse.name}`,

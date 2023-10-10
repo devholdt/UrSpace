@@ -5,6 +5,7 @@ import { getUser } from "../utilities/storage.js";
 import { httpRequest } from "../utilities/httpRequest.js";
 import { handleImageModal } from "./handleImageModal.js";
 
+// Initialize variables for pagination
 let start = 0;
 let loading = false;
 
@@ -18,13 +19,17 @@ export async function displayPosts(url) {
   const loadMoreButton = document.getElementById("loadMoreButton");
   const postsPerPage = 10;
 
-  if (loading) return; // Check if posts are currently being loaded
+  // Check if posts are currently being loaded
+  if (loading) return;
 
-  loading = true; // Set the loading flag to prevent multiple requests
+  // Set the loading flag to prevent multiple requests
+  loading = true;
 
-  const end = start + postsPerPage; // Calculate the end index for displaying posts
+  // Calculate the end index for displaying posts
+  const end = start + postsPerPage;
 
-  const posts = await httpRequest(url); // Fetch posts from the specified URL
+  // Fetch posts from the specified URL
+  const posts = await httpRequest(url);
 
   // Handle the case when no posts are found
   if (posts.length === 0) {
@@ -35,9 +40,14 @@ export async function displayPosts(url) {
   for (let i = start; i < end && i < posts.length; i++) {
     const post = posts[i];
 
-    const postElement = document.createElement("div"); // Create post element
-    postInnerHtml(post, postElement); // Populate the post element with content
-    postsContainer.appendChild(postElement); // Append the post element to the posts container
+    // Create post element
+    const postElement = document.createElement("div");
+
+    // Populate the post element with content
+    postInnerHtml(post, postElement);
+
+    // Append the post element to the posts container
+    postsContainer.appendChild(postElement);
   }
 
   // Update the start index and reset the loading flag
@@ -61,7 +71,8 @@ export async function displayPosts(url) {
     button.addEventListener("click", handleEdit);
   });
 
-  handleImageModal(); // Handle image modal
+  // Handle image modal
+  handleImageModal();
 }
 
 /**

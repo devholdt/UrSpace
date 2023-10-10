@@ -2,7 +2,7 @@ nav {
     top: 50px;
 
     i, span {
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
 
     i {
@@ -12,5 +12,11 @@ nav {
 
     .active {
         color: $secondary;
+    }
+}
+
+@media (min-width: 992px) {
+    nav {
+        flex-direction: column;
     }
 }
