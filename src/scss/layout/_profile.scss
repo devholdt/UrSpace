@@ -6,15 +6,15 @@
     &_banner {
         .banner {
             width: 100%;
-            height: 250px;
+            height: 300px;
             object-fit: cover;
         }
     }
 
     &_info {
         .avatar {
-            width: 130px;
-            height: 130px;
+            width: 220px;
+            height: 220px;
         }
     
         .btn-settings {
@@ -26,6 +26,23 @@
             font-size: 14px;
         }
     }
+
+    #btnSetting {
+        border-radius: 50%;
+        border: 2px solid $dark;
+        border: none;
+        font-size: 1.3em;
+        background-color: transparent;
+        width: fit-content;
+        color: $dark;
+        border-color: $dark;
+        
+
+        &:hover {
+            color: $gray-700;
+            border-color: $gray-700;
+        }
+    }
 }
 
 .no-posts {
@@ -33,4 +50,19 @@
     justify-content: center;
     margin-top: 3em;
     font-size: 20px;
+}
+
+#userSettingsModal .modal-content {
+    width: 475px;
+    height: 325px;
+    margin: auto;
+
+    #userSettingsForm {
+        width: 400px;
+
+        button.btn-post {
+            width: 100px;
+            height: 40px;
+        }
+    }
 }

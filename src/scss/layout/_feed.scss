@@ -7,8 +7,6 @@
 }
 
 .form-container {
-    height: 530px;
-
     &_post {
         height: inherit;
         .btn-post {
@@ -20,18 +18,13 @@
             height: 120px;
         }
     }
-
-    &_list {
-        height: inherit;
-    }
 }
 
-.pagination {
-    &-top {
-        z-index: 2;
-    }
+#loadMoreButton {
+    width: 200px;
+    display: flex;
+}
 
-    &-bottom {
-        z-index: 1;
-    }
+.feed-left-column {
+    top: 50px;
 }

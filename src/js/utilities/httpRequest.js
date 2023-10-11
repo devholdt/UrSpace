@@ -46,11 +46,9 @@ export async function httpRequest(url, method = "GET", body = null) {
       throw new Error("HTTP Request failed");
     }
   } catch (error) {
-    console.error("An error occured with the API call:", error);
-
     message(
       "error",
-      "An error occured with the API call",
+      `An error occured with the API call: ${error}`,
       ".message-posts",
       null
     );

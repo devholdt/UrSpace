@@ -28,25 +28,28 @@
         <div class="row page-columns">
 
             <div class="col py-4">
-                <nav class="nav flex-column position-sticky"></nav>
+                <nav class="nav position-sticky"></nav>
+                <div class="profile-aside position-sticky"></div>
             </div>
 
-            <div class="col-7 px-0">
+            <div class="col-lg-8 px-0">
 
-                <div class="container profile-container">
+                <div class="profile-container">
                     <div class="profile-container_banner"></div>
-                    <div class="profile-container_info mx-auto p-5"></div>
+                    <div class="profile-container_info mb-3"></div>
                 </div>
 
                 <div>
-                    <h2>Your posts</h2>
+                    <h2 class="border-bottom pb-2">Your posts</h2>
                     <div class="posts-container message-posts message-container"></div>
-                    <div class="search-results"></div>
+                    <button id="loadMoreButton" class="btn btn-outline-primary justify-content-center m-auto"
+                        style="display: none;">More
+                        posts</button>
                 </div>
 
             </div>
 
-            <div class="col py-4"></div>
+            <div class="col"></div>
 
         </div>
     </main>

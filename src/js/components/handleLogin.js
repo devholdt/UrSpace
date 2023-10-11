@@ -15,24 +15,30 @@ import message from "../components/message.js";
  * @returns {Promise<void>} A Promise that resolves when the login is complete.
  */
 export async function handleLogin(event) {
+  // Prevent the default form submission behavior
   event.preventDefault();
 
+  // Collect email and password from the login form
   const email = document.getElementById("loginEmail").value;
   const password = document.getElementById("loginPassword").value;
 
+  // Check if email and password are provided
   if (email.length === 0 || password.length === 0) {
     message("error", "Email and password are required", ".message-index");
     return;
   } else {
+    // Create a user object with email and password
     const user = {
       email: email,
       password: password,
     };
 
     try {
+      // Send a POST request to the server for login
       const response = await httpRequest(API_URLS.LOGIN, "POST", user);
 
       if (!response) {
+        // Handle incorrect login credentials
         message(
           "error",
           "Please provide correct login credentials",
@@ -40,10 +46,12 @@ export async function handleLogin(event) {
         );
         return;
       } else if (response.accessToken) {
+        // Save the access token and user data on successful login
         const token = response.accessToken;
         saveToken(token);
         saveUser(JSON.stringify(response));
 
+        // Display a success message and redirect after a delay
         message(
           "success",
           `Login successful, welcome back ${response.name}`,
@@ -55,10 +63,10 @@ export async function handleLogin(event) {
         }, 2000);
       }
     } catch (error) {
-      console.log(error);
+      // Display error message
       message(
         "error",
-        "An error occured when attempting to log in",
+        `An error occured when attempting to login: ${error}`,
         ".message-index"
       );
     }
