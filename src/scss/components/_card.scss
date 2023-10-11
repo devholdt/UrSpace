@@ -33,9 +33,13 @@
         .btn-comment {
             border-radius: 0 0 3px 0;
         }
+
+        .btn-like:hover i {
+            color: $secondary;
+        }
     }
 
-    .post-date {
+    .post-bottom p {
         font-size: 13px;
         color: $gray-600;
     }

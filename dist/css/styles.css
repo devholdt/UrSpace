@@ -12112,7 +12112,10 @@ form .url-input {
 .card .btn-group .btn-comment {
   border-radius: 0 0 3px 0;
 }
-.card .post-date {
+.card .btn-group .btn-like:hover i {
+  color: #ff5722;
+}
+.card .post-bottom p {
   font-size: 13px;
   color: #6c757d;
 }

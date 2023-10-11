@@ -61,8 +61,9 @@ export async function handleComment() {
                 </div>
             </div>
 
-            <div class="d-flex align-items-center">
-                <p class="mx-2 mt-0 mb-1 post-date">${formattedNewCommentDate}</p>
+            <div class="d-flex justify-content-between post-bottom">
+                <p class="mx-2 my-1">${formattedNewCommentDate}</p>
+                <p class="mx-2 my-1 fw-light">id: ${newComment.id}</p>
             </div>
 
             </div>`;

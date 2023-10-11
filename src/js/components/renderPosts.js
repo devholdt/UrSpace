@@ -5,6 +5,7 @@ import { getUser } from "../utilities/storage.js";
 import { httpRequest } from "../utilities/httpRequest.js";
 import { handleImageModal } from "./handleImageModal.js";
 import { handleComment } from "./handleComment.js";
+import { handlePostReaction } from "./handlePostReaction.js";
 
 // Initialize variables for pagination
 let start = 0;
@@ -58,6 +59,8 @@ export async function displayPosts(url) {
   // Hide the load more button if there are no more posts to load
   if (start >= posts.length) {
     loadMoreButton.style.display = "none";
+  } else {
+    loadMoreButton.style.display = "flex";
   }
 
   // Add event listeners to delete buttons
@@ -70,6 +73,11 @@ export async function displayPosts(url) {
   const editButtons = document.querySelectorAll(".btn-edit");
   editButtons.forEach((button) => {
     button.addEventListener("click", handleEdit);
+  });
+
+  const likeButtons = document.querySelectorAll(".btn-like");
+  likeButtons.forEach((button) => {
+    button.addEventListener("click", handlePostReaction);
   });
 
   // Initialize image modal functionality
@@ -126,17 +134,22 @@ export function postInnerHtml(post, container) {
     buttonGroup = `
       <div class="btn-group m-0 pt-1 gap-1" role="group" aria-label="Post interaction">
         <button class="btn btn-light p-0 btn-edit" title="Edit" data-id="${post.id}" data-name="${post.author.name}">
-        <i class="fa-regular fa-pen-to-square" data-id="${post.id}" data-name="${post.author.name}"></i>
+          <i class="fa-regular fa-pen-to-square" data-id="${post.id}" data-name="${post.author.name}"></i>
         </button>
         <button class="btn btn-light p-0 btn-delete" title="Delete" data-id="${post.id}">
-        <i class="fa-regular fa-trash-can" data-id="${post.id}"></i>
+          <i class="fa-regular fa-trash-can" data-id="${post.id}"></i>
+        </button>
+      </div>
+      <div class="btn-group m-0" role="group" aria-label="Post interaction">
+        <button class="btn border-0 m-0 p-0 btn-like" data-id="${post.id}">
+          <i class="fa-regular fa-thumbs-up" data-id="${post.id}"></i> ${post._count.reactions}
         </button>
       </div>`;
   } else {
     buttonGroup = `
-      <div class="btn-group m-0 pt-1 gap-1" role="group" aria-label="Post interaction">
-        <button class="btn btn-outline-secondary p-0 btn-like" title="Like">
-        <i class="fa-regular fa-thumbs-up"></i>
+      <div class="btn-group m-0" role="group" aria-label="Post interaction">
+        <button class="btn border-0 m-0 p-0 btn-like"data-id="${post.id}">
+          <i class="fa-regular fa-thumbs-up" data-id="${post.id}"></i> ${post._count.reactions}
         </button>
       </div>`;
   }
@@ -158,12 +171,11 @@ export function postInnerHtml(post, container) {
           <div class="card post p-1">
     
             <div class="card-header border-0 py-1">
-              <div class="d-flex justify-content-between align-items-center">
+              <div class="d-flex align-items-center">
                 <div class="d-flex gap-2">
                   <p>${comment.owner}</p>
                   <a href="#" class="fst-italic fw-light">visit profile</a>
                 </div>
-                <p class="fst-italic fw-light">id: ${comment.id}</p>
               </div>
             </div>
     
@@ -173,8 +185,9 @@ export function postInnerHtml(post, container) {
               </div>
             </div>
     
-            <div class="d-flex align-items-center">
-              <p class="mx-2 mt-0 mb-1 post-date">${formattedCommentDate}</p>
+            <div class="d-flex justify-content-between post-bottom">
+              <p class="mx-2 my-1">${formattedCommentDate}</p>
+              <p class="mx-2 my-1 fw-light">id: ${comment.id}</p>
             </div>
     
           </div>
@@ -201,7 +214,7 @@ export function postInnerHtml(post, container) {
               <p class="fs-5">${post.author.name}</p>
               <a href="#" class="fst-italic fw-light">visit profile</a>
             </div>
-            <p class="fst-italic fw-light">id: ${post.id}</p>
+            ${buttonGroup}
           </div>
         </div>
         
@@ -221,9 +234,9 @@ export function postInnerHtml(post, container) {
           </div>
         </div>
             
-        <div class="d-flex justify-content-between align-items-center">
-          <p class="d-flex justify-content-end mx-2 mt-0 mb-1 post-date">${formattedPostDate} ${updatedTime}</p>
-          ${buttonGroup}
+        <div class="d-flex justify-content-between post-bottom">
+          <p class="mx-2 my-1">${formattedPostDate} ${updatedTime}</p>
+          <p class="mx-2 my-1 fw-light">id: ${post.id}</p>
         </div>
       </div>
 
