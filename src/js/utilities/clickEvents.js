@@ -1,3 +1,4 @@
+import message from "../components/message.js";
 import { API_URLS } from "../settings/constants.js";
 import { httpRequest } from "./httpRequest.js";
 
@@ -27,7 +28,11 @@ export async function handleDelete(event) {
         location.reload();
       }
     } catch (error) {
-      console.log(error);
+      message(
+        "error",
+        `An error occured when attempting to delete a post: ${error}`,
+        ".message-posts"
+      );
     }
   } else {
     return;

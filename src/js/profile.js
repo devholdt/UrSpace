@@ -14,7 +14,7 @@ if (!localUserData) {
 }
 
 // The URL to fetch the logged-in user's posts and data
-const postsUrl = `${API_URLS.PROFILES}/${localUserData.name}/posts?_author=true`;
+const postsUrl = `${API_URLS.PROFILES}/${localUserData.name}/posts?_author=true&_comments=true&_reactions=true`;
 const userUrl = `${API_URLS.PROFILES}/${localUserData.name}?_followers=true&_following=true`;
 
 // Render the navigation menu
@@ -57,12 +57,12 @@ async function renderProfile() {
 
     // Update the profile info HTML with the user's avatar and name
     profileInfo.innerHTML = `
-        <div class="text-center pb-5 bg-dark text-light">
+        <div class="text-center pb-5 mb-5 border border-dark text-dark">
           <div class="d-flex justify-content-end">
-            <button id="userSettingsButton" class="btn btn-light rounded-0">Settings</button>
+            <button id="userSettingsButton" class="btn btn-dark rounded-0">Settings</button>
           </div>
           <div class="d-flex gap-4 align-items-center justify-content-evenly p-4">
-              <img src="${apiUserData.avatar}" class="avatar border border-2 border-light" id="userAvatar" alt="${apiUserData.name}'s avatar">
+              <img src="${apiUserData.avatar}" class="avatar border border-dark" id="userAvatar" alt="${apiUserData.name}'s avatar">
               <div>
                   <h1 class="m-0">${apiUserData.name}</h1>
                   <p class="profile-email">${apiUserData.email}</p>
@@ -84,7 +84,11 @@ async function renderProfile() {
       handleUserSettings();
     });
   } catch (error) {
-    console.error(error);
+    message(
+      "error",
+      "An error occured when attempting to render profile",
+      ".message-posts"
+    );
   }
 }
 
@@ -248,13 +252,9 @@ async function handleUserSettings() {
         }
       });
   } catch (error) {
-    console.error(
-      "An error occured when attempting to change the banner image:",
-      error
-    );
     message(
       "error",
-      "An error occured when attempting to change the banner image",
+      `An error occured when attempting to change the banner image. ${error}`,
       ".message-banner"
     );
   }

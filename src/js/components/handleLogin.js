@@ -63,11 +63,10 @@ export async function handleLogin(event) {
         }, 2000);
       }
     } catch (error) {
-      // Handle errors that occur during login
-      console.log("An error occured when attempting to loging:", error);
+      // Display error message
       message(
         "error",
-        "An error occured when attempting to login",
+        `An error occured when attempting to login: ${error}`,
         ".message-index"
       );
     }

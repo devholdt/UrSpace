@@ -145,11 +145,9 @@ export async function handleEdit(event) {
           }
         });
     } else {
-      console.error("Unauthorized to edit this post.");
       message("error", "Unauthorized to edit this post.", ".message-edit");
     }
   } catch (error) {
-    console.error("Error fetching post data:", error);
     message("error", `Error fetching post data: ${error}`, ".message-edit");
   }
 }

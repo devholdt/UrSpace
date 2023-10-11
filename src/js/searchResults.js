@@ -7,6 +7,7 @@ import { handleImageModal } from "./components/handleImageModal.js";
 import { handleDelete } from "./utilities/clickEvents.js";
 import { handleEdit } from "./components/editPost.js";
 import { postInnerHtml } from "./components/renderPosts.js";
+import { handleComment } from "./components/handleComment.js";
 
 // Get references to various elements in the HTML
 const postsContainer = document.querySelector(".posts-container");
@@ -15,7 +16,7 @@ const searchInput = document.getElementById("searchInput");
 const messageContainer = document.querySelector(".message-container");
 
 // Create a URL for fetching posts based on search input
-const url = `${API_URLS.POSTS}?_author=true&_tag=${searchInput.value}`;
+const url = `${API_URLS.POSTS}?_author=true&_comments=true&_reactions=true&_tag=${searchInput.value}`;
 
 // Render the menu and display the scroll button
 renderMenu();
@@ -54,12 +55,7 @@ async function renderSearchResults(form, httpRequest) {
       // Display error message
       message(
         "error",
-        "An error occured when attempting to render search results."
-      );
-      // Log error message
-      console.error(
-        "An error occured when attempting to render search results:",
-        error
+        `An error occured when attempting to render search results: ${error}`
       );
     }
   });
@@ -140,6 +136,9 @@ async function getResults(httpRequest) {
 
   // Initialize image modal functionality
   handleImageModal();
+
+  // Handle post commenting functionality
+  handleComment();
 }
 
 renderSearchResults(searchForm, await httpRequest(url, "GET"));

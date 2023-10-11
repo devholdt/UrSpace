@@ -106,10 +106,9 @@ export async function handleRegistration(event) {
           );
         }
       } catch (loginError) {
-        console.log(loginError);
         message(
           "error",
-          "An error occured during user registration",
+          `An error occured during user registration: ${loginError}`,
           ".message-index"
         );
       }
@@ -121,10 +120,9 @@ export async function handleRegistration(event) {
       );
     }
   } catch (error) {
-    console.log(error);
     message(
       "error",
-      "An error occured when attempting user registration",
+      `An error occured when attempting user registration: ${error}`,
       ".message-index"
     );
   }

@@ -76,8 +76,7 @@ export async function handlePost(event) {
       return;
     }
   } catch (error) {
-    // Log and display an error message if an error occurs during the request
-    console.error("An error occured:", error);
-    message("error", "An error occured", ".message-post");
+    // display an error message if an error occurs during the request
+    message("error", `An error occured: ${error}`, ".message-post");
   }
 }

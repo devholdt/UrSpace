@@ -30,7 +30,7 @@ clearUrl(clearMediaUrl, mediaInput);
 displayScrollButton(1500);
 
 // Define the URL for fetching posts by the current user
-const url = `${API_URLS.POSTS}?_author=true`;
+const url = `${API_URLS.POSTS}?_author=true&_comments=true&_reactions=true`;
 
 // Display the initial set of posts
 displayPosts(url);

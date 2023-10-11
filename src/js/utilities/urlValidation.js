@@ -1,3 +1,5 @@
+import message from "../components/message.js";
+
 export async function isValidImageUrl(url) {
   try {
     const response = await fetch(url, { method: "HEAD" });
@@ -9,7 +11,11 @@ export async function isValidImageUrl(url) {
 
     return;
   } catch (error) {
-    console.log(error);
+    message(
+      "error",
+      `An error occured when attempting to validate image URL: ${error}`,
+      ".message-posts"
+    );
     return;
   }
 }
