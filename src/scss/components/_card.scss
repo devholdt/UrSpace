@@ -127,7 +127,8 @@
     height: 560px;
 
     #editForm {
-        width: 350px;
+        max-width: 350px;
+        width: 100%;
     
         textarea {
             resize: none;

@@ -56,12 +56,13 @@
 }
 
 #userSettingsModal .modal-content {
-    width: 475px;
+    max-width: 475px;
     height: 325px;
     margin: auto;
 
     #userSettingsForm {
-        width: 400px;
+        max-width: 400px;
+        width: 100%;
 
         button.btn-post {
             width: 100px;
