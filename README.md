@@ -20,7 +20,8 @@
 &nbsp;
 
 <div>
-  <h3>Built with</h3>
+  <h4>Dependencies</h4>
+  Run <pre>npm install</pre> in the terminal
 
   <h4>Languages</h4>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
