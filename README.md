@@ -11,6 +11,10 @@
   This is a simple post content based social media website where logged-in users can read posts or post content themselves.
 
   &nbsp;
+
+  <a href="https://jazzy-creponne-3f2db0.netlify.app/">Visit on Netlify</a>
+
+  &nbsp;
   
   Created by Mathias B. Herholdt as part of the JavaScript 2 course at Noroff.
   
@@ -21,7 +25,7 @@
 
 <div>
   <h4>Dependencies</h4>
-  Run <pre>npm install</pre> in the terminal
+  Run <pre>npm install</pre>
 
   <h4>Languages</h4>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
@@ -31,6 +35,7 @@
 
   <h4>Tools, Frameworks & Libraries</h4>
   <img src="https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white" />
+  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" />
   <img src="https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white" />
   <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" />
 </div>
