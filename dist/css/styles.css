@@ -11972,10 +11972,10 @@ main {
   font-size: 14px;
 }
 
-.follow-container {
-  top: 50px;
+.profile-following, .profile-followers {
+  max-height: 500px;
+  overflow-y: auto;
 }
-
 .profile-following a, .profile-followers a {
   text-decoration: none;
   color: #333333;

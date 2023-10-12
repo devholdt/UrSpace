@@ -1,16 +1,16 @@
 import renderMenu from "./components/renderMenu.js";
 import message from "./components/message.js";
-import { API_URLS, URLS } from "./settings/constants.js";
+import { API_URLS, URLS, DEFAULT_URLS } from "./settings/constants.js";
 import { getUser } from "./utilities/storage.js";
 import { displayPosts } from "./components/renderPosts.js";
 import { clearUrl } from "./utilities/clickEvents.js";
 import { httpRequest } from "./utilities/httpRequest.js";
 import { isValidImageUrl } from "./utilities/urlValidation.js";
-
 import {
   handleFollowUser,
   handleUnfollowUser,
-} from "./components/handleFollowEvent.js";
+  displayFollows,
+} from "./components/handleFollows.js";
 
 // Get the 'name' query string
 const queryString = document.location.search;
@@ -53,31 +53,25 @@ async function renderProfile() {
   const profilePostsHeading = document.querySelector(".profile-posts h2");
   const profileBanner = document.querySelector(".profile-container_banner");
   const profileInfo = document.querySelector(".profile-container_info");
-  const profileFollowing = document.querySelector(".profile-following");
-  const profileFollowers = document.querySelector(".profile-followers");
 
   try {
     const apiUserData = await httpRequest(userUrl, "GET");
     const loggedInUserData = await httpRequest(loggedInUserUrl, "GET");
 
     // Ensure there's a default avatar URL if userData.avatar is null
-    const defaultAvatarUrl =
-      "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-avatarture-973460_1280.png";
     if (apiUserData.avatar === null) {
-      apiUserData.avatar = defaultAvatarUrl;
+      apiUserData.avatar = DEFAULT_URLS.AVATAR;
     }
 
     // Ensure there's a default banner URL if userData.banner is null
-    const defaultBannerUrl =
-      "https://images.unsplash.com/photo-1557682260-96773eb01377?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2029&q=80";
     if (apiUserData.banner === null) {
-      apiUserData.banner = defaultBannerUrl;
+      apiUserData.banner = DEFAULT_URLS.BANNER;
     }
 
     // Update the profile banner HTML with the user's banner image
     profileBanner.innerHTML = `
       <div class="profile-banner-image">
-        <img src="${apiUserData.banner}" class="banner" id="userBanner" alt="${apiUserData.name}'s banner image" onerror="this.src='${defaultBannerUrl}'">
+        <img src="${apiUserData.banner}" class="banner" id="userBanner" alt="${apiUserData.name}'s banner image" onerror="this.src='${DEFAULT_URLS.BANNER}'">
       </div>`;
 
     // Update the profile info HTML with the user's avatar and name
@@ -89,7 +83,7 @@ async function renderProfile() {
           <button id="unfollowUserButton" class="btn btn-dark m-1 rounded-0" style="display: none;">Unfollow ${apiUserData.name}</button>
         </div>
         <div class="d-flex gap-4 align-items-center justify-content-evenly p-4">
-            <img src="${apiUserData.avatar}" class="avatar border border-dark" id="userAvatar" alt="${apiUserData.name}'s avatar" onerror="this.src='${defaultAvatarUrl}'">
+            <img src="${apiUserData.avatar}" class="avatar border border-dark" id="userAvatar" alt="${apiUserData.name}'s avatar" onerror="this.src='${DEFAULT_URLS.AVATAR}'">
             <div>
                 <h1 class="m-0">${apiUserData.name}</h1>
                 <p class="profile-email">${apiUserData.email}</p>
@@ -103,33 +97,7 @@ async function renderProfile() {
           </div>
       </div>`;
 
-    if (apiUserData.following.length > 0) {
-      apiUserData.following.forEach((user) => {
-        profileFollowing.innerHTML += `
-        <a href="profile.html?name=${
-          user.name
-        }" class="d-flex border-top px-3 py-2 rounded">
-          <img src="${user.avatar || defaultAvatarUrl}" class="avatar">
-          <p class="my-auto ms-2">${user.name}</p>
-        </a>`;
-      });
-    } else {
-      profileFollowing.innerHTML += `${apiUserData.name} is not following anyone`;
-    }
-
-    if (apiUserData.followers.length > 0) {
-      apiUserData.followers.forEach((user) => {
-        profileFollowers.innerHTML += `
-        <a href="profile.html?name=${
-          user.name
-        }" class="d-flex border-top px-3 py-2 rounded">
-          <img src="${user.avatar || defaultAvatarUrl}" class="avatar">
-          <p class="my-auto ms-2">${user.name}</p>
-        </a>`;
-      });
-    } else {
-      profileFollowers.innerHTML += `${apiUserData.name} is not followed by anyone`;
-    }
+    displayFollows(apiUserData);
 
     // Get the settings and follow buttons
     const userSettingsButton = document.getElementById("userSettingsButton");
