@@ -27,20 +27,19 @@
     <main class="container">
         <div class="row page-columns">
 
-            <div class="col py-4">
+            <div class="col-lg-2 py-4">
                 <nav class="nav position-sticky"></nav>
-                <div class="profile-aside position-sticky"></div>
             </div>
 
-            <div class="col-lg-8 px-0">
+            <div class="col-lg-7 px-0">
 
                 <div class="profile-container">
                     <div class="profile-container_banner"></div>
                     <div class="profile-container_info mb-3"></div>
                 </div>
 
-                <div>
-                    <h2 class="border-bottom pb-2">Your posts</h2>
+                <div class="profile-posts">
+                    <h2 class="border-bottom pb-2">Posts</h2>
                     <div class="posts-container message-posts message-container"></div>
                     <button id="loadMoreButton" class="btn btn-outline-primary justify-content-center m-auto"
                         style="display: none;">More
@@ -49,7 +48,16 @@
 
             </div>
 
-            <div class="col"></div>
+            <div class="col-lg-3">
+                <div class="follow-container position-sticky">
+                    <div class="profile-following mt-3 bg-light px-3 py-2 rounded">
+                        <p class="fs-5 mb-2">Following</p>
+                    </div>
+                    <div class="profile-followers mt-3 bg-light px-3 py-2 rounded">
+                        <p class="fs-5 mb-2">Followers</p>
+                    </div>
+                </div>
+            </div>
 
         </div>
     </main>

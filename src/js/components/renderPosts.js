@@ -118,14 +118,16 @@ export function postInnerHtml(post, container) {
   // Handle post media and modal content
   if (post.media) {
     const modalId = `modal-${post.id}`;
+
     postMedia = `
-      <div class="thumbnail">
-        <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}">
+      <div class="thumbnail" id="thumbnailImgContainer">
+        <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}" onerror='this.src="https://imageupload.io/ib/44rlPagSlwtwkei_1697114759.png"'>
       </div>`;
+
     modalContent = `
       <div class="modal" id="${modalId}">
         <i class="fa-solid fa-circle-xmark close-btn" data-modal-id="${modalId}"></i>
-        <img src="${post.media}" alt="Full-sized post media" class="modal-content">
+        <img src="${post.media}" alt="Full-sized post media" class="modal-content" onerror='this.src="https://imageupload.io/ib/44rlPagSlwtwkei_1697114759.png"'>
       </div>`;
   }
 
@@ -154,6 +156,7 @@ export function postInnerHtml(post, container) {
       </div>`;
   }
 
+  // Handle displaying of post comments
   if (post.comments.length > 0) {
     function sortComments(a, b) {
       return a.id - b.id;
@@ -174,7 +177,7 @@ export function postInnerHtml(post, container) {
               <div class="d-flex align-items-center">
                 <div class="d-flex gap-2">
                   <p>${comment.owner}</p>
-                  <a href="#" class="fst-italic fw-light">visit profile</a>
+                  <a href="profile.html?name=${comment.owner}" class="fst-italic fw-light">visit profile</a>
                 </div>
               </div>
             </div>
@@ -212,7 +215,9 @@ export function postInnerHtml(post, container) {
           <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex gap-2 align-items-end">
               <p class="fs-5">${post.author.name}</p>
-              <a href="#" class="fst-italic fw-light">visit profile</a>
+              <a href="profile.html?name=${
+                post.author.name
+              }" class="fst-italic fw-light">visit profile</a>
             </div>
             ${buttonGroup}
           </div>

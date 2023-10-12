@@ -1,11 +1,25 @@
 import renderMenu from "./components/renderMenu.js";
 import message from "./components/message.js";
-import { API_URLS, URLS } from "./settings/constants.js";
+import { API_URLS, URLS, DEFAULT_URLS } from "./settings/constants.js";
 import { getUser } from "./utilities/storage.js";
 import { displayPosts } from "./components/renderPosts.js";
 import { clearUrl } from "./utilities/clickEvents.js";
 import { httpRequest } from "./utilities/httpRequest.js";
 import { isValidImageUrl } from "./utilities/urlValidation.js";
+import {
+  handleFollowUser,
+  handleUnfollowUser,
+  displayFollows,
+} from "./components/handleFollows.js";
+
+// Get the 'name' query string
+const queryString = document.location.search;
+const params = new URLSearchParams(queryString);
+const username = params.get("name");
+
+if (!username) {
+  username = localUserData;
+}
 
 // Get user data or redirect to the index page if the user is not authenticated
 const localUserData = getUser();
@@ -14,8 +28,9 @@ if (!localUserData) {
 }
 
 // The URL to fetch the logged-in user's posts and data
-const postsUrl = `${API_URLS.PROFILES}/${localUserData.name}/posts?_author=true&_comments=true&_reactions=true`;
-const userUrl = `${API_URLS.PROFILES}/${localUserData.name}?_followers=true&_following=true`;
+const postsUrl = `${API_URLS.PROFILES}/${username}/posts?_author=true&_comments=true&_reactions=true`;
+const userUrl = `${API_URLS.PROFILES}/${username}?_followers=true&_following=true`;
+const loggedInUserUrl = `${API_URLS.PROFILES}/${localUserData.name}?_followers=true&_following=true`;
 
 // Render the navigation menu
 renderMenu();
@@ -26,59 +41,120 @@ renderProfile();
 // Display the logged-in user's posts
 displayPosts(postsUrl);
 
+loadMoreButton.addEventListener("click", () => {
+  displayPosts(postsUrl);
+});
+
 /**
  * Renders the user's profile information, including banner and avatar.
  */
 async function renderProfile() {
-  // Get references to the profile banner and profile info elements
+  // Get references to the profile info and banner elements
+  const profilePostsHeading = document.querySelector(".profile-posts h2");
   const profileBanner = document.querySelector(".profile-container_banner");
   const profileInfo = document.querySelector(".profile-container_info");
 
   try {
     const apiUserData = await httpRequest(userUrl, "GET");
+    const loggedInUserData = await httpRequest(loggedInUserUrl, "GET");
 
     // Ensure there's a default avatar URL if userData.avatar is null
     if (apiUserData.avatar === null) {
-      apiUserData.avatar =
-        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-avatarture-973460_1280.png";
+      apiUserData.avatar = DEFAULT_URLS.AVATAR;
     }
 
     // Ensure there's a default banner URL if userData.banner is null
     if (apiUserData.banner === null) {
-      apiUserData.banner =
-        "https://images.unsplash.com/photo-1557682260-96773eb01377?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2029&q=80";
+      apiUserData.banner = DEFAULT_URLS.BANNER;
     }
 
     // Update the profile banner HTML with the user's banner image
     profileBanner.innerHTML = `
       <div class="profile-banner-image">
-        <img src="${apiUserData.banner}" class="banner" id="userBanner" alt="${apiUserData.name}'s banner image">
+        <img src="${apiUserData.banner}" class="banner" id="userBanner" alt="${apiUserData.name}'s banner image" onerror="this.src='${DEFAULT_URLS.BANNER}'">
       </div>`;
 
     // Update the profile info HTML with the user's avatar and name
     profileInfo.innerHTML = `
-        <div class="text-center pb-5 mb-5 border border-dark text-dark">
-          <div class="d-flex justify-content-end">
-            <button id="userSettingsButton" class="btn btn-dark rounded-0">Settings</button>
-          </div>
-          <div class="d-flex gap-4 align-items-center justify-content-evenly p-4">
-              <img src="${apiUserData.avatar}" class="avatar border border-dark" id="userAvatar" alt="${apiUserData.name}'s avatar">
-              <div>
-                  <h1 class="m-0">${apiUserData.name}</h1>
-                  <p class="profile-email">${apiUserData.email}</p>
-                  <hr class="my-3">
-                  <div>
-                    <p class="m-0">${apiUserData._count.posts} posts</p>
-                    <p class="m-0">${apiUserData._count.followers} followers</p>
-                    <p class="m-0">${apiUserData._count.following} followed</p>
-                </div>
+      <div class="text-center pb-5 mb-5 border border-dark text-dark">
+        <div class="d-flex justify-content-end">
+          <button id="userSettingsButton" class="btn btn-dark m-1 rounded-0">Settings</button>
+          <button id="followUserButton" class="btn btn-primary m-1 rounded-0" style="display: none;">Follow ${apiUserData.name}</button>
+          <button id="unfollowUserButton" class="btn btn-dark m-1 rounded-0" style="display: none;">Unfollow ${apiUserData.name}</button>
+        </div>
+        <div class="d-flex gap-4 align-items-center justify-content-evenly p-4">
+            <img src="${apiUserData.avatar}" class="avatar border border-dark" id="userAvatar" alt="${apiUserData.name}'s avatar" onerror="this.src='${DEFAULT_URLS.AVATAR}'">
+            <div>
+                <h1 class="m-0">${apiUserData.name}</h1>
+                <p class="profile-email">${apiUserData.email}</p>
+                <hr class="my-3">
+                <div>
+                  <p class="m-0">${apiUserData._count.posts} posts</p>
+                  <p class="m-0">${apiUserData._count.followers} followers</p>
+                  <p class="m-0">${apiUserData._count.following} followed</p>
               </div>
             </div>
-        </div>`;
+          </div>
+      </div>`;
 
-    // Get the user settings button
+    displayFollows(apiUserData);
+
+    // Get the settings and follow buttons
     const userSettingsButton = document.getElementById("userSettingsButton");
+    const followUserButton = document.getElementById("followUserButton");
+    const unfollowUserButton = document.getElementById("unfollowUserButton");
 
+    // Display heading previously hidden heading
+    profilePostsHeading.style.display = "block";
+
+    // Style changes depending on profile state
+    if (apiUserData.name !== loggedInUserData.name) {
+      profilePostsHeading.innerHTML = `${apiUserData.name}'s posts`;
+      userSettingsButton.style.display = "none";
+      followUserButton.style.display = "block";
+
+      const loggedInUserFollowing = loggedInUserData.following;
+      loggedInUserFollowing.forEach((user) => {
+        if (user.name === apiUserData.name) {
+          followUserButton.style.display = "none";
+          unfollowUserButton.style.display = "block";
+        }
+      });
+
+      followUserButton.addEventListener("click", async () => {
+        try {
+          await handleFollowUser(
+            apiUserData.name,
+            followUserButton,
+            unfollowUserButton
+          );
+        } catch (error) {
+          message(
+            "error",
+            `An error occured when attempting to follow ${apiUserData.name}: ${error}`,
+            ".message-posts"
+          );
+        }
+      });
+
+      unfollowUserButton.addEventListener("click", async () => {
+        try {
+          await handleUnfollowUser(
+            apiUserData.name,
+            unfollowUserButton,
+            followUserButton
+          );
+        } catch (error) {
+          message(
+            "error",
+            `An error occured when attempting to unfollow ${apiUserData.name}: ${error}`,
+            ".message-posts"
+          );
+        }
+      });
+    } else {
+      profilePostsHeading.innerHTML = "Your posts";
+    }
     // Run handleUserSettings function on button click
     userSettingsButton.addEventListener("click", () => {
       handleUserSettings();
@@ -258,4 +334,9 @@ async function handleUserSettings() {
       ".message-banner"
     );
   }
+}
+
+function defaultImg() {
+  document.querySelector(".avatar").style.display = "none";
+  document.querySelector(".banner").style.display = "none";
 }
