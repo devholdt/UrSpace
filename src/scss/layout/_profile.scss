@@ -26,22 +26,26 @@
             font-size: 14px;
         }
     }
+}
 
-    #btnSetting {
-        border-radius: 50%;
-        border: 2px solid $dark;
-        border: none;
-        font-size: 1.3em;
-        background-color: transparent;
-        width: fit-content;
+.follow-container {
+    top: 50px;
+}
+
+.profile-following, .profile-followers {
+    a {
+        text-decoration: none;
         color: $dark;
-        border-color: $dark;
-        
 
         &:hover {
-            color: $gray-700;
-            border-color: $gray-700;
+            background-color: $dark;
+            color: $light;
         }
+    }
+
+    img {
+        width: 40px;
+        height: 40px;
     }
 }
 

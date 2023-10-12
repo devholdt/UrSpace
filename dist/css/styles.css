@@ -11971,19 +11971,22 @@ main {
 .profile-container_info .profile-email {
   font-size: 14px;
 }
-.profile-container #btnSetting {
-  border-radius: 50%;
-  border: 2px solid #333333;
-  border: none;
-  font-size: 1.3em;
-  background-color: transparent;
-  width: fit-content;
-  color: #333333;
-  border-color: #333333;
+
+.follow-container {
+  top: 50px;
 }
-.profile-container #btnSetting:hover {
-  color: #495057;
-  border-color: #495057;
+
+.profile-following a, .profile-followers a {
+  text-decoration: none;
+  color: #333333;
+}
+.profile-following a:hover, .profile-followers a:hover {
+  background-color: #333333;
+  color: #eeeeee;
+}
+.profile-following img, .profile-followers img {
+  width: 40px;
+  height: 40px;
 }
 
 .no-posts {
