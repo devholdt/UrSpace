@@ -13,12 +13,17 @@ export default function renderMenu() {
   const nav = document.querySelector("nav");
 
   // Get user data if available
-  const user = getUser();
+  const userData = getUser();
 
   // Define navigation links with their href, text, and icon
   const links = [
     { href: URLS.FEED, text: "Home", icon: "fa-solid fa-house" },
-    { href: URLS.PROFILE, text: "Profile", icon: "fa-solid fa-user" },
+    // { href: URLS.PROFILE, text: "Profile", icon: "fa-solid fa-user" },
+    {
+      href: `${URLS.PROFILE}?name=${userData.name}`,
+      text: "Profile",
+      icon: "fa-solid fa-user",
+    },
     { href: URLS.SEARCH, text: "Search", icon: "fa-solid fa-search" },
   ];
 
@@ -26,21 +31,21 @@ export default function renderMenu() {
   const navProfile = document.querySelector(".user-info");
 
   // Check if the user is authenticated
-  if (user) {
+  if (userData) {
     // Display the user profile navigation
     navProfile.style.display = "flex";
 
     // Set a default avatar URL if the user's avatar is null
-    if (user.avatar === null) {
-      user.avatar =
+    if (userData.avatar === null) {
+      userData.avatar =
         "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-avatarture-973460_1280.png";
     }
 
     // Render the user profile information
     navProfile.innerHTML = `
     <div>
-      <img src="${user.avatar}" class="avatar" alt="${user.name}'s profile picture">
-      <a href="${URLS.PROFILE}">${user.name}</a>
+      <img src="${userData.avatar}" class="avatar" alt="${userData.name}'s profile picture">
+      <a href="${URLS.PROFILE}?name=${userData.name}">${userData.name}</a>
     </div>
     <div>
       <button id="btnLogout" class="border-0">Log out</button>

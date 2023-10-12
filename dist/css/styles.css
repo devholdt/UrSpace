@@ -12006,6 +12006,10 @@ main {
   height: 40px;
 }
 
+.profile-posts h2, .profile-posts .h2 {
+  display: none;
+}
+
 .form-search {
   top: 40px;
   z-index: 2;

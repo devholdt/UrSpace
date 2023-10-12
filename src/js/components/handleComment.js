@@ -68,9 +68,11 @@ export async function handleComment() {
 
             </div>`;
 
-        commentsContainer.append(commentElement);
+        if (commentsContainer) {
+          commentsContainer.append(commentElement);
+          commentsContainer.prepend(commentMessage);
+        }
 
-        commentsContainer.prepend(commentMessage);
         message("success", "Comment posted", ".message-comment");
 
         commentInput.value = "";
@@ -79,7 +81,9 @@ export async function handleComment() {
           commentMessage.remove();
         }, 1500);
       } catch (error) {
-        commentsContainer.prepend(commentMessage);
+        if (commentsContainer) {
+          commentsContainer.prepend(commentMessage);
+        }
         message(
           "error",
           `An error occured when attempting to post a comment: ${error}`,
