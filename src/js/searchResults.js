@@ -124,7 +124,6 @@ async function getUsersBySearchTerm(searchTerm) {
       }
     });
   } catch (error) {
-    console.error("getUsersBySearchTerm", error);
     message(
       "error",
       `An error occured when attempting to fetch search results (users): ${error}`,
@@ -156,7 +155,6 @@ async function getPostsBySearchTerm(searchTerm) {
       }
     });
   } catch (error) {
-    console.error("getPostsBySearchTerm", error);
     message(
       "error",
       `An error occured when attempting to fetch search results (posts): ${error}`,

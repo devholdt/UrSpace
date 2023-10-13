@@ -46,10 +46,10 @@ export async function handleRegistration(event) {
   }
 
   // Check if provided image URLs are valid
-  if (
-    (avatar && !(await isValidImageUrl(avatar))) ||
-    (banner && !(await isValidImageUrl(banner)))
-  ) {
+  const isValidAvatar = await isValidImageUrl(avatar);
+  const isValidBanner = await isValidImageUrl(banner);
+
+  if (!isValidAvatar || !isValidBanner) {
     message("error", "Invalid image URL", ".message-index");
     return;
   }
@@ -95,9 +95,9 @@ export async function handleRegistration(event) {
             ".message-index"
           );
 
-          setTimeout(() => {
-            window.location.href = URLS.FEED;
-          }, 2000);
+          // setTimeout(() => {
+          //   window.location.href = URLS.FEED;
+          // }, 2000);
         } else {
           message(
             "error",

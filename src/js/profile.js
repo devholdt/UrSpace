@@ -312,11 +312,10 @@ async function handleUserSettings() {
           newUserMedia.banner = newBannerValue;
         }
 
-        // Check if the new image URLs are valid
-        if (
-          !(await isValidImageUrl(newUserMedia.avatar)) ||
-          !(await isValidImageUrl(newUserMedia.banner))
-        ) {
+        const isValidAvatar = await isValidImageUrl(newUserMedia.avatar);
+        const isValidBanner = await isValidImageUrl(newUserMedia.banner);
+
+        if (!isValidAvatar || !isValidBanner) {
           message("error", "Invalid image URL", ".message-settings");
           return;
         }
