@@ -2,21 +2,32 @@
     font-size: 3em;
 
     img {
-        width: 185px;
+        max-width: 200px;
     }
 }
 
 .form-container {
     &_post {
         height: inherit;
+        max-width: 350px;
+    
         .btn-post {
             height: 40px;
         }
 
-        #postBody {
+        .body-input {
             resize: none;
             height: 120px;
         }
+    }
+
+    &_list {
+        height: inherit;
+        max-width: 350px;
+    }
+
+    .post-form-requirement {
+        display: none;
     }
 }
 
@@ -27,4 +38,48 @@
 
 .feed-left-column {
     top: 50px;
+}
+
+@media (min-width: 768px) {
+    .form-container {
+        .post-form-requirement {
+            display: inline-block;
+            height: fit-content;
+    
+            i {
+                color: $info;
+            }
+    
+            span {
+                display: inline-block;
+                position: absolute;
+                width: 0px;
+                padding: 0;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                font-size: 15px;
+            }
+    
+            
+            &:hover, &:focus {
+                min-width: fit-content;
+                cursor: help;
+    
+                span {
+                    width: fit-content;
+                    max-width: 138px;
+                    white-space: wrap;
+                    overflow: auto;
+                    padding: .5em .75em;
+                    margin-right: 1em;
+                    z-index: 1;
+                }
+            }
+        }
+    
+        &_list {
+            display: none;
+        }
+    }
 }

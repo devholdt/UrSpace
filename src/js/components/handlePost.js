@@ -13,11 +13,17 @@ export async function handlePost(event) {
   event.preventDefault();
 
   // Get references to form input elements
-  const titleInput = document.getElementById("postTitle");
+
+  const titleInput = document.querySelector(".title-input");
+  const body = document.querySelector(".body-input").value;
+  const media = document.querySelector(".media-input").value;
+  const tagsInput = document.querySelector(".tags-input");
+
+  // const titleInput = document.getElementById("postTitle");
   const title = titleInput.value;
-  const body = document.getElementById("postBody").value;
-  const media = document.getElementById("postMedia").value;
-  const tagsInput = document.getElementById("postTags");
+  // const body = document.getElementById("postBody").value;
+  // const media = document.getElementById("postMedia").value;
+  // const tagsInput = document.getElementById("postTags");
   const tags = tagsInput.value.split(", ").map((tag) => tag.trim());
 
   // Check if the number of tags exceeds the allowed limit

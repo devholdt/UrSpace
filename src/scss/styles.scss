@@ -31,18 +31,6 @@
     }
 }
 
-.btn-custom {
-    @extend .btn-outline-secondary;
-
-    border-radius: 20px;
-    width: 75px;
-    font-weight: 600;
-
-    &:hover {
-        color: $white;
-    }
-}
-
 .btn-post {
     @extend .btn-secondary;
 
