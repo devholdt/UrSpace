@@ -64,3 +64,13 @@
         }
     }
 }
+
+.search-top-column {
+    display: none;
+}
+
+@media (min-width: 992px) {
+    .search-top-column {
+        display: block;
+    }
+}

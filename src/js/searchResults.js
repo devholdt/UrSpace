@@ -168,7 +168,7 @@ async function getPostsBySearchTerm(searchTerm) {
 
 function createUserResultElement(user) {
   const userElement = document.createElement("div");
-  userElement.classList.add("col-md-4", "col-sm-6");
+  userElement.classList.add("col-md-4", "col-sm-6", "px-1");
 
   let userAvatar = "";
 
@@ -191,6 +191,7 @@ function createUserResultElement(user) {
 
 function createPostResultElement(post) {
   const postElement = document.createElement("div");
+  postElement.classList.add("px-1");
   postElement.innerHTML = generatePostHTML(post);
   return postElement;
 }
