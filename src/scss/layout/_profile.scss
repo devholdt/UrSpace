@@ -3,6 +3,11 @@
     flex-direction: column;
     padding: 0;
 
+    .profile-info-details {
+        display: flex;
+        flex-direction: row;
+    }
+
     &_banner {
         .banner {
             width: 100%;
@@ -73,4 +78,37 @@
 
 .profile-posts h2 {
     display: none;
+}
+
+.post-profile-link-lg {
+    display: flex;
+}
+
+.post-profile-link-sm {
+    display: none;
+}
+
+@media (max-width: 576px) {
+    .profile-container {
+        .profile-info-details {
+            flex-direction: column;
+        }
+
+        .avatar {
+            width: 170px;
+            height: 170px;
+        }
+    }
+
+    .post-profile-link-lg {
+        display: none;
+    }
+
+    .post-profile-link-sm {
+        display: flex;
+    }
+
+    .post-updated-time {
+        display: none;
+    }
 }

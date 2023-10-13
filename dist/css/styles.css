@@ -11890,7 +11890,6 @@ main {
 #logoIndex {
   display: flex;
   justify-content: center;
-  margin: 0 auto;
   max-width: 450px;
 }
 
@@ -11933,6 +11932,10 @@ main {
   display: flex;
   flex-direction: column;
   padding: 0;
+}
+.profile-container .profile-info-details {
+  display: flex;
+  flex-direction: row;
 }
 .profile-container_banner .banner {
   width: 100%;
@@ -11993,6 +11996,32 @@ main {
   display: none;
 }
 
+.post-profile-link-lg {
+  display: flex;
+}
+
+.post-profile-link-sm {
+  display: none;
+}
+
+@media (max-width: 576px) {
+  .profile-container .profile-info-details {
+    flex-direction: column;
+  }
+  .profile-container .avatar {
+    width: 170px;
+    height: 170px;
+  }
+  .post-profile-link-lg {
+    display: none;
+  }
+  .post-profile-link-sm {
+    display: flex;
+  }
+  .post-updated-time {
+    display: none;
+  }
+}
 .form-search {
   top: 40px;
   z-index: 2;
@@ -12049,6 +12078,15 @@ main {
   height: 40px;
 }
 
+.search-top-column {
+  display: none;
+}
+
+@media (min-width: 992px) {
+  .search-top-column {
+    display: block;
+  }
+}
 footer {
   display: flex;
   flex-shrink: 0;
@@ -12126,7 +12164,7 @@ nav.position-sticky .active {
   text-decoration: underline;
 }
 
-@media (min-width: 998px) {
+@media (min-width: 992px) {
   .navbar {
     display: none;
   }
@@ -12264,6 +12302,10 @@ form .url-input {
 
 #editModal .modal-content {
   height: 560px;
+  min-width: fit-content;
+  max-width: 560px;
+  padding: 1em;
+  margin: auto;
 }
 #editModal .modal-content #editForm {
   max-width: 350px;
@@ -12306,6 +12348,7 @@ form .url-input {
 
 .message-index {
   position: absolute;
+  margin-top: 1em;
 }
 
 .message-post {

@@ -134,25 +134,20 @@ export function generatePostHTML(post) {
   // Generate button group based on user data
   if (post.author.name === userData.name) {
     buttonGroup = `
-      <div class="btn-group m-0 pt-1 gap-1" role="group" aria-label="Post interaction">
-        <button class="btn btn-light p-0 btn-edit" title="Edit" data-id="${post.id}" data-name="${post.author.name}">
-          <i class="fa-regular fa-pen-to-square" data-id="${post.id}" data-name="${post.author.name}"></i>
+      <div class="dropdown">
+        <button class="btn btn-outline-dark dropdown-toggle rounded-0" type="button" id="postInteraction" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Post Actions
         </button>
-        <button class="btn btn-light p-0 btn-delete" title="Delete" data-id="${post.id}">
-          <i class="fa-regular fa-trash-can" data-id="${post.id}"></i>
-        </button>
-      </div>
-      <div class="btn-group m-0" role="group" aria-label="Post interaction">
-        <button class="btn border-0 m-0 p-0 btn-like" data-id="${post.id}">
-          <i class="fa-regular fa-thumbs-up" data-id="${post.id}"></i> ${post._count.reactions}
-        </button>
-      </div>`;
-  } else {
-    buttonGroup = `
-      <div class="btn-group m-0" role="group" aria-label="Post interaction">
-        <button class="btn border-0 m-0 p-0 btn-like"data-id="${post.id}">
-          <i class="fa-regular fa-thumbs-up" data-id="${post.id}"></i> ${post._count.reactions}
-        </button>
+        <div class="dropdown-menu rounded-0" aria-labelledby="postInteraction">
+          <button class="dropdown-item btn-edit" data-id="${post.id}" data-name="${post.author.name}">
+            <i class="fa-regular fa-pen-to-square" data-id="${post.id}" data-name="${post.author.name}"></i>
+            Edit post
+          </button>
+          <button class="dropdown-item btn-delete" data-id="${post.id}">
+            <i class="fa-regular fa-trash-can" data-id="${post.id}"></i>
+            Delete post
+          </button>
+        </div>
       </div>`;
   }
 
@@ -175,10 +170,20 @@ export function generatePostHTML(post) {
       
               <div class="card-header border-0 py-1">
                 <div class="d-flex align-items-center">
-                  <div class="d-flex gap-2">
+
+                  <div class="post-profile-link-lg gap-2">
                     <p>${comment.owner}</p>
                     <a href="profile.html?name=${comment.owner}" class="fst-italic fw-light">visit profile</a>
                   </div>
+
+                  <div class="post-profile-link-sm align-items-end">
+                    <a href="profile.html?name=${post.author.name}" class="fs-6">
+                      <button class="btn btn-outline-primary">
+                        ${post.author.name}
+                      </button>
+                    </a>
+                  </div>
+
                 </div>
               </div>
       
@@ -209,16 +214,26 @@ export function generatePostHTML(post) {
 
   // Return the HTML content for the post
   return `
-    <div class="p-3 bg-light mb-4 rounded">
+    <div class="p-2 bg-light mb-4 rounded">
       <div class="card post border p-1" data-id="${post.id}">
         <div class="card-header border-0">
           <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex gap-2 align-items-end">
+
+            <div class="post-profile-link-lg gap-2 align-items-end">
               <p class="fs-5">${post.author.name}</p>
               <a href="profile.html?name=${
                 post.author.name
               }" class="fst-italic fw-light">visit profile</a>
             </div>
+
+            <div class="post-profile-link-sm align-items-end">
+              <a href="profile.html?name=${post.author.name}" class="fs-6">
+                <button class="btn btn-primary">
+                  ${post.author.name}
+                </button>
+              </a>
+            </div>
+
             ${buttonGroup}
           </div>
         </div>
@@ -240,7 +255,13 @@ export function generatePostHTML(post) {
         </div>
             
         <div class="d-flex justify-content-between post-bottom">
-          <p class="mx-2 my-1">${formattedPostDate} ${updatedTime}</p>
+          <p class="mx-2 my-1">${formattedPostDate} <span class="post-updated-time">${updatedTime}</span></p>
+          <div class="btn-group m-0" role="group" aria-label="Post interaction">
+            <button class="btn border-0 m-0 p-0 btn-like"data-id="${post.id}">
+              <i class="fa-regular fa-thumbs-up" data-id="${post.id}"></i>
+              ${post._count.reactions}
+            </button>
+          </div>
           <p class="mx-2 my-1 fw-light">id: ${post.id}</p>
         </div>
       </div>

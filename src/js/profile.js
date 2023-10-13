@@ -17,6 +17,8 @@ const queryString = document.location.search;
 const params = new URLSearchParams(queryString);
 const username = params.get("name");
 
+document.title = `UrSpace | ${username}'s profile`;
+
 if (!queryString) {
   params.set("name", `${getUser().name}`);
   document.location.search = params;
@@ -77,14 +79,14 @@ async function renderProfile() {
 
     // Update the profile info HTML with the user's avatar and name
     profileInfo.innerHTML = `
-      <div class="text-center pb-5 mb-5 border border-dark text-dark">
+      <div class="text-center pb-5 bg-light mb-5 text-dark">
         <div class="d-flex justify-content-end">
           <button id="userSettingsButton" class="btn btn-dark m-1 rounded-0">Settings</button>
           <button id="followUserButton" class="btn btn-primary m-1 rounded-0" style="display: none;">Follow ${apiUserData.name}</button>
           <button id="unfollowUserButton" class="btn btn-dark m-1 rounded-0" style="display: none;">Unfollow ${apiUserData.name}</button>
         </div>
-        <div class="d-flex gap-4 align-items-center justify-content-evenly p-4">
-            <img src="${apiUserData.avatar}" class="avatar border border-dark" id="userAvatar" alt="${apiUserData.name}'s avatar" onerror="this.src='${DEFAULT_URLS.AVATAR}'">
+        <div class="profile-info-details gap-4 align-items-center justify-content-evenly p-4">
+            <img src="${apiUserData.avatar}" class="avatar border border-2 border-dark" id="userAvatar" alt="${apiUserData.name}'s avatar" onerror="this.src='${DEFAULT_URLS.AVATAR}'">
             <div>
                 <h1 class="m-0">${apiUserData.name}</h1>
                 <p class="profile-email">${apiUserData.email}</p>
@@ -175,8 +177,8 @@ async function renderProfile() {
 async function handleUserSettings() {
   // HTML for the user settings modal
   const modalHtml = `
-  <div id="userSettingsModal" class="modal flex-column justify-content-center">
-  <div class="modal-content py-5">
+  <div id="userSettingsModal" class="modal p-2 flex-column justify-content-center">
+  <div class="modal-content px-3 pt-5">
 
     <i class="fa-solid fa-circle-xmark close-btn"></i>
 
@@ -335,9 +337,4 @@ async function handleUserSettings() {
       ".message-banner"
     );
   }
-}
-
-function defaultImg() {
-  document.querySelector(".avatar").style.display = "none";
-  document.querySelector(".banner").style.display = "none";
 }

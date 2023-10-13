@@ -17,7 +17,7 @@ export async function handleEdit(event) {
 
   // Define the HTML content for the edit modal
   const modalHtml = `
-      <div id="editModal" class="modal flex-column justify-content-center px-1 mx-auto">
+      <div id="editModal" class="modal flex-column justify-content-center">
         <div class="modal-content py-5">
           <i class="fa-solid fa-circle-xmark close-btn" id="closeEditModal"></i>
   

@@ -38,11 +38,11 @@
     <main class="container">
         <div class="row page-columns">
 
-            <div class="col-lg-2 py-4">
+            <div class="col-lg-2 py-4 search-top-column">
                 <nav class="nav position-sticky"></nav>
             </div>
 
-            <div class="col-lg-7 px-0">
+            <div class="col-lg-7">
 
                 <form class="form-search mt-4 sticky-top" id="searchForm">
                     <label for="search" class="form-label mb-0 hide-label" aria-label="search">
@@ -65,11 +65,12 @@
                     <p>Search results appear here</p>
 
                     <h2 class="user-search-heading h4 mb-3 py-2 px-3 text-white rounded"></h2>
-                    <div id="userResults" class="container row message-container message-search-users"></div>
+                    <div id="userResults" class="row mx-auto message-container message-search-users">
+                    </div>
 
 
                     <h2 class="post-search-heading h4 mb-3 py-2 px-3 text-white rounded"></h2>
-                    <div id="postResults" class="container row message-container message-search-posts">
+                    <div id="postResults" class="row mx-auto message-container message-search-posts">
                     </div>
                 </div>
 

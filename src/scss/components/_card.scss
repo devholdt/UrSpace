@@ -125,6 +125,10 @@
 
 #editModal .modal-content {
     height: 560px;
+    min-width: fit-content;
+    max-width: 560px;
+    padding: 1em;
+    margin: auto;
 
     #editForm {
         max-width: 350px;
