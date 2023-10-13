@@ -26,10 +26,8 @@ export async function displayFollows(userData) {
   if (userData.following.length > 0) {
     userData.following.forEach((user) => {
       profileFollowing.innerHTML += `
-      <a href="profile.html?name=${
-        user.name
-      }" class="d-flex border-top px-3 py-2 rounded">
-        <img src="${user.avatar || DEFAULT_URLS.AVATAR}" class="avatar">
+      <a href="profile.html?name=${user.name}" class="d-flex border-top px-3 py-2 rounded">
+        <img src="${user.avatar}" class="avatar" alt="${user.name}'s avatar" onerror="this.src='${DEFAULT_URLS.AVATAR}'">
         <p class="my-auto ms-2">${user.name}</p>
       </a>`;
     });
@@ -40,10 +38,8 @@ export async function displayFollows(userData) {
   if (userData.followers.length > 0) {
     userData.followers.forEach((user) => {
       profileFollowers.innerHTML += `
-      <a href="profile.html?name=${
-        user.name
-      }" class="d-flex border-top px-3 py-2 rounded">
-        <img src="${user.avatar || DEFAULT_URLS.AVATAR}" class="avatar">
+      <a href="profile.html?name=${user.name}" class="d-flex border-top px-3 py-2 rounded">
+        <img src="${user.avatar}" class="avatar" alt="${user.name}'s avatar" onerror="this.src='${DEFAULT_URLS.AVATAR}'">
         <p class="my-auto ms-2">${user.name}</p>
       </a>`;
     });

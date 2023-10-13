@@ -13,17 +13,11 @@ export async function handlePost(event) {
   event.preventDefault();
 
   // Get references to form input elements
-
   const titleInput = document.querySelector(".title-input");
+  const title = titleInput.value;
   const body = document.querySelector(".body-input").value;
   const media = document.querySelector(".media-input").value;
   const tagsInput = document.querySelector(".tags-input");
-
-  // const titleInput = document.getElementById("postTitle");
-  const title = titleInput.value;
-  // const body = document.getElementById("postBody").value;
-  // const media = document.getElementById("postMedia").value;
-  // const tagsInput = document.getElementById("postTags");
   const tags = tagsInput.value.split(", ").map((tag) => tag.trim());
 
   // Check if the number of tags exceeds the allowed limit
@@ -46,8 +40,9 @@ export async function handlePost(event) {
     return;
   }
 
-  // Check if a media URL is provided and if it's a valid image URL
-  if (media && !(await isValidImageUrl(media))) {
+  const isValidMedia = await isValidImageUrl(media);
+
+  if (media && !isValidMedia) {
     message("error", "Invalid media URL", ".message-post");
     return;
   }
