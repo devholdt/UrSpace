@@ -17,8 +17,9 @@ const queryString = document.location.search;
 const params = new URLSearchParams(queryString);
 const username = params.get("name");
 
-if (!username) {
-  username = localUserData;
+if (!queryString) {
+  params.set("name", `${getUser().name}`);
+  document.location.search = params;
 }
 
 // Get user data or redirect to the index page if the user is not authenticated

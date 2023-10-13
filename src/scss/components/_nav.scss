@@ -1,4 +1,5 @@
-nav {
+nav.position-sticky {
+    display: none;
     top: 50px;
 
     i, span {
@@ -15,8 +16,77 @@ nav {
     }
 }
 
-@media (min-width: 992px) {
-    nav {
-        flex-direction: column;
+.user-info {
+    align-items: center;
+    gap: 2em;
+
+    a {
+        text-decoration: none;
+        font-weight: 500;
+    }
+}
+
+.user-info-header {
+    display: none;
+    align-items: center;
+    gap: 2em;
+
+    .avatar {
+        width: 35px;
+        height: 35px;
+    }
+
+    a {
+        text-decoration: none;
+        font-weight: 500;
+        color: white;
+    }
+
+    #btnLogoutHeader {
+        background-color: transparent;
+        color: white;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+.user-info-hamburger {
+    align-items: center;
+    gap: 2em;
+
+    .avatar {
+        width: 60px;
+        height: 60px;
+    }
+
+    a {
+        text-decoration: none;
+        font-weight: 500;
+        color: $dark;
+    }
+
+    #btnLogoutHamburger {
+        background-color: transparent;
+        color: $dark;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+@media (min-width: 998px) {
+    .navbar {
+        display: none;
+    }
+
+    .user-info-header {
+        display: flex;
+    }
+
+    nav.position-sticky {
+        display: block;
     }
 }

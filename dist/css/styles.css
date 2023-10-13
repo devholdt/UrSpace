@@ -11869,27 +11869,6 @@ header img {
   width: 150px;
   height: fit-content;
 }
-header .user-info {
-  display: none;
-  align-items: center;
-  gap: 2em;
-}
-header .user-info .avatar {
-  width: 35px;
-  height: 35px;
-}
-header .user-info a {
-  text-decoration: none;
-  font-weight: 500;
-  color: white;
-}
-header .user-info #btnLogout {
-  background-color: transparent;
-  color: white;
-}
-header .user-info #btnLogout:hover {
-  text-decoration: underline;
-}
 
 main {
   flex: 1 0 auto;
@@ -11997,12 +11976,13 @@ main {
 }
 
 #userSettingsModal .modal-content {
-  width: 475px;
+  max-width: 475px;
   height: 325px;
   margin: auto;
 }
 #userSettingsModal .modal-content #userSettingsForm {
-  width: 400px;
+  max-width: 400px;
+  width: 100%;
 }
 #userSettingsModal .modal-content #userSettingsForm button.btn-post {
   width: 100px;
@@ -12046,6 +12026,29 @@ main {
   background-color: #ff5722;
 }
 
+#userResults button {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+#userResults button p {
+  max-width: inherit;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #333333;
+}
+#userResults button:hover {
+  min-width: fit-content;
+  transform: scale(1.05);
+}
+#userResults button:hover p {
+  overflow: visible;
+}
+#userResults .search-result-user img {
+  width: 40px;
+  height: 40px;
+}
+
 footer {
   display: flex;
   flex-shrink: 0;
@@ -12056,23 +12059,82 @@ footer p {
   margin: auto;
 }
 
-nav {
+nav.position-sticky {
+  display: none;
   top: 50px;
 }
-nav i, nav span {
+nav.position-sticky i, nav.position-sticky span {
   font-size: 1rem;
 }
-nav i {
+nav.position-sticky i {
   width: 30px;
   text-align: center;
 }
-nav .active {
+nav.position-sticky .active {
   color: #ff5722;
 }
 
-@media (min-width: 992px) {
-  nav {
-    flex-direction: column;
+.user-info {
+  align-items: center;
+  gap: 2em;
+}
+.user-info a {
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.user-info-header {
+  display: none;
+  align-items: center;
+  gap: 2em;
+}
+.user-info-header .avatar {
+  width: 35px;
+  height: 35px;
+}
+.user-info-header a {
+  text-decoration: none;
+  font-weight: 500;
+  color: white;
+}
+.user-info-header #btnLogoutHeader {
+  background-color: transparent;
+  color: white;
+}
+.user-info-header #btnLogoutHeader:hover {
+  text-decoration: underline;
+}
+
+.user-info-hamburger {
+  align-items: center;
+  gap: 2em;
+}
+.user-info-hamburger .avatar {
+  width: 60px;
+  height: 60px;
+}
+.user-info-hamburger a {
+  text-decoration: none;
+  font-weight: 500;
+  color: #333333;
+}
+.user-info-hamburger #btnLogoutHamburger {
+  background-color: transparent;
+  color: #333333;
+}
+.user-info-hamburger #btnLogoutHamburger:hover {
+  text-decoration: underline;
+}
+
+@media (min-width: 998px) {
+  .navbar {
+    display: none;
+  }
+  .user-info-header {
+    display: flex;
+  }
+  nav.position-sticky {
+    display: block;
   }
 }
 form input {
@@ -12204,7 +12266,8 @@ form .url-input {
   height: 560px;
 }
 #editModal .modal-content #editForm {
-  width: 350px;
+  max-width: 350px;
+  width: 100%;
 }
 #editModal .modal-content #editForm textarea {
   resize: none;
