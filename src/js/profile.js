@@ -11,6 +11,7 @@ import {
   handleUnfollowUser,
   displayFollows,
 } from "./components/handleFollows.js";
+import { handlePost } from "./components/handlePost.js";
 
 // Get the 'name' query string
 const queryString = document.location.search;
@@ -29,6 +30,17 @@ const localUserData = getUser();
 if (!localUserData) {
   window.location.href = URLS.INDEX;
 }
+
+// Select the "Post" button, media input field, and clear media URL button
+const btnPost = document.querySelector(".btn-post");
+const mediaInput = document.querySelector(".media-input");
+const clearMediaUrl = document.querySelector(".clear-media");
+
+// Attach a click event listener to the "Post" button to handle post creation
+btnPost.addEventListener("click", handlePost);
+
+// Attach functionality to clear media URL button
+clearUrl(clearMediaUrl, mediaInput);
 
 // The URL to fetch the logged-in user's posts and data
 const postsUrl = `${API_URLS.PROFILES}/${username}/posts?_author=true&_comments=true&_reactions=true`;
@@ -79,7 +91,7 @@ async function renderProfile() {
 
     // Update the profile info HTML with the user's avatar and name
     profileInfo.innerHTML = `
-      <div class="text-center pb-5 bg-light mb-5 text-dark">
+      <div class="text-center pb-5 bg-light text-dark">
         <div class="d-flex justify-content-end">
           <button id="userSettingsButton" class="btn btn-dark m-1 rounded-0">Settings</button>
           <button id="followUserButton" class="btn btn-primary m-1 rounded-0" style="display: none;">Follow ${apiUserData.name}</button>
@@ -102,8 +114,9 @@ async function renderProfile() {
 
     displayFollows(apiUserData);
 
-    // Get the settings and follow buttons
+    // Get the settings, create post accordion and follow buttons
     const userSettingsButton = document.getElementById("userSettingsButton");
+    const postFormAccordion = document.querySelector(".form-container");
     const followUserButton = document.getElementById("followUserButton");
     const unfollowUserButton = document.getElementById("unfollowUserButton");
 
@@ -114,6 +127,7 @@ async function renderProfile() {
     if (apiUserData.name !== loggedInUserData.name) {
       profilePostsHeading.innerHTML = `${apiUserData.name}'s posts`;
       userSettingsButton.style.display = "none";
+      postFormAccordion.style.display = "none";
       followUserButton.style.display = "block";
 
       const loggedInUserFollowing = loggedInUserData.following;

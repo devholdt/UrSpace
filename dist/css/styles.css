@@ -3111,7 +3111,7 @@ textarea.form-control-lg {
   --bs-gradient: none;
 }
 
-.btn-outline-secondary, .btn-custom {
+.btn-outline-secondary {
   --bs-btn-color: #ff5722;
   --bs-btn-border-color: #ff5722;
   --bs-btn-hover-color: #000;
@@ -4924,20 +4924,20 @@ textarea.form-control-lg {
 }
 
 .list-group {
-  --bs-list-group-color: white;
-  --bs-list-group-bg: #1a3767;
+  --bs-list-group-color: var(--bs-body-color);
+  --bs-list-group-bg: var(--bs-body-bg);
   --bs-list-group-border-color: var(--bs-border-color);
   --bs-list-group-border-width: var(--bs-border-width);
   --bs-list-group-border-radius: var(--bs-border-radius);
   --bs-list-group-item-padding-x: 1rem;
-  --bs-list-group-item-padding-y: 0.5em;
+  --bs-list-group-item-padding-y: 0.5rem;
   --bs-list-group-action-color: var(--bs-secondary-color);
   --bs-list-group-action-hover-color: var(--bs-emphasis-color);
   --bs-list-group-action-hover-bg: var(--bs-tertiary-bg);
   --bs-list-group-action-active-color: var(--bs-body-color);
   --bs-list-group-action-active-bg: var(--bs-secondary-bg);
   --bs-list-group-disabled-color: var(--bs-secondary-color);
-  --bs-list-group-disabled-bg: #1a3767;
+  --bs-list-group-disabled-bg: var(--bs-body-bg);
   --bs-list-group-active-color: #fff;
   --bs-list-group-active-bg: #1a3767;
   --bs-list-group-active-border-color: #1a3767;
@@ -11905,18 +11905,26 @@ main {
   font-size: 3em;
 }
 .feed-welcome img {
-  width: 185px;
+  max-width: 200px;
 }
 
 .form-container_post {
   height: inherit;
+  max-width: 350px;
 }
 .form-container_post .btn-post {
   height: 40px;
 }
-.form-container_post #postBody {
+.form-container_post .body-input {
   resize: none;
   height: 120px;
+}
+.form-container_list {
+  height: inherit;
+  max-width: 350px;
+}
+.form-container .post-form-requirement {
+  display: none;
 }
 
 #loadMoreButton {
@@ -11928,6 +11936,41 @@ main {
   top: 50px;
 }
 
+@media (min-width: 768px) {
+  .form-container .post-form-requirement {
+    display: inline-block;
+    height: fit-content;
+  }
+  .form-container .post-form-requirement i {
+    color: #2196f3;
+  }
+  .form-container .post-form-requirement span {
+    display: inline-block;
+    position: absolute;
+    width: 0px;
+    padding: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-size: 15px;
+  }
+  .form-container .post-form-requirement:hover, .form-container .post-form-requirement:focus {
+    min-width: fit-content;
+    cursor: help;
+  }
+  .form-container .post-form-requirement:hover span, .form-container .post-form-requirement:focus span {
+    width: fit-content;
+    max-width: 138px;
+    white-space: wrap;
+    overflow: auto;
+    padding: 0.5em 0.75em;
+    margin-right: 1em;
+    z-index: 1;
+  }
+  .form-container_list {
+    display: none;
+  }
+}
 .profile-container {
   display: flex;
   flex-direction: column;
@@ -12363,15 +12406,6 @@ form .url-input {
 }
 .link-custom:hover {
   color: #ff5722;
-}
-
-.btn-custom {
-  border-radius: 20px;
-  width: 75px;
-  font-weight: 600;
-}
-.btn-custom:hover {
-  color: #fff;
 }
 
 .btn-post {

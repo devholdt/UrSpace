@@ -19,6 +19,8 @@ export function clearUrl(button, input) {
 export async function handleDelete(event) {
   const postId = event.target.dataset.id;
 
+  console.log(postId);
+
   if (confirm("Are you sure you want to delete this post?") === true) {
     try {
       const response = await httpRequest(

@@ -48,60 +48,108 @@
                         alt="UrSpace Logo">
                 </h1>
 
-                <div class="form-container row text-white bg-primary p-4 rounded m-auto">
+                <div class="accordion accordion-flush form-container" id="postFormAccordion">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="postFormHeading">
+                            <button class="accordion-button collapsed shadow-none fs-5" type="button"
+                                data-bs-toggle="collapse" data-bs-target="#postForm-collapse" aria-expanded="false"
+                                aria-controls="postForm-collapse">
+                                Create a post
+                            </button>
+                        </h2>
+                        <div id="postForm-collapse" class="accordion-collapse collapse"
+                            aria-labelledby="postFormHeading" data-bs-parent="#postFormAccordion">
+                            <div class="accordion-body border border-primary rounded-bottom">
 
-                    <form class="form-container_post col-sm-7">
-                        <h2 class="mb-4">Create a post</h2>
-                        <div class="mb-2">
-                            <label for="postTitle" class="form-label m-0">Title</label>
-                            <input type="text" class="form-control shadow-none" id="postTitle">
-                        </div>
+                                <form class="form-container_post mx-auto">
+                                    <div class="mb-2">
+                                        <label for="postTitle" class="form-label m-0">Title</label>
+                                        <div class="d-flex">
+                                            <input type="text" class="form-control shadow-none title-input"
+                                                id="postTitle">
+                                            <span class="post-form-requirement ms-1">
+                                                <i class="fa-solid fa-circle-question"></i>
+                                                <span class="ms-1 bg-primary rounded text-white">Required
+                                                    field</span>
+                                            </span>
+                                        </div>
+                                    </div>
 
-                        <div class="mb-2">
-                            <label for="postBody" class="form-label m-0">Body (Optional)</label>
-                            <textarea class="form-control mb-3 shadow-none" id="postBody" maxlength="280"></textarea>
-                        </div>
+                                    <div class=" mb-2">
+                                        <label for="postBody" class="form-label m-0">Body
+                                            (Optional)</label>
+                                        <div class="d-flex">
+                                            <textarea class="form-control mb-3 shadow-none body-input" id="postBody"
+                                                maxlength="280"></textarea>
+                                            <span class="post-form-requirement ms-1">
+                                                <i class="fa-solid fa-circle-question"></i>
+                                                <span class="ms-1 bg-primary rounded text-white">Max. 280
+                                                    characters</span>
+                                            </span>
+                                        </div>
+                                    </div>
 
-                        <div class="mb-2">
-                            <label for="postMedia" class="form-label m-0">Media URL (Optional)</label>
-                            <div class="d-flex">
-                                <input type="text" class="form-control shadow-none url-input" id="postMedia">
-                                <button type="button" class="btn btn-light btn-clear" id="clearMediaUrl"><i
-                                        class="fa-solid fa-xmark"></i></button>
+                                    <div class="mb-2">
+                                        <label for="postMedia" class="form-label m-0">Media URL
+                                            (Optional)</label>
+                                        <div class="d-flex">
+                                            <input type="text" class="form-control shadow-none url-input media-input"
+                                                id="postMedia">
+                                            <button type="button" class="btn btn-light btn-clear" id="clearMediaUrl"><i
+                                                    class="fa-solid fa-xmark"></i></button>
+                                            <span class="post-form-requirement ms-1">
+                                                <i class="fa-solid fa-circle-question"></i>
+                                                <span class="ms-1 bg-primary rounded text-white">Must be a
+                                                    valid image URL</span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="postTags" class="form-label m-0">Tags (Optional)</label>
+                                        <div class="d-flex">
+                                            <input type="text" class="form-control shadow-none tags-input"
+                                                id="postTags">
+                                            <span class="post-form-requirement ms-1">
+                                                <i class="fa-solid fa-circle-question"></i>
+                                                <span class="ms-1 bg-primary rounded text-white">
+                                                    <p>Max. 6 tags</p>
+                                                    <hr>
+                                                    <p>Tags are separated by commas (tag1, tag2, tag3)</p>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-between">
+                                        <button type="submit" class="btn btn-post" title="Post">Post</button>
+                                        <p class="message-container message-post"></p>
+                                    </div>
+
+                                </form>
+
+                                <div class="form-container_list mx-auto mb-4">
+                                    <hr class="my-5">
+                                    <p class="fw-semibold fs-5 mb-0">Rules and requirements</p>
+                                    <ul class="list-group list-group-flush">
+                                        <li class="list-group-item ps-1">Title is required</li>
+                                        <li class="list-group-item ps-1">Max 280 characters for body text
+                                        </li>
+                                        <li class="list-group-item ps-1">Media URL must link to a live and
+                                            publicly accessible image
+                                        </li>
+                                        <li class="list-group-item ps-1">Max 6 tags per post</li>
+                                        <li class="list-group-item ps-1">Tags are separated using commas
+                                            (tag 1, tag 2, tag 3)
+                                        </li>
+                                        <li class="list-group-item ps-1">Be appropriate and respectful
+                                        </li>
+                                    </ul>
+                                </div>
+
                             </div>
                         </div>
-
-                        <div class="mb-3">
-                            <label for="postTags" class="form-label m-0">Tags (Optional)</label>
-                            <input type="text" class="form-control shadow-none" id="postTags">
-                        </div>
-
-                        <div class="d-flex justify-content-between">
-                            <button type="submit" class="btn btn-post" title="Post">Post</button>
-                            <p class="message-container message-post"></p>
-                        </div>
-                    </form>
-
-                    <div class="form-container_list col-sm-5">
-                        <p class="fw-semibold fs-5 mb-0">Rules and requirements</p>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item ps-1">Title is required</li>
-                            <li class="list-group-item ps-1">Body text and media are optional
-                            </li>
-                            <li class="list-group-item ps-1">Max 280 characters for body text
-                            </li>
-                            <li class="list-group-item ps-1">Media URL must link to a live and
-                                publicly accessible image
-                            </li>
-                            <li class="list-group-item ps-1">Max 6 tags per post</li>
-                            <li class="list-group-item ps-1">Tags are separated using commas
-                                (tag 1, tag 2, tag 3)
-                            </li>
-                            <li class="list-group-item ps-1">Be appropriate and respectful
-                            </li>
-                        </ul>
                     </div>
-
                 </div>
 
                 <h3 class="mt-5 h2 scroll-target border-bottom pb-2">Feed</h3>

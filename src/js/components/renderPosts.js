@@ -177,9 +177,9 @@ export function generatePostHTML(post) {
                   </div>
 
                   <div class="post-profile-link-sm align-items-end">
-                    <a href="profile.html?name=${post.author.name}" class="fs-6">
+                    <a href="profile.html?name=${comment.owner}" class="fs-6">
                       <button class="btn btn-outline-primary">
-                        ${post.author.name}
+                        ${comment.owner}
                       </button>
                     </a>
                   </div>
