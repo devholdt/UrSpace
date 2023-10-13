@@ -17,6 +17,8 @@ const queryString = document.location.search;
 const params = new URLSearchParams(queryString);
 const username = params.get("name");
 
+document.title = `UrSpace | ${username}'s profile`;
+
 if (!queryString) {
   params.set("name", `${getUser().name}`);
   document.location.search = params;
@@ -335,9 +337,4 @@ async function handleUserSettings() {
       ".message-banner"
     );
   }
-}
-
-function defaultImg() {
-  document.querySelector(".avatar").style.display = "none";
-  document.querySelector(".banner").style.display = "none";
 }
