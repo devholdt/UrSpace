@@ -46,7 +46,7 @@ export async function displayPosts(url) {
     const postElement = document.createElement("div");
 
     // Populate the post element with content
-    postInnerHtml(post, postElement);
+    postElement.innerHTML = generatePostHTML(post);
 
     // Append the post element to the posts container
     postsContainer.appendChild(postElement);
@@ -88,12 +88,12 @@ export async function displayPosts(url) {
 }
 
 /**
- * Updates the HTML content of a container with post data.
+ * Extract common post HTML generation logic to a function.
  *
  * @param {Object} post - The post object to display.
- * @param {HTMLElement} container - The container where the post content should be displayed.
+ * @returns {string} - HTML content for the post.
  */
-export function postInnerHtml(post, container) {
+export function generatePostHTML(post) {
   const userData = getUser(); // Get user data for comparison
 
   // Initialize variables for post media, modal content, and button group
@@ -120,15 +120,15 @@ export function postInnerHtml(post, container) {
     const modalId = `modal-${post.id}`;
 
     postMedia = `
-      <div class="thumbnail" id="thumbnailImgContainer">
-        <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}" onerror='this.src="https://imageupload.io/ib/44rlPagSlwtwkei_1697114759.png"'>
-      </div>`;
+        <div class="thumbnail" id="thumbnailImgContainer">
+          <img src="${post.media}" alt="Post media thumbnail" class="thumbnail-img" data-modal-id="${modalId}" onerror='this.src="https://imageupload.io/ib/44rlPagSlwtwkei_1697114759.png"'>
+        </div>`;
 
     modalContent = `
-      <div class="modal" id="${modalId}">
-        <i class="fa-solid fa-circle-xmark close-btn" data-modal-id="${modalId}"></i>
-        <img src="${post.media}" alt="Full-sized post media" class="modal-content" onerror='this.src="https://imageupload.io/ib/44rlPagSlwtwkei_1697114759.png"'>
-      </div>`;
+        <div class="modal" id="${modalId}">
+          <i class="fa-solid fa-circle-xmark close-btn" data-modal-id="${modalId}"></i>
+          <img src="${post.media}" alt="Full-sized post media" class="modal-content" onerror='this.src="https://imageupload.io/ib/44rlPagSlwtwkei_1697114759.png"'>
+        </div>`;
   }
 
   // Generate button group based on user data
@@ -169,46 +169,46 @@ export function postInnerHtml(post, container) {
       const formattedCommentDate = formatDate(commentDate);
 
       postComments += `
-        <div class="d-flex rounded-bottom post-comment">
-    
-          <div class="card post p-1">
-    
-            <div class="card-header border-0 py-1">
-              <div class="d-flex align-items-center">
-                <div class="d-flex gap-2">
-                  <p>${comment.owner}</p>
-                  <a href="profile.html?name=${comment.owner}" class="fst-italic fw-light">visit profile</a>
+          <div class="d-flex rounded-bottom post-comment">
+      
+            <div class="card post p-1">
+      
+              <div class="card-header border-0 py-1">
+                <div class="d-flex align-items-center">
+                  <div class="d-flex gap-2">
+                    <p>${comment.owner}</p>
+                    <a href="profile.html?name=${comment.owner}" class="fst-italic fw-light">visit profile</a>
+                  </div>
                 </div>
               </div>
-            </div>
-    
-            <div class="card-content border-bottom">
-              <div class="card-body">
-                <div class="card-text">${comment.body}</div>
+      
+              <div class="card-content border-bottom">
+                <div class="card-body">
+                  <div class="card-text">${comment.body}</div>
+                </div>
               </div>
+      
+              <div class="d-flex justify-content-between post-bottom">
+                <p class="mx-2 my-1">${formattedCommentDate}</p>
+                <p class="mx-2 my-1 fw-light">id: ${comment.id}</p>
+              </div>
+      
             </div>
-    
-            <div class="d-flex justify-content-between post-bottom">
-              <p class="mx-2 my-1">${formattedCommentDate}</p>
-              <p class="mx-2 my-1 fw-light">id: ${comment.id}</p>
-            </div>
-    
-          </div>
-    
-        </div>`;
+      
+          </div>`;
     });
 
     commentsContainer = `
-      <div class="d-flex flex-column gap-2">
-        <h4 class="fs-6 ms-1 mb-0 mt-3">Comments</h4>
-        <div class="comments d-flex flex-column gap-2 m-0">
-          ${postComments}
-        </div>
-      </div>`;
+        <div class="d-flex flex-column gap-2">
+          <h4 class="fs-6 ms-1 mb-0 mt-3">Comments</h4>
+          <div class="comments d-flex flex-column gap-2 m-0">
+            ${postComments}
+          </div>
+        </div>`;
   }
 
-  // Update the container's HTML with post content
-  container.innerHTML += `
+  // Return the HTML content for the post
+  return `
     <div class="p-3 bg-light mb-4 rounded">
       <div class="card post border p-1" data-id="${post.id}">
         <div class="card-header border-0">
@@ -249,7 +249,7 @@ export function postInnerHtml(post, container) {
 
         <form class="mx-auto mt-1 comment-form" data-id="${post.id}">
 
-          <label for="commentInput" class="form-label mb-0 mt-2 hide-label">Comment</label>
+          <label for "commentInput" class="form-label mb-0 mt-2 hide-label">Comment</label>
 
           <div class="d-flex bg-white">
             <input type="text" class="form-control shadow-none rounded-0 rounded-start" id="commentInput" name="commentInput" placeholder="comment" minlength="2" required>
@@ -258,11 +258,9 @@ export function postInnerHtml(post, container) {
             }" class="comment-button btn btn-outline-secondary p-0 rounded-0 rounded-end" title="Comment">Post</button>
           </div>
 
-          </form>
-          
-          <div class="comments-container">${commentsContainer}</div>
-
-        </div>
+        </form>
         
-      </div>`;
+        <div class="comments-container">${commentsContainer}</div>
+      </div>
+    </div>`;
 }

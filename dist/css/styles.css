@@ -12026,6 +12026,29 @@ main {
   background-color: #ff5722;
 }
 
+#userResults button {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+#userResults button p {
+  max-width: inherit;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #333333;
+}
+#userResults button:hover {
+  min-width: fit-content;
+  transform: scale(1.05);
+}
+#userResults button:hover p {
+  overflow: visible;
+}
+#userResults .search-result-user img {
+  width: 40px;
+  height: 40px;
+}
+
 footer {
   display: flex;
   flex-shrink: 0;

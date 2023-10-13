@@ -34,3 +34,33 @@
         background-color: $secondary;
     }
 }
+
+#userResults {
+    button {
+        width: 100%;
+        margin-bottom: 1rem;
+
+        p {
+            max-width: inherit;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            color: $dark;
+        }
+
+        &:hover {
+            min-width: fit-content;
+            transform: scale(1.05);
+        }
+
+        &:hover p {
+            overflow: visible;
+        }
+    }
+    .search-result-user {
+        img {
+            width: 40px;
+            height: 40px;
+        }
+    }
+}
