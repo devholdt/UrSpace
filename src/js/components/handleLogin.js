@@ -24,7 +24,7 @@ export async function handleLogin(event) {
 
   // Check if email and password are provided
   if (email.length === 0 || password.length === 0) {
-    message("error", "Email and password are required", ".message-index");
+    message("error", "Email and password are required", ".message-fixed");
     return;
   } else {
     // Create a user object with email and password
@@ -42,7 +42,7 @@ export async function handleLogin(event) {
         message(
           "error",
           "Please provide correct login credentials",
-          ".message-index"
+          ".message-fixed"
         );
         return;
       } else if (response.accessToken) {
@@ -55,7 +55,7 @@ export async function handleLogin(event) {
         message(
           "success",
           `Login successful, welcome back ${response.name}`,
-          ".message-index"
+          ".message-fixed"
         );
 
         setTimeout(() => {
@@ -67,7 +67,7 @@ export async function handleLogin(event) {
       message(
         "error",
         `An error occured when attempting to login: ${error}`,
-        ".message-index"
+        ".message-fixed"
       );
     }
   }

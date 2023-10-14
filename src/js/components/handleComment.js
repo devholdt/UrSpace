@@ -10,7 +10,6 @@ export async function handleComment() {
 
   commentFormContainers.forEach((container) => {
     const commentForm = container.querySelector("form");
-    const commentsContainer = container.querySelector(".comments");
     const commentInput = commentForm.querySelector("#commentInput");
 
     const url = `${API_URLS.POSTS}/${commentForm.dataset.id}/comment`;
@@ -28,6 +27,7 @@ export async function handleComment() {
       );
 
       try {
+        const commentsContainer = container.querySelector(".comments");
         const newComment = await httpRequest(url, "POST", {
           body: commentValue,
         });
@@ -70,29 +70,17 @@ export async function handleComment() {
 
         if (commentsContainer) {
           commentsContainer.append(commentElement);
-          commentsContainer.prepend(commentMessage);
         }
 
-        message("success", "Comment posted", ".message-comment");
+        message("success", "Comment posted", ".message-fixed");
 
         commentInput.value = "";
-
-        setTimeout(() => {
-          commentMessage.remove();
-        }, 1500);
       } catch (error) {
-        if (commentsContainer) {
-          commentsContainer.prepend(commentMessage);
-        }
         message(
           "error",
           `An error occured when attempting to post a comment: ${error}`,
-          ".message-comment",
-          null
+          ".message-fixed"
         );
-        setTimeout(() => {
-          commentMessage.remove();
-        }, 2000);
       }
     });
   });

@@ -115,7 +115,7 @@ export async function handleEdit(event) {
             .map((tag) => tag.trim());
 
           if (editedTags.length > 6) {
-            message("error", "You can only add up to 6 tags", ".message-edit");
+            message("error", "You can only add up to 6 tags", ".message-fixed");
             return;
           }
 
@@ -132,7 +132,12 @@ export async function handleEdit(event) {
 
           if (updateResponse.updated) {
             // Display a success message and update the post UI
-            message("success", "Post edited successfully", ".message-edit");
+            message(
+              "success",
+              "Post edited successfully",
+              ".message-fixed",
+              1000
+            );
 
             setTimeout(() => {
               post.title = editedPost.title;
@@ -145,10 +150,10 @@ export async function handleEdit(event) {
           }
         });
     } else {
-      message("error", "Unauthorized to edit this post.", ".message-edit");
+      message("error", "Unauthorized to edit this post.", ".message-fixed");
     }
   } catch (error) {
-    message("error", `Error fetching post data: ${error}`, ".message-edit");
+    message("error", `Error fetching post data: ${error}`, ".message-fixed");
   }
 }
 

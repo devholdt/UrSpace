@@ -6,9 +6,9 @@ import { httpRequest } from "../utilities/httpRequest.js";
 import { handleImageModal } from "./handleImageModal.js";
 import { handleComment } from "./handleComment.js";
 import { handlePostReaction } from "./handlePostReaction.js";
+import "../settings/common.js";
 
 // Initialize variables for pagination
-let start = 0;
 let loading = false;
 
 /**
@@ -276,11 +276,11 @@ export function generatePostHTML(post) {
             <input type="text" class="form-control shadow-none rounded-0 rounded-start" id="commentInput" name="commentInput" placeholder="comment" minlength="2" required>
             <button type="submit" data-id="${
               post.id
-            }" class="comment-button btn btn-outline-secondary p-0 rounded-0 rounded-end" title="Comment">Post</button>
+            }" class="comment-button btn btn-outline-post p-0 rounded-0 rounded-end" title="Comment">Post</button>
           </div>
 
         </form>
-        
+      
         <div class="comments-container">${commentsContainer}</div>
       </div>
     </div>`;

@@ -92,38 +92,38 @@ export async function handleRegistration(event) {
           message(
             "success",
             `User registration was successful, welcome ${loginResponse.name}`,
-            ".message-index"
+            ".message-fixed"
           );
 
-          // setTimeout(() => {
-          //   window.location.href = URLS.FEED;
-          // }, 2000);
+          setTimeout(() => {
+            window.location.href = URLS.FEED;
+          }, 2000);
         } else {
           message(
             "error",
             "An error occured during auto-login",
-            ".message-index"
+            ".message-fixed"
           );
         }
       } catch (loginError) {
         message(
           "error",
           `An error occured during user registration: ${loginError}`,
-          ".message-index"
+          ".message-fixed"
         );
       }
     } else {
       message(
         "error",
         "Please provide correct registration credentials",
-        ".message-index"
+        ".message-fixed"
       );
     }
   } catch (error) {
     message(
       "error",
       `An error occured when attempting user registration: ${error}`,
-      ".message-index"
+      ".message-fixed"
     );
   }
 }

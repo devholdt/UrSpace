@@ -1,13 +1,13 @@
-import renderMenu from "./components/renderMenu.js";
-import message from "./components/message.js";
-import { httpRequest } from "./utilities/httpRequest.js";
-import { API_URLS, DEFAULT_URLS } from "./settings/constants.js";
-import { displayScrollButton } from "./utilities/scrollEvents.js";
-import { handleImageModal } from "./components/handleImageModal.js";
-import { handleDelete } from "./utilities/clickEvents.js";
-import { handleEdit } from "./components/editPost.js";
-import { generatePostHTML } from "./components/renderPosts.js";
-import { handleComment } from "./components/handleComment.js";
+import renderMenu from "./renderMenu.js";
+import message from "./message.js";
+import { httpRequest } from "../utilities/httpRequest.js";
+import { API_URLS, DEFAULT_URLS } from "../settings/constants.js";
+import { displayScrollButton } from "../utilities/scrollEvents.js";
+import { handleImageModal } from "./handleImageModal.js";
+import { handleDelete } from "../utilities/clickEvents.js";
+import { handleEdit } from "./editPost.js";
+import { generatePostHTML } from "./renderPosts.js";
+import { handleComment } from "./handleComment.js";
 
 // Render the menu and display the scroll button
 renderMenu();
@@ -15,26 +15,15 @@ displayScrollButton(500);
 
 // Get references to various elements in the HTML
 const searchInput = document.getElementById("searchInput");
-const searchForm = document.getElementById("searchForm");
-const containerParagraph = document.querySelector("#searchContainer p");
 const userResultsDiv = document.getElementById("userResults");
 const postResultsDiv = document.getElementById("postResults");
 const userSearchHeading = document.querySelector(".user-search-heading");
 const postSearchHeading = document.querySelector(".post-search-heading");
+const postsContainer = document.querySelector(".posts-container");
+const searchContainer = document.querySelector(".search-container");
 
 const usersUrl = `${API_URLS.PROFILES}?_posts=true?`;
 const postsUrl = `${API_URLS.POSTS}?_author=true&_comments=true&_reactions=true&_tag=${searchInput.value}`;
-
-searchForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const searchTerm = searchInput.value.trim();
-
-  if (searchTerm.length === 0) {
-    return;
-  }
-
-  handleSearch(searchTerm);
-});
 
 async function handleSearch(searchTerm) {
   const usersPromise = getUsersBySearchTerm(searchTerm);
@@ -48,7 +37,6 @@ async function handleSearch(searchTerm) {
 
 function updateUserResults(users) {
   userResultsDiv.innerHTML = "";
-  containerParagraph.innerHTML = "";
 
   userSearchHeading.innerHTML = "Users";
   userSearchHeading.classList.add("bg-primary");
@@ -57,7 +45,7 @@ function updateUserResults(users) {
     message(
       "info",
       "No users found. Try a different search query.",
-      ".message-search-users",
+      ".user-results",
       null
     );
   }
@@ -70,7 +58,6 @@ function updateUserResults(users) {
 
 function updatePostResults(posts) {
   postResultsDiv.innerHTML = "";
-  containerParagraph.innerHTML = "";
 
   postSearchHeading.innerHTML = "Posts";
   postSearchHeading.classList.add("bg-primary");
@@ -79,7 +66,7 @@ function updatePostResults(posts) {
     message(
       "info",
       "No posts found. Try a different search query.",
-      ".message-search-posts",
+      ".post-results",
       null
     );
   }
@@ -127,7 +114,7 @@ async function getUsersBySearchTerm(searchTerm) {
     message(
       "error",
       `An error occured when attempting to fetch search results (users): ${error}`,
-      ".message-search-users",
+      ".user-results",
       null
     );
     return Promise.resolve([]);
@@ -158,7 +145,7 @@ async function getPostsBySearchTerm(searchTerm) {
     message(
       "error",
       `An error occured when attempting to fetch search results (posts): ${error}`,
-      ".message-search-posts",
+      ".post-results",
       null
     );
   }
@@ -193,3 +180,5 @@ function createPostResultElement(post) {
   postElement.innerHTML = generatePostHTML(post);
   return postElement;
 }
+
+export { handleSearch, searchInput, postsContainer, searchContainer };
