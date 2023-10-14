@@ -9,26 +9,26 @@ import message from "./message.js";
  * @param {Event} event - The form submission event.
  */
 export async function handlePost(event) {
-  // Prevent the default form submission behavior
   event.preventDefault();
 
   // Get references to form input elements
   const titleInput = document.querySelector(".title-input");
   const title = titleInput.value;
   const body = document.querySelector(".body-input").value;
-  const media = document.querySelector(".media-input").value;
+  const mediaInput = document.querySelector(".media-input");
+  const media = mediaInput.value;
   const tagsInput = document.querySelector(".tags-input");
   const tags = tagsInput.value.split(", ").map((tag) => tag.trim());
 
   // Check if the number of tags exceeds the allowed limit
   if (tags.length > 6) {
-    message("error", "You can only add up to 6 tags", ".message-post");
+    message("error", "You can only add up to 6 tags.", ".message-post");
     return;
   }
 
   // Check if the title input is empty
   if (title.length === 0) {
-    message("error", "Title required", ".message-post");
+    message("error", "Title required.", ".message-post");
     titleInput.style.borderColor = "#ff4444";
     titleInput.style.borderWidth = "3px";
 
@@ -40,10 +40,19 @@ export async function handlePost(event) {
     return;
   }
 
+  // Check if media URL is valid
   const isValidMedia = await isValidImageUrl(media);
 
   if (media && !isValidMedia) {
     message("error", "Invalid media URL", ".message-post");
+    mediaInput.style.borderColor = "#ff4444";
+    mediaInput.style.borderWidth = "3px";
+
+    // Reset the media input's border color and width after a delay
+    setTimeout(() => {
+      mediaInput.style.borderColor = "#dee2e6";
+      mediaInput.style.borderWidth = "1px";
+    }, 1900);
     return;
   }
 
@@ -60,24 +69,21 @@ export async function handlePost(event) {
     const response = await httpRequest(API_URLS.POSTS, "POST", post);
 
     if (response) {
-      // Display a success message if the post is successful
-      message("success", "Post successful", ".message-post");
+      message("success", "Post successful!", ".message-post");
 
       // Reload the page after a delay
       setTimeout(() => {
         location.reload();
       }, 1000);
     } else if (!response) {
-      // Display an error message if the post request fails
       message(
         "error",
-        "An error occured while attempting to post",
-        ".message-post"
+        "An error occured while attempting to post.",
+        ".message-fixed"
       );
       return;
     }
   } catch (error) {
-    // display an error message if an error occurs during the request
-    message("error", `An error occured: ${error}`, ".message-post");
+    message("error", "An error occured.", ".message-fixed");
   }
 }

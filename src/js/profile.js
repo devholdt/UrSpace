@@ -151,7 +151,7 @@ async function renderProfile() {
         } catch (error) {
           message(
             "error",
-            `An error occured when attempting to follow ${apiUserData.name}: ${error}`,
+            `An error occured when attempting to follow ${apiUserData.name}.`,
             ".message-fixed"
           );
         }
@@ -167,7 +167,7 @@ async function renderProfile() {
         } catch (error) {
           message(
             "error",
-            `An error occured when attempting to unfollow ${apiUserData.name}: ${error}`,
+            `An error occured when attempting to unfollow ${apiUserData.name}.`,
             ".message-fixed"
           );
         }
@@ -182,7 +182,7 @@ async function renderProfile() {
   } catch (error) {
     message(
       "error",
-      `An error occured when attempting to render profile: ${error}`,
+      "An error occured when attempting to render profile.",
       ".message-fixed",
       null
     );
@@ -316,21 +316,23 @@ async function handleUserSettings() {
           newUserMedia.banner = newBannerValue;
         }
 
+        // Check if image URL is valid
         const isValidAvatar = await isValidImageUrl(newUserMedia.avatar);
         const isValidBanner = await isValidImageUrl(newUserMedia.banner);
 
         if (!isValidAvatar || !isValidBanner) {
-          message("error", "Invalid image URL", ".message-settings");
+          message("error", "Invalid image URL.", ".message-fixed");
           return;
         }
 
+        // Update user media
         const response = await httpRequest(`${url}/media`, "PUT", newUserMedia);
 
         if (response) {
           message(
             "success",
-            "Image(s) successfully changed",
-            ".message-settings"
+            "Image(s) successfully changed.",
+            ".message-fixed"
           );
 
           setTimeout(() => {
@@ -350,8 +352,8 @@ async function handleUserSettings() {
   } catch (error) {
     message(
       "error",
-      `An error occured when attempting to change the banner image. ${error}`,
-      ".message-banner"
+      "An error occured when attempting to change the banner image.",
+      ".message-fixed"
     );
   }
 }

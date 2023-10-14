@@ -23,6 +23,7 @@ if (!userData) {
 const btnPost = document.querySelector(".btn-post");
 const mediaInput = document.getElementById("postMedia");
 const clearMediaUrl = document.getElementById("clearMediaUrl");
+const filterSelect = document.getElementById("filterSelect");
 
 // Attach a click event listener to the "Post" button to handle post creation
 btnPost.addEventListener("click", handlePost);
@@ -53,36 +54,36 @@ resetButton.addEventListener("click", () => {
   postsContainer.innerHTML = "";
   searchContainer.style.display = "none";
   searchInput.value = "";
+  filterSelect.value = "all";
+
   displayPosts(allPostsUrl);
 });
 
 // Handle search functionality
 searchInput.addEventListener("search", () => {
   const searchTerm = searchInput.value.trim();
+  start = 0;
 
   if (searchTerm.length === 0) {
-    start = 0;
-    displayPosts(allPostsUrl);
-    loadMoreButton.style.display = "block";
-    searchContainer.style.display = "none";
     return;
   }
 
   postsContainer.innerHTML = "";
   loadMoreButton.style.display = "none";
   searchContainer.style.display = "block";
+  filterSelect.value = "all";
 
   handleSearch(searchTerm);
 });
 
-const filterSelect = document.getElementById("filterSelect");
-
+// Handle filter/sort functionality
 let selectedValue;
 
 filterSelect.addEventListener("change", () => {
   selectedValue = filterSelect.value;
   start = 0;
 
+  searchInput.value = "";
   postsContainer.innerHTML = "";
 
   if (selectedValue === "all") {
@@ -94,5 +95,6 @@ filterSelect.addEventListener("change", () => {
 
 loadMoreButton.addEventListener("click", () => {
   const url = selectedValue === "follow" ? followPostsUrl : allPostsUrl;
+
   displayPosts(url);
 });

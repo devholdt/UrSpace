@@ -15,7 +15,6 @@ import message from "../components/message.js";
  * @returns {Promise<void>} A Promise that resolves when the login is complete.
  */
 export async function handleLogin(event) {
-  // Prevent the default form submission behavior
   event.preventDefault();
 
   // Collect email and password from the login form
@@ -24,7 +23,7 @@ export async function handleLogin(event) {
 
   // Check if email and password are provided
   if (email.length === 0 || password.length === 0) {
-    message("error", "Email and password are required", ".message-fixed");
+    message("error", "Email and password are required.", ".message-fixed");
     return;
   } else {
     // Create a user object with email and password
@@ -38,10 +37,9 @@ export async function handleLogin(event) {
       const response = await httpRequest(API_URLS.LOGIN, "POST", user);
 
       if (!response) {
-        // Handle incorrect login credentials
         message(
           "error",
-          "Please provide correct login credentials",
+          "Please provide correct login credentials.",
           ".message-fixed"
         );
         return;
@@ -51,10 +49,9 @@ export async function handleLogin(event) {
         saveToken(token);
         saveUser(JSON.stringify(response));
 
-        // Display a success message and redirect after a delay
         message(
           "success",
-          `Login successful, welcome back ${response.name}`,
+          `Login successful, welcome back ${response.name}!`,
           ".message-fixed"
         );
 
@@ -63,10 +60,9 @@ export async function handleLogin(event) {
         }, 2000);
       }
     } catch (error) {
-      // Display error message
       message(
         "error",
-        `An error occured when attempting to login: ${error}`,
+        "An error occured when attempting to login.",
         ".message-fixed"
       );
     }

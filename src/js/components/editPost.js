@@ -77,7 +77,11 @@ export async function handleEdit(event) {
 
     // If post not found/doesn't exist, display an error message
     if (!post) {
-      message("error", "Post not found or API response is invalid");
+      message(
+        "error",
+        "Post not found or API response is invalid.",
+        ".message-fixed"
+      );
       return;
     }
 
@@ -115,7 +119,11 @@ export async function handleEdit(event) {
             .map((tag) => tag.trim());
 
           if (editedTags.length > 6) {
-            message("error", "You can only add up to 6 tags", ".message-fixed");
+            message(
+              "error",
+              "You can only add up to 6 tags.",
+              ".message-fixed"
+            );
             return;
           }
 
@@ -134,7 +142,7 @@ export async function handleEdit(event) {
             // Display a success message and update the post UI
             message(
               "success",
-              "Post edited successfully",
+              "Post edited successfully!",
               ".message-fixed",
               1000
             );
@@ -153,7 +161,7 @@ export async function handleEdit(event) {
       message("error", "Unauthorized to edit this post.", ".message-fixed");
     }
   } catch (error) {
-    message("error", `Error fetching post data: ${error}`, ".message-fixed");
+    message("error", "Error fetching post data.", ".message-fixed");
   }
 }
 

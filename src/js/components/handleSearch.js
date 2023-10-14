@@ -25,6 +25,11 @@ const searchContainer = document.querySelector(".search-container");
 const usersUrl = `${API_URLS.PROFILES}?_posts=true?`;
 const postsUrl = `${API_URLS.POSTS}?_author=true&_comments=true&_reactions=true&_tag=${searchInput.value}`;
 
+/**
+ * Handle search functionality based on the given search term.
+ *
+ * @param {string} searchTerm - The term to search for.
+ */
 async function handleSearch(searchTerm) {
   const usersPromise = getUsersBySearchTerm(searchTerm);
   const postsPromise = getPostsBySearchTerm(searchTerm);
@@ -35,6 +40,11 @@ async function handleSearch(searchTerm) {
   updatePostResults(posts);
 }
 
+/**
+ * Update the user search results in the UI.
+ *
+ * @param {Array} users - The array of user search results.
+ */
 function updateUserResults(users) {
   userResultsDiv.innerHTML = "";
 
@@ -56,6 +66,11 @@ function updateUserResults(users) {
   });
 }
 
+/**
+ * Update the post search results in the UI.
+ *
+ * @param {Array} posts - The array of posts search results.
+ */
 function updatePostResults(posts) {
   postResultsDiv.innerHTML = "";
 
@@ -95,6 +110,12 @@ function updatePostResults(posts) {
   handleComment();
 }
 
+/**
+ * Fetch user search results based on the search term.
+ *
+ * @param {string} searchTerm - The term to search for.
+ * @returns {Promise<Array>} - An array of user search results.
+ */
 async function getUsersBySearchTerm(searchTerm) {
   searchTerm = searchInput.value;
 
@@ -113,7 +134,7 @@ async function getUsersBySearchTerm(searchTerm) {
   } catch (error) {
     message(
       "error",
-      `An error occured when attempting to fetch search results (users): ${error}`,
+      "An error occured when attempting to fetch search results (users).",
       ".user-results",
       null
     );
@@ -121,6 +142,12 @@ async function getUsersBySearchTerm(searchTerm) {
   }
 }
 
+/**
+ * Fetch post search results based on the search term.
+ *
+ * @param {string} searchTerm - The term to search for.
+ * @returns {Promise<Array>} - An array of post search results.
+ */
 async function getPostsBySearchTerm(searchTerm) {
   searchTerm = searchInput.value;
 
@@ -144,13 +171,19 @@ async function getPostsBySearchTerm(searchTerm) {
   } catch (error) {
     message(
       "error",
-      `An error occured when attempting to fetch search results (posts): ${error}`,
+      "An error occured when attempting to fetch search results (posts).",
       ".post-results",
       null
     );
   }
 }
 
+/**
+ * Create an HTML element for a user search result.
+ *
+ * @param {Object} user - The user data for the search result.
+ * @returns {HTMLElement} - The HTML element representing the user result.
+ */
 function createUserResultElement(user) {
   const userElement = document.createElement("div");
   userElement.classList.add("col-md-4", "col-sm-6", "px-1");
@@ -174,6 +207,12 @@ function createUserResultElement(user) {
   return userElement;
 }
 
+/**
+ * Create an HTML element for a post search result.
+ *
+ * @param {Object} post - The post data for the search result.
+ * @returns {HTMLElement} - The HTML element representing the post result.
+ */
 function createPostResultElement(post) {
   const postElement = document.createElement("div");
   postElement.classList.add("px-1");

@@ -32,8 +32,11 @@
 }
 
 .posts-header {
+    width: 100%;
+    margin: auto;
+
     .search-input-container {
-        max-width: 330px;
+        min-width: 235px;
     
         span {
             height: 40px;
@@ -54,6 +57,16 @@
             clip: rect(0, 0, 0, 0);
             white-space: nowrap;
             border: 0;
+        }
+    }
+
+    .form-select {
+        width: 100%;
+        min-width: 120px;
+        margin: auto;
+
+        &:hover {
+            cursor: pointer;
         }
     }
 

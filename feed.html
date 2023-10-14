@@ -148,42 +148,31 @@
                </div>
             </div>
 
-            <div class="container d-flex justify-content-between pb-2 mt-5 border-bottom scroll-target posts-header">
-               <h3 class="h2">Feed</h3>
+            <h3 class="h2 pb-2 border-bottom mt-5 scroll-target">Feed</h3>
+
+            <div class="posts-header d-flex flex-column flex-sm-row gap-2">
 
                <div class="input-group search-input-container">
-                  <span class="input-group-text border-secondary bg-transparent text-dark rounded-start"
+                  <span class="input-group-text border-secondary border-end-0 bg-transparent text-dark rounded-start"
                      id="searchAddon">
                      <i class="fa-solid fa-magnifying-glass"></i>
                   </span>
                   <input type="search" id="searchInput"
-                     class="form-control shadow-none rounded-end border-start-0 border-secondary"
-                     placeholder="Search post title, ID, tags or user...">
+                     class="form-control shadow-none rounded-end border-start-0 border-secondary ps-0"
+                     placeholder="Search posts or users...">
                   <label for="searchInput" class="hide-label">Search</label>
                </div>
 
-               <!-- <form class="form-search mt-1" id="searchForm">
-                        <div class="d-flex">
-                            <label for="search" class="form-label mb-0 hide-label" aria-label="search posts">
-                                Search:
-                            </label>
-                            <input type="search"
-                                class="form-control shadow-none border-primary rounded-0 rounded-start"
-                                id="searchInput" placeholder="Search for post title, ID, tags or user..."
-                                minlength="2">
-                            <button class="btn btn-primary bg-primary border-primary text-white rounded-0 rounded-end"
-                                id="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </div>
-                    </form> -->
+               <div class="d-flex justify-content-center ms-auto gap-2">
 
-               <select id="filterSelect" class="form-select shadow-none border-secondary"
-                  aria-label="Filter posts select">
-                  <option value="all">All posts</option>
-                  <option value="follow">Following</option>
-               </select>
+                  <select id="filterSelect" class="form-select shadow-none border-secondary"
+                     aria-label="Filter posts select">
+                     <option value="all">All posts</option>
+                     <option value="follow">Following</option>
+                  </select>
 
-               <div>
                   <button class="btn btn-outline-post text-dark btn-reset">Reset</button>
+
                </div>
 
             </div>
@@ -220,6 +209,7 @@
       </div>
 
       <div class="message-container message-fixed" title="Click to remove"></div>
+
    </main>
 
    <footer class="bg-primary align-items-center">

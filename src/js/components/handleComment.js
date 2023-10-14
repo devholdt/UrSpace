@@ -3,7 +3,11 @@ import { API_URLS } from "../settings/constants.js";
 import { httpRequest } from "../utilities/httpRequest.js";
 import { formatDate } from "../utilities/formatDate.js";
 
+/**
+ * Handles submitting comments for posts.
+ */
 export async function handleComment() {
+  // Select all comment form containers on the page.
   const commentFormContainers = document.querySelectorAll(
     ".comment-form-container"
   );
@@ -12,22 +16,20 @@ export async function handleComment() {
     const commentForm = container.querySelector("form");
     const commentInput = commentForm.querySelector("#commentInput");
 
+    // Construct the URL for posting the comment based on the dataset ID.
     const url = `${API_URLS.POSTS}/${commentForm.dataset.id}/comment`;
 
     commentForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
+      // Get the comment value from the input field.
       const commentValue = commentInput.value;
 
-      const commentMessage = document.createElement("div");
-      commentMessage.classList.add(
-        "message-container",
-        "message-comment",
-        "mt-2"
-      );
-
       try {
+        // Get the comments container element to append the new comment.
         const commentsContainer = container.querySelector(".comments");
+
+        // Send a POST request to the server to add a new comment.
         const newComment = await httpRequest(url, "POST", {
           body: commentValue,
         });
@@ -35,13 +37,13 @@ export async function handleComment() {
         const newCommentDate = new Date(newComment.created);
         const formattedNewCommentDate = formatDate(newCommentDate);
 
+        // Create the HTML structure for the new comment.
         const commentElement = document.createElement("div");
         commentElement.classList.add(
           "d-flex",
           "rounded-bottom",
           "post-comment"
         );
-
         commentElement.innerHTML = `
             <div class="card post p-">
         
@@ -69,16 +71,19 @@ export async function handleComment() {
             </div>`;
 
         if (commentsContainer) {
+          // Append the new comment to the comments container.
           commentsContainer.append(commentElement);
         }
 
-        message("success", "Comment posted", ".message-fixed");
+        // Show a success message after posting the comment.
+        message("success", "Comment posted!", ".message-fixed");
 
+        // Clear the comment input field.
         commentInput.value = "";
       } catch (error) {
         message(
           "error",
-          `An error occured when attempting to post a comment: ${error}`,
+          "An error occured when attempting to post a comment.",
           ".message-fixed"
         );
       }

@@ -41,7 +41,11 @@ export async function handleRegistration(event) {
 
   // Check if username, email, and password are provided
   if (username.length === 0 || email.length === 0 || password.length === 0) {
-    message("error", "Username, email and password required", ".message-index");
+    message(
+      "error",
+      "Username, email and password required.",
+      ".message-fixed"
+    );
     return;
   }
 
@@ -50,7 +54,7 @@ export async function handleRegistration(event) {
   const isValidBanner = await isValidImageUrl(banner);
 
   if (!isValidAvatar || !isValidBanner) {
-    message("error", "Invalid image URL", ".message-index");
+    message("error", "Invalid image URL.", ".message-fixed");
     return;
   }
 
@@ -88,10 +92,9 @@ export async function handleRegistration(event) {
           saveToken(token);
           saveUser(JSON.stringify(loginResponse));
 
-          // Display a success message and redirect after a delay
           message(
             "success",
-            `User registration was successful, welcome ${loginResponse.name}`,
+            `User registration was successful, welcome ${loginResponse.name}!`,
             ".message-fixed"
           );
 
@@ -101,28 +104,28 @@ export async function handleRegistration(event) {
         } else {
           message(
             "error",
-            "An error occured during auto-login",
+            "An error occured during auto-login.",
             ".message-fixed"
           );
         }
-      } catch (loginError) {
+      } catch (error) {
         message(
           "error",
-          `An error occured during user registration: ${loginError}`,
+          "An error occured during user registration.",
           ".message-fixed"
         );
       }
     } else {
       message(
         "error",
-        "Please provide correct registration credentials",
+        "Please provide correct registration credentials.",
         ".message-fixed"
       );
     }
   } catch (error) {
     message(
       "error",
-      `An error occured when attempting user registration: ${error}`,
+      "An error occured when attempting user registration.",
       ".message-fixed"
     );
   }

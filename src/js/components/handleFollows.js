@@ -1,6 +1,13 @@
 import { httpRequest } from "../utilities/httpRequest.js";
 import { API_URLS, DEFAULT_URLS } from "../settings/constants.js";
 
+/**
+ * Follow a user and update the UI.
+ *
+ * @param {string} name - The name of the user to follow.
+ * @param {Element} button1 - The first button (Follow) to toggle visibility.
+ * @param {Element} button2 - The second button (Unfollow) to toggle visibility.
+ */
 export async function handleFollowUser(name, button1, button2) {
   const followUrl = `${API_URLS.PROFILES}/${name}/follow`;
   const response = await httpRequest(followUrl, "PUT", {});
@@ -10,6 +17,13 @@ export async function handleFollowUser(name, button1, button2) {
   }
 }
 
+/**
+ * Unfollow a user and update the UI.
+ *
+ * @param {string} name - The name of the user to unfollow.
+ * @param {Element} button1 - The first button (Follow) to toggle visibility.
+ * @param {Element} button2 - The second button (Unfollow) to toggle visibility.
+ */
 export async function handleUnfollowUser(name, button1, button2) {
   const followUrl = `${API_URLS.PROFILES}/${name}/unfollow`;
   const response = await httpRequest(followUrl, "PUT", {});
@@ -19,6 +33,11 @@ export async function handleUnfollowUser(name, button1, button2) {
   }
 }
 
+/**
+ * Display the list of users following and followed by the given user.
+ *
+ * @param {Object} userData - The user's data containing 'following' and 'followers' arrays.
+ */
 export async function displayFollows(userData) {
   const profileFollowing = document.querySelector(".profile-following");
   const profileFollowers = document.querySelector(".profile-followers");

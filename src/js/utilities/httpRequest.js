@@ -9,9 +9,14 @@ import message from "../components/message.js";
  * @param {object|null} [body=null] - The request body data to send, if applicable. Should be an object or null.
  * @returns {Promise<Object>} A Promise that resolves to the JSON response data if the request is successful,
  *                            or rejects with an error message if the request fails.
+ *
+ * @throws {Error} - If the HTTP request fails.
+ *
+ * @description This function uses the 'getToken' function to get the user token for authentication.
  */
 export async function httpRequest(url, method = "GET", body = null) {
   try {
+    // Get the user token from local storage
     const token = getToken();
 
     const headers = {
@@ -19,6 +24,7 @@ export async function httpRequest(url, method = "GET", body = null) {
     };
 
     if (token) {
+      // Include the user's token in the request headers for authentication.
       headers.Authorization = `Bearer ${token}`;
     }
 
@@ -35,21 +41,15 @@ export async function httpRequest(url, method = "GET", body = null) {
 
       return json;
     } else {
-      const errorData = await response.json();
-      message(
-        "error",
-        errorData.message || "Request failed",
-        ".message-posts",
-        null
-      );
+      message("error", "Request failed.", ".message-fixed", null);
 
       throw new Error("HTTP Request failed");
     }
   } catch (error) {
     message(
       "error",
-      `An error occured with the API call: ${error}`,
-      ".message-posts",
+      "An error occured with the API call.",
+      ".message-fixed",
       null
     );
 

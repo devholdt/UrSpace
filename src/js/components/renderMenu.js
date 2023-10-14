@@ -94,7 +94,7 @@ export default async function renderMenu() {
   } catch (error) {
     message(
       "error",
-      `An error occured when attempting to fetch user data_ ${error}`,
+      "An error occured when attempting to fetch user data.",
       ".message-fixed",
       4000
     );
