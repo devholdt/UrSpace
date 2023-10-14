@@ -3,7 +3,7 @@ import message from "./components/message.js";
 import { API_URLS, URLS, DEFAULT_URLS } from "./settings/constants.js";
 import { getUser } from "./utilities/storage.js";
 import { displayPosts } from "./components/renderPosts.js";
-import { clearUrl } from "./utilities/clickEvents.js";
+import { clearUrl, removeMessage } from "./utilities/clickEvents.js";
 import { httpRequest } from "./utilities/httpRequest.js";
 import { isValidImageUrl } from "./utilities/urlValidation.js";
 import {
@@ -12,6 +12,15 @@ import {
   displayFollows,
 } from "./components/handleFollows.js";
 import { handlePost } from "./components/handlePost.js";
+
+// Get user data or redirect to the index page if the user is not authenticated
+const localUserData = getUser();
+if (!localUserData) {
+  window.location.href = URLS.INDEX;
+}
+
+// Remove fixed message function
+removeMessage();
 
 // Get the 'name' query string
 const queryString = document.location.search;
@@ -23,12 +32,6 @@ document.title = `UrSpace | ${username}'s profile`;
 if (!queryString) {
   params.set("name", `${getUser().name}`);
   document.location.search = params;
-}
-
-// Get user data or redirect to the index page if the user is not authenticated
-const localUserData = getUser();
-if (!localUserData) {
-  window.location.href = URLS.INDEX;
 }
 
 // Select the "Post" button, media input field, and clear media URL button
@@ -149,7 +152,7 @@ async function renderProfile() {
           message(
             "error",
             `An error occured when attempting to follow ${apiUserData.name}: ${error}`,
-            ".message-posts"
+            ".message-fixed"
           );
         }
       });
@@ -165,7 +168,7 @@ async function renderProfile() {
           message(
             "error",
             `An error occured when attempting to unfollow ${apiUserData.name}: ${error}`,
-            ".message-posts"
+            ".message-fixed"
           );
         }
       });
@@ -179,8 +182,9 @@ async function renderProfile() {
   } catch (error) {
     message(
       "error",
-      "An error occured when attempting to render profile",
-      ".message-posts"
+      `An error occured when attempting to render profile: ${error}`,
+      ".message-fixed",
+      null
     );
   }
 }

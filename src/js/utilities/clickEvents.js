@@ -33,10 +33,18 @@ export async function handleDelete(event) {
       message(
         "error",
         `An error occured when attempting to delete a post: ${error}`,
-        ".message-posts"
+        ".message-fixed"
       );
     }
   } else {
     return;
   }
+}
+
+export function removeMessage() {
+  const messageFixed = document.querySelector(".message-fixed");
+
+  messageFixed.addEventListener("click", () => {
+    messageFixed.innerHTML = "";
+  });
 }

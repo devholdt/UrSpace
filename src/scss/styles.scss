@@ -9,7 +9,6 @@
 @import "./layout/index";
 @import "./layout/feed";
 @import "./layout/profile";
-@import "./layout/searchResults";
 @import "./layout/footer";
 @import "./components/nav";
 @import "./components/form";
@@ -42,4 +41,10 @@
     &:hover {
         color: $white;
     }
+}
+
+.btn-outline-post {
+    @extend .btn-outline-secondary;
+
+    color: $dark;
 }

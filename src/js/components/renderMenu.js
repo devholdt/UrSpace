@@ -29,7 +29,6 @@ export default async function renderMenu() {
         text: "Profile",
         icon: "fa-solid fa-user",
       },
-      { href: URLS.SEARCH, text: "Search", icon: "fa-solid fa-search" },
     ];
 
     // Select the user profile navigation element
@@ -96,8 +95,8 @@ export default async function renderMenu() {
     message(
       "error",
       `An error occured when attempting to fetch user data_ ${error}`,
-      ".message-posts",
-      null
+      ".message-fixed",
+      4000
     );
   }
 }

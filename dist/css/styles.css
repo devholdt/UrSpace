@@ -3111,7 +3111,7 @@ textarea.form-control-lg {
   --bs-gradient: none;
 }
 
-.btn-outline-secondary {
+.btn-outline-secondary, .btn-outline-post {
   --bs-btn-color: #ff5722;
   --bs-btn-border-color: #ff5722;
   --bs-btn-hover-color: #000;
@@ -11874,6 +11874,17 @@ main {
   flex: 1 0 auto;
 }
 
+.message-fixed {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  transform: translate(-50%, -50%);
+}
+.message-fixed:hover {
+  cursor: pointer;
+}
+
 .forms-container {
   display: flex;
   flex-direction: column;
@@ -11927,6 +11938,54 @@ main {
   display: none;
 }
 
+.posts-header .search-input-container {
+  max-width: 330px;
+}
+.posts-header .search-input-container span {
+  height: 40px;
+  width: 45px;
+}
+.posts-header .search-input-container input {
+  height: 40px;
+}
+.posts-header .search-input-container .hide-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+.posts-header .btn-reset {
+  height: 40px;
+}
+
+#userResults button {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+#userResults button p {
+  max-width: inherit;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: #333333;
+}
+#userResults button:hover {
+  min-width: fit-content;
+  transform: scale(1.05);
+}
+#userResults button:hover p {
+  overflow: visible;
+}
+#userResults .search-result-user img {
+  width: 40px;
+  height: 40px;
+}
+
 #loadMoreButton {
   width: 200px;
   display: flex;
@@ -11934,6 +11993,16 @@ main {
 
 .feed-left-column {
   top: 50px;
+}
+
+.scroll-button {
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  background-color: white;
+}
+.scroll-button:hover {
+  background-color: #ff5722;
 }
 
 @media (min-width: 768px) {
@@ -12065,71 +12134,6 @@ main {
     display: none;
   }
 }
-.form-search {
-  top: 40px;
-  z-index: 2;
-}
-.form-search button {
-  height: 40px;
-  width: 45px;
-}
-.form-search input {
-  height: 40px;
-}
-.form-search .hide-label {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
-}
-
-.scroll-button {
-  position: fixed;
-  bottom: 2em;
-  right: 2em;
-  background-color: white;
-}
-.scroll-button:hover {
-  background-color: #ff5722;
-}
-
-#userResults button {
-  width: 100%;
-  margin-bottom: 1rem;
-}
-#userResults button p {
-  max-width: inherit;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  color: #333333;
-}
-#userResults button:hover {
-  min-width: fit-content;
-  transform: scale(1.05);
-}
-#userResults button:hover p {
-  overflow: visible;
-}
-#userResults .search-result-user img {
-  width: 40px;
-  height: 40px;
-}
-
-.search-top-column {
-  display: none;
-}
-
-@media (min-width: 992px) {
-  .search-top-column {
-    display: block;
-  }
-}
 footer {
   display: flex;
   flex-shrink: 0;
@@ -12236,6 +12240,11 @@ form .url-input {
   border-radius: 3px 0 0 3px;
 }
 
+.form-select {
+  max-width: 125px;
+  height: 40px;
+}
+
 .card-header p {
   margin: 0;
 }
@@ -12268,6 +12277,9 @@ form .url-input {
 .card .post-bottom p {
   font-size: 13px;
   color: #6c757d;
+}
+.card .liked i {
+  color: #ff5722;
 }
 
 .comment-form .hide-label {
@@ -12416,6 +12428,10 @@ form .url-input {
 }
 .btn-post:hover {
   color: #fff;
+}
+
+.btn-outline-post {
+  color: #333333;
 }
 
 /*# sourceMappingURL=styles.css.map */

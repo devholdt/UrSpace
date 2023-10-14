@@ -2,191 +2,236 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>UrSpace | Home</title>
-    <link rel="stylesheet" href="./dist/css/styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://kit.fontawesome.com/c609dd8d17.js" crossorigin="anonymous"></script>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>UrSpace | Home</title>
+   <link rel="stylesheet" href="./dist/css/styles.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+   <script src="https://kit.fontawesome.com/c609dd8d17.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    <header class="bg-primary">
-        <div class="container d-flex justify-content-between align-items-center p-3">
-            <div>
-                <a href="feed.html">
-                    <img src="images/UrSpace Logo w.svg" alt="UrSpace Logo">
-                </a>
+   <header class="bg-primary">
+      <div class="container d-flex justify-content-between align-items-center p-3">
+         <div>
+            <a href="feed.html">
+               <img src="images/UrSpace Logo w.svg" alt="UrSpace Logo">
+            </a>
+         </div>
+         <div class="user-info user-info-header"></div>
+         <nav class="navbar navbar-expand-lg">
+            <div class="container-fluid d-flex justify-content-end">
+               <button class="navbar-toggler bg-white shadow-none" type="button" data-bs-toggle="collapse"
+                  data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                  aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+               </button>
             </div>
-            <div class="user-info user-info-header"></div>
-            <nav class="navbar navbar-expand-lg">
-                <div class="container-fluid d-flex justify-content-end">
-                    <button class="navbar-toggler bg-white shadow-none" type="button" data-bs-toggle="collapse"
-                        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
-            </nav>
-        </div>
-        <div class="collapse navbar-collapse bg-light" id="navbarSupportedContent">
-            <div class="user-info user-info-hamburger d-flex justify-content-center mb-3 pt-3"></div>
-            <ul class="navbar-nav me-auto mb-lg-0"></ul>
-        </div>
-    </header>
+         </nav>
+      </div>
+      <div class="collapse navbar-collapse bg-light" id="navbarSupportedContent">
+         <div class="user-info user-info-hamburger d-flex justify-content-center mb-3 pt-3"></div>
+         <ul class="navbar-nav me-auto mb-lg-0"></ul>
+      </div>
+   </header>
 
-    <main class="container">
-        <div class="row page-columns">
+   <main class="container">
+      <div class="row page-columns">
 
-            <div class="col-lg-2 py-4">
-                <nav class="nav position-sticky"></nav>
-            </div>
+         <div class="col-lg-2 py-4">
+            <nav class="nav position-sticky"></nav>
+         </div>
 
-            <div class="col-lg-7">
+         <div class="col-lg-8">
 
-                <h1 class="feed-welcome my-5 text-center">Welcome to <img src="images/UrSpace Logo.svg"
-                        alt="UrSpace Logo">
-                </h1>
+            <h1 class="feed-welcome my-5 text-center">Welcome to <img src="images/UrSpace Logo.svg" alt="UrSpace Logo">
+            </h1>
 
-                <div class="accordion accordion-flush form-container" id="postFormAccordion">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header" id="postFormHeading">
-                            <button class="accordion-button collapsed shadow-none fs-5" type="button"
-                                data-bs-toggle="collapse" data-bs-target="#postForm-collapse" aria-expanded="false"
-                                aria-controls="postForm-collapse">
-                                Create a post
-                            </button>
-                        </h2>
-                        <div id="postForm-collapse" class="accordion-collapse collapse"
-                            aria-labelledby="postFormHeading" data-bs-parent="#postFormAccordion">
-                            <div class="accordion-body border border-primary rounded-bottom">
+            <div class="accordion accordion-flush form-container" id="postFormAccordion">
+               <div class="accordion-item">
+                  <h2 class="accordion-header" id="postFormHeading">
+                     <button class="accordion-button collapsed shadow-none fs-5" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#postForm-collapse" aria-expanded="false" aria-controls="postForm-collapse">
+                        Create a post
+                     </button>
+                  </h2>
+                  <div id="postForm-collapse" class="accordion-collapse collapse" aria-labelledby="postFormHeading"
+                     data-bs-parent="#postFormAccordion">
+                     <div class="accordion-body border border-primary rounded-bottom">
 
-                                <form class="form-container_post mx-auto">
-                                    <div class="mb-2">
-                                        <label for="postTitle" class="form-label m-0">Title</label>
-                                        <div class="d-flex">
-                                            <input type="text" class="form-control shadow-none title-input"
-                                                id="postTitle">
-                                            <span class="post-form-requirement ms-1">
-                                                <i class="fa-solid fa-circle-question"></i>
-                                                <span class="ms-1 bg-primary rounded text-white">Required
-                                                    field</span>
-                                            </span>
-                                        </div>
-                                    </div>
+                        <form class="form-container_post mx-auto">
+                           <div class="mb-2">
+                              <label for="postTitle" class="form-label m-0">Title</label>
+                              <div class="d-flex">
+                                 <input type="text" class="form-control shadow-none title-input" id="postTitle">
+                                 <span class="post-form-requirement ms-1">
+                                    <i class="fa-solid fa-circle-question"></i>
+                                    <span class="ms-1 bg-primary rounded text-white">Required
+                                       field</span>
+                                 </span>
+                              </div>
+                           </div>
 
-                                    <div class=" mb-2">
-                                        <label for="postBody" class="form-label m-0">Body
-                                            (Optional)</label>
-                                        <div class="d-flex">
-                                            <textarea class="form-control mb-3 shadow-none body-input" id="postBody"
-                                                maxlength="280"></textarea>
-                                            <span class="post-form-requirement ms-1">
-                                                <i class="fa-solid fa-circle-question"></i>
-                                                <span class="ms-1 bg-primary rounded text-white">Max. 280
-                                                    characters</span>
-                                            </span>
-                                        </div>
-                                    </div>
+                           <div class=" mb-2">
+                              <label for="postBody" class="form-label m-0">Body
+                                 (Optional)</label>
+                              <div class="d-flex">
+                                 <textarea class="form-control mb-3 shadow-none body-input" id="postBody"
+                                    maxlength="280"></textarea>
+                                 <span class="post-form-requirement ms-1">
+                                    <i class="fa-solid fa-circle-question"></i>
+                                    <span class="ms-1 bg-primary rounded text-white">Max. 280
+                                       characters</span>
+                                 </span>
+                              </div>
+                           </div>
 
-                                    <div class="mb-2">
-                                        <label for="postMedia" class="form-label m-0">Media URL
-                                            (Optional)</label>
-                                        <div class="d-flex">
-                                            <input type="text" class="form-control shadow-none url-input media-input"
-                                                id="postMedia">
-                                            <button type="button" class="btn btn-light btn-clear" id="clearMediaUrl"><i
-                                                    class="fa-solid fa-xmark"></i></button>
-                                            <span class="post-form-requirement ms-1">
-                                                <i class="fa-solid fa-circle-question"></i>
-                                                <span class="ms-1 bg-primary rounded text-white">Must be a
-                                                    valid image URL</span>
-                                            </span>
-                                        </div>
-                                    </div>
+                           <div class="mb-2">
+                              <label for="postMedia" class="form-label m-0">Media URL
+                                 (Optional)</label>
+                              <div class="d-flex">
+                                 <input type="text" class="form-control shadow-none url-input media-input"
+                                    id="postMedia">
+                                 <button type="button" class="btn btn-light btn-clear" id="clearMediaUrl"><i
+                                       class="fa-solid fa-xmark"></i></button>
+                                 <span class="post-form-requirement ms-1">
+                                    <i class="fa-solid fa-circle-question"></i>
+                                    <span class="ms-1 bg-primary rounded text-white">Must be a
+                                       valid image URL</span>
+                                 </span>
+                              </div>
+                           </div>
 
-                                    <div class="mb-3">
-                                        <label for="postTags" class="form-label m-0">Tags (Optional)</label>
-                                        <div class="d-flex">
-                                            <input type="text" class="form-control shadow-none tags-input"
-                                                id="postTags">
-                                            <span class="post-form-requirement ms-1">
-                                                <i class="fa-solid fa-circle-question"></i>
-                                                <span class="ms-1 bg-primary rounded text-white">
-                                                    <p>Max. 6 tags</p>
-                                                    <hr>
-                                                    <p>Tags are separated by commas (tag1, tag2, tag3)</p>
-                                                </span>
-                                            </span>
-                                        </div>
-                                    </div>
+                           <div class="mb-3">
+                              <label for="postTags" class="form-label m-0">Tags (Optional)</label>
+                              <div class="d-flex">
+                                 <input type="text" class="form-control shadow-none tags-input" id="postTags">
+                                 <span class="post-form-requirement ms-1">
+                                    <i class="fa-solid fa-circle-question"></i>
+                                    <span class="ms-1 bg-primary rounded text-white">
+                                       <p>Max. 6 tags</p>
+                                       <hr>
+                                       <p>Tags are separated by commas (tag1, tag2, tag3)</p>
+                                    </span>
+                                 </span>
+                              </div>
+                           </div>
 
-                                    <div class="d-flex justify-content-between">
-                                        <button type="submit" class="btn btn-post" title="Post">Post</button>
-                                        <p class="message-container message-post"></p>
-                                    </div>
+                           <div class="d-flex justify-content-between">
+                              <button type="submit" class="btn btn-post" title="Post">Post</button>
+                              <p class="message-container message-post"></p>
+                           </div>
 
-                                </form>
+                        </form>
 
-                                <div class="form-container_list mx-auto mb-4">
-                                    <hr class="my-5">
-                                    <p class="fw-semibold fs-5 mb-0">Rules and requirements</p>
-                                    <ul class="list-group list-group-flush">
-                                        <li class="list-group-item ps-1">Title is required</li>
-                                        <li class="list-group-item ps-1">Max 280 characters for body text
-                                        </li>
-                                        <li class="list-group-item ps-1">Media URL must link to a live and
-                                            publicly accessible image
-                                        </li>
-                                        <li class="list-group-item ps-1">Max 6 tags per post</li>
-                                        <li class="list-group-item ps-1">Tags are separated using commas
-                                            (tag 1, tag 2, tag 3)
-                                        </li>
-                                        <li class="list-group-item ps-1">Be appropriate and respectful
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
+                        <div class="form-container_list mx-auto mb-4">
+                           <hr class="my-5">
+                           <p class="fw-semibold fs-5 mb-0">Rules and requirements</p>
+                           <ul class="list-group list-group-flush">
+                              <li class="list-group-item ps-1">Title is required</li>
+                              <li class="list-group-item ps-1">Max 280 characters for body text
+                              </li>
+                              <li class="list-group-item ps-1">Media URL must link to a live and
+                                 publicly accessible image
+                              </li>
+                              <li class="list-group-item ps-1">Max 6 tags per post</li>
+                              <li class="list-group-item ps-1">Tags are separated using commas
+                                 (tag 1, tag 2, tag 3)
+                              </li>
+                              <li class="list-group-item ps-1">Be appropriate and respectful
+                              </li>
+                           </ul>
                         </div>
-                    </div>
-                </div>
 
-                <h3 class="mt-5 h2 scroll-target border-bottom pb-2">Feed</h3>
-
-                <div class="posts message-container message-posts p-2">
-
-                    <div class="posts-container"></div>
-
-                    <button id="loadMoreButton" class="btn btn-outline-primary justify-content-center mx-auto mt-4"
-                        style="display: none;">
-                        More posts
-                    </button>
-
-                    <div class="d-flex justify-content-end">
-                        <button class="scroll-button btn btn-outline-secondary rounded-5" style="display: none;">
-                            <i class="fa-solid fa-arrow-up"></i>
-                        </button>
-                    </div>
-
-                </div>
+                     </div>
+                  </div>
+               </div>
             </div>
 
-            <div class="col-lg-3"></div>
+            <div class="container d-flex justify-content-between pb-2 mt-5 border-bottom scroll-target posts-header">
+               <h3 class="h2">Feed</h3>
 
-        </div>
-    </main>
+               <div class="input-group search-input-container">
+                  <span class="input-group-text border-secondary bg-transparent text-dark rounded-start"
+                     id="searchAddon">
+                     <i class="fa-solid fa-magnifying-glass"></i>
+                  </span>
+                  <input type="search" id="searchInput"
+                     class="form-control shadow-none rounded-end border-start-0 border-secondary"
+                     placeholder="Search post title, ID, tags or user...">
+                  <label for="searchInput" class="hide-label">Search</label>
+               </div>
 
-    <footer class="bg-primary align-items-center">
-        <div class="container text-center text-white">
-            <p>UrSpace©2023</p>
-        </div>
-    </footer>
+               <!-- <form class="form-search mt-1" id="searchForm">
+                        <div class="d-flex">
+                            <label for="search" class="form-label mb-0 hide-label" aria-label="search posts">
+                                Search:
+                            </label>
+                            <input type="search"
+                                class="form-control shadow-none border-primary rounded-0 rounded-start"
+                                id="searchInput" placeholder="Search for post title, ID, tags or user..."
+                                minlength="2">
+                            <button class="btn btn-primary bg-primary border-primary text-white rounded-0 rounded-end"
+                                id="searchButton"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </div>
+                    </form> -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
-        crossorigin="anonymous"></script>
-    <script src="./src/js/feed.js" type="module"></script>
+               <select id="filterSelect" class="form-select shadow-none border-secondary"
+                  aria-label="Filter posts select">
+                  <option value="all">All posts</option>
+                  <option value="follow">Following</option>
+               </select>
+
+               <div>
+                  <button class="btn btn-outline-post text-dark btn-reset">Reset</button>
+               </div>
+
+            </div>
+
+
+            <div class="posts message-container message-posts p-2">
+
+               <div class="posts-container"></div>
+
+               <div class="search-container">
+                  <h2 class="user-search-heading h4 mb-3 py-2 px-3 text-white"></h2>
+                  <div id="userResults" class="user-results message-container row mx-auto"></div>
+
+                  <h2 class="post-search-heading h4 mb-3 py-2 px-3 text-white"></h2>
+                  <div id="postResults" class="post-results message-container row mx-auto"></div>
+               </div>
+
+               <button id="loadMoreButton" class="btn btn-outline-primary justify-content-center mx-auto"
+                  style="display: none;">
+                  More posts
+               </button>
+
+               <div class="d-flex justify-content-end">
+                  <button class="scroll-button btn btn-outline-secondary rounded-5" style="display: none;">
+                     <i class="fa-solid fa-arrow-up"></i>
+                  </button>
+               </div>
+
+            </div>
+         </div>
+
+         <div class="col-lg-3"></div>
+
+      </div>
+
+      <div class="message-container message-fixed" title="Click to remove"></div>
+   </main>
+
+   <footer class="bg-primary align-items-center">
+      <div class="container text-center text-white">
+         <p>UrSpace©2023</p>
+      </div>
+   </footer>
+
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"></script>
+   <script src="./src/js/feed.js" type="module"></script>
 </body>
 
 </html>
