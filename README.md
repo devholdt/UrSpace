@@ -10,14 +10,14 @@
   <h3>About this project</h3>
   This is a simple post content based social media website where logged-in users can read posts or post content themselves.
 
-  &nbsp;
+&nbsp;
 
-  <a href="https://jazzy-creponne-3f2db0.netlify.app/">Visit on Netlify</a>
+<a href="https://jazzy-creponne-3f2db0.netlify.app/">Visit on Netlify</a>
 
-  &nbsp;
-  
-  Created by Mathias B. Herholdt as part of the JavaScript 2 course at Noroff.
-  
+&nbsp;
+
+Created by Mathias B. Herholdt as part of the JavaScript 2 course at Noroff.
+
   <img src="https://github.com/MHerholdt94/js2-ca/assets/81162745/e38b900a-6a65-4199-95ca-c88d668bf8db" />
 </div>
 
@@ -26,19 +26,19 @@
 <div>
   <h4>How to open project</h4>
 
-  1. Clone repo
+1. Clone repo
 
 ```
 https://github.com/MHerholdt94/js2-ca/tree/js2
 ```
 
-  2. Install dependencies
+2. Install dependencies
 
 ```
 npm install
 ```
 
-  3. Run script
+3. Run script
 
 ```
 npm run dev
