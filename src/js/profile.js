@@ -1,17 +1,17 @@
-import renderMenu from "./components/renderMenu.js";
-import message from "./components/message.js";
-import { API_URLS, URLS, DEFAULT_URLS } from "./settings/constants.js";
-import { getUser } from "./utilities/storage.js";
-import { displayPosts } from "./components/renderPosts.js";
-import { clearUrl, removeMessage } from "./utilities/clickEvents.js";
-import { httpRequest } from "./utilities/httpRequest.js";
-import { isValidImageUrl } from "./utilities/urlValidation.js";
+import renderMenu from "./components/renderMenu.mjs";
+import message from "./components/message.mjs";
+import { API_URLS, URLS, DEFAULT_URLS } from "./settings/constants.mjs";
+import { getUser } from "./utilities/storage.mjs";
+import { displayPosts } from "./components/renderPosts.mjs";
+import { clearUrl, removeMessage } from "./utilities/clickEvents.mjs";
+import { httpRequest } from "./utilities/httpRequest.mjs";
+import { isValidImageUrl } from "./utilities/urlValidation.mjs";
 import {
   handleFollowUser,
   handleUnfollowUser,
   displayFollows,
-} from "./components/handleFollows.js";
-import { handlePost } from "./components/handlePost.js";
+} from "./components/handleFollows.mjs";
+import { handlePost } from "./components/handlePost.mjs";
 
 // Get user data or redirect to the index page if the user is not authenticated
 const localUserData = getUser();

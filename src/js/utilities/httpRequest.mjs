@@ -1,5 +1,5 @@
-import { getToken } from "./storage.js";
-import message from "../components/message.js";
+import { getToken } from "./storage.mjs";
+import message from "../components/message.mjs";
 
 /**
  * A flexible and dynamic function for HTTP Requests.

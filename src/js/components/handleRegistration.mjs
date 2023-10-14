@@ -1,10 +1,10 @@
-import message from "../components/message.js";
-import { API_URLS } from "../settings/constants.js";
-import { httpRequest } from "../utilities/httpRequest.js";
-import { isValidImageUrl } from "../utilities/urlValidation.js";
-import { saveToken, saveUser } from "../utilities/storage.js";
-import { URLS } from "../settings/constants.js";
-import { clearUrl } from "../utilities/clickEvents.js";
+import message from "./message.mjs";
+import { API_URLS } from "../settings/constants.mjs";
+import { httpRequest } from "../utilities/httpRequest.mjs";
+import { isValidImageUrl } from "../utilities/urlValidation.mjs";
+import { saveToken, saveUser } from "../utilities/storage.mjs";
+import { URLS } from "../settings/constants.mjs";
+import { clearUrl } from "../utilities/clickEvents.mjs";
 
 // Get input and clear button for avatar URL
 const avatarInput = document.getElementById("registerAvatar");

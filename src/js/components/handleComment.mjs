@@ -1,7 +1,7 @@
-import message from "./message.js";
-import { API_URLS } from "../settings/constants.js";
-import { httpRequest } from "../utilities/httpRequest.js";
-import { formatDate } from "../utilities/formatDate.js";
+import message from "./message.mjs";
+import { API_URLS } from "../settings/constants.mjs";
+import { httpRequest } from "../utilities/httpRequest.mjs";
+import { formatDate } from "../utilities/formatDate.mjs";
 
 /**
  * Handles submitting comments for posts.

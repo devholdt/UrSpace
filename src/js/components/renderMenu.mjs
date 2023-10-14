@@ -1,8 +1,8 @@
-import message from "./message.js";
-import { httpRequest } from "../utilities/httpRequest.js";
-import { getUser } from "../utilities/storage.js";
-import { URLS, DEFAULT_URLS, API_URLS } from "../settings/constants.js";
-import { handleLogout } from "../utilities/clickEvents.js";
+import message from "./message.mjs";
+import { httpRequest } from "../utilities/httpRequest.mjs";
+import { getUser } from "../utilities/storage.mjs";
+import { URLS, DEFAULT_URLS, API_URLS } from "../settings/constants.mjs";
+import { handleLogout } from "../utilities/clickEvents.mjs";
 
 /**
  * Renders the navigation menu based on the user's authentication status and current page.

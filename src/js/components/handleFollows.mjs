@@ -1,5 +1,5 @@
-import { httpRequest } from "../utilities/httpRequest.js";
-import { API_URLS, DEFAULT_URLS } from "../settings/constants.js";
+import { httpRequest } from "../utilities/httpRequest.mjs";
+import { API_URLS, DEFAULT_URLS } from "../settings/constants.mjs";
 
 /**
  * Follow a user and update the UI.

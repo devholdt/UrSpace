@@ -1,7 +1,7 @@
-import { API_URLS } from "../settings/constants.js";
-import { httpRequest } from "../utilities/httpRequest.js";
-import { isValidImageUrl } from "../utilities/urlValidation.js";
-import message from "./message.js";
+import { API_URLS } from "../settings/constants.mjs";
+import { httpRequest } from "../utilities/httpRequest.mjs";
+import { isValidImageUrl } from "../utilities/urlValidation.mjs";
+import message from "./message.mjs";
 
 /**
  * Handles the submission of a new post form.

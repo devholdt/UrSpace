@@ -1,12 +1,12 @@
-import { formatDate } from "../utilities/formatDate.js";
-import { handleEdit } from "./editPost.js";
-import { handleDelete } from "../utilities/clickEvents.js";
-import { getUser } from "../utilities/storage.js";
-import { httpRequest } from "../utilities/httpRequest.js";
-import { handleImageModal } from "./handleImageModal.js";
-import { handleComment } from "./handleComment.js";
-import { handlePostReaction } from "./handlePostReaction.js";
-import "../settings/common.js";
+import { formatDate } from "../utilities/formatDate.mjs";
+import { handleEdit } from "./editPost.mjs";
+import { handleDelete } from "../utilities/clickEvents.mjs";
+import { getUser } from "../utilities/storage.mjs";
+import { httpRequest } from "../utilities/httpRequest.mjs";
+import { handleImageModal } from "./handleImageModal.mjs";
+import { handleComment } from "./handleComment.mjs";
+import { handlePostReaction } from "./handlePostReaction.mjs";
+import "../settings/common.mjs";
 
 // Initialize variables for pagination
 let loading = false;

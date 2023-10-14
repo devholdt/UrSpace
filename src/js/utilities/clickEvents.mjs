@@ -1,6 +1,6 @@
-import message from "../components/message.js";
-import { API_URLS } from "../settings/constants.js";
-import { httpRequest } from "./httpRequest.js";
+import message from "../components/message.mjs";
+import { API_URLS } from "../settings/constants.mjs";
+import { httpRequest } from "./httpRequest.mjs";
 
 /**
  * Logs the user out by removing token and user data from localStorage and reloading the page.

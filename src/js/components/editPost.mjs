@@ -1,8 +1,8 @@
-import { httpRequest } from "../utilities/httpRequest.js";
-import { clearUrl } from "../utilities/clickEvents.js";
-import { API_URLS } from "../settings/constants.js";
-import { getUser } from "../utilities/storage.js";
-import message from "./message.js";
+import { httpRequest } from "../utilities/httpRequest.mjs";
+import { clearUrl } from "../utilities/clickEvents.mjs";
+import { API_URLS } from "../settings/constants.mjs";
+import { getUser } from "../utilities/storage.mjs";
+import message from "./message.mjs";
 
 /**
  * Handles the editing of a post.

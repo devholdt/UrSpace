@@ -1,8 +1,8 @@
-import { API_URLS } from "../settings/constants.js";
-import { httpRequest } from "../utilities/httpRequest.js";
-import { saveToken, saveUser } from "../utilities/storage.js";
-import { URLS } from "../settings/constants.js";
-import message from "../components/message.js";
+import { API_URLS } from "../settings/constants.mjs";
+import { httpRequest } from "../utilities/httpRequest.mjs";
+import { saveToken, saveUser } from "../utilities/storage.mjs";
+import { URLS } from "../settings/constants.mjs";
+import message from "./message.mjs";
 
 /**
  * Handles the submission of a user login form.

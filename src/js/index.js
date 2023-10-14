@@ -1,7 +1,7 @@
-import { getUser } from "./utilities/storage.js";
-import { URLS } from "./settings/constants.js";
-import { handleLogin } from "./components/handleLogin.js";
-import { handleRegistration } from "./components/handleRegistration.js";
+import { getUser } from "./utilities/storage.mjs";
+import { URLS } from "./settings/constants.mjs";
+import { handleLogin } from "./components/handleLogin.mjs";
+import { handleRegistration } from "./components/handleRegistration.mjs";
 
 // Get user data or redirect to the index page if the user is already authenticated
 const user = getUser();

@@ -1,17 +1,17 @@
-import renderMenu from "./components/renderMenu.js";
-import { API_URLS, URLS } from "./settings/constants.js";
-import { displayScrollButton } from "./utilities/scrollEvents.js";
-import { getUser } from "./utilities/storage.js";
-import { clearUrl, removeMessage } from "./utilities/clickEvents.js";
-import { handlePost } from "./components/handlePost.js";
-import { displayPosts } from "./components/renderPosts.js";
+import renderMenu from "./components/renderMenu.mjs";
+import { API_URLS, URLS } from "./settings/constants.mjs";
+import { displayScrollButton } from "./utilities/scrollEvents.mjs";
+import { getUser } from "./utilities/storage.mjs";
+import { clearUrl, removeMessage } from "./utilities/clickEvents.mjs";
+import { handlePost } from "./components/handlePost.mjs";
+import { displayPosts } from "./components/renderPosts.mjs";
 import {
   handleSearch,
   searchInput,
   postsContainer,
   searchContainer,
-} from "./components/handleSearch.js";
-import "./settings/common.js";
+} from "./components/handleSearch.mjs";
+import "./settings/common.mjs";
 
 // Get user data or redirect to the index page if the user is not authenticated
 const userData = getUser();

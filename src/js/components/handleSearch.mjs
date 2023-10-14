@@ -1,13 +1,13 @@
-import renderMenu from "./renderMenu.js";
-import message from "./message.js";
-import { httpRequest } from "../utilities/httpRequest.js";
-import { API_URLS, DEFAULT_URLS } from "../settings/constants.js";
-import { displayScrollButton } from "../utilities/scrollEvents.js";
-import { handleImageModal } from "./handleImageModal.js";
-import { handleDelete } from "../utilities/clickEvents.js";
-import { handleEdit } from "./editPost.js";
-import { generatePostHTML } from "./renderPosts.js";
-import { handleComment } from "./handleComment.js";
+import renderMenu from "./renderMenu.mjs";
+import message from "./message.mjs";
+import { httpRequest } from "../utilities/httpRequest.mjs";
+import { API_URLS, DEFAULT_URLS } from "../settings/constants.mjs";
+import { displayScrollButton } from "../utilities/scrollEvents.mjs";
+import { handleImageModal } from "./handleImageModal.mjs";
+import { handleDelete } from "../utilities/clickEvents.mjs";
+import { handleEdit } from "./editPost.mjs";
+import { generatePostHTML } from "./renderPosts.mjs";
+import { handleComment } from "./handleComment.mjs";
 
 // Render the menu and display the scroll button
 renderMenu();

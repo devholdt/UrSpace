@@ -1,6 +1,6 @@
-import message from "./message.js";
-import { httpRequest } from "../utilities/httpRequest.js";
-import { API_URLS } from "../settings/constants.js";
+import message from "./message.mjs";
+import { httpRequest } from "../utilities/httpRequest.mjs";
+import { API_URLS } from "../settings/constants.mjs";
 
 /**
  * Handles the user's reaction (like) of a post.

@@ -1,4 +1,4 @@
-import message from "../components/message.js";
+import message from "../components/message.mjs";
 
 /**
  * Validates an image URL to check if it's accessible and represents an image.
