@@ -24,8 +24,25 @@
 &nbsp;
 
 <div>
-  <h4>Dependencies</h4>
-  Run <pre>npm install</pre>
+  <h4>How to open project</h4>
+
+  1. Clone repo
+
+```
+https://github.com/MHerholdt94/js2-ca/tree/js2
+```
+
+  2. Install dependencies
+
+```
+npm install
+```
+
+  3. Run script
+
+```
+npm run dev
+```
 
   <h4>Languages</h4>
   <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
