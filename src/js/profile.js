@@ -321,7 +321,7 @@ async function handleUserSettings() {
         const isValidBanner = await isValidImageUrl(newUserMedia.banner);
 
         if (!isValidAvatar || !isValidBanner) {
-          message("error", "Invalid image URL.", ".message-fixed");
+          message("error", "Invalid image URL.", ".message-settings");
           return;
         }
 
@@ -332,7 +332,7 @@ async function handleUserSettings() {
           message(
             "success",
             "Image(s) successfully changed.",
-            ".message-fixed"
+            ".message-settings"
           );
 
           setTimeout(() => {

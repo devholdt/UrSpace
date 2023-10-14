@@ -29,7 +29,7 @@ export async function isValidImageUrl(url) {
     message(
       "error",
       "An error occured when attempting to validate image URL.",
-      ".message-posts"
+      ".message-fixed"
     );
     return false;
   }
