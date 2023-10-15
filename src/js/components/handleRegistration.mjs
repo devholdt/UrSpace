@@ -36,8 +36,8 @@ export async function handleRegistration(event) {
   const username = document.getElementById("registerUsername").value;
   const email = document.getElementById("registerEmail").value;
   const password = document.getElementById("registerPassword").value;
-  const avatar = avatarInput.value;
-  const banner = bannerInput.value;
+  const avatar = avatarInput.value.trim();
+  const banner = bannerInput.value.trim();
 
   // Check if username, email, and password are provided
   if (username.length === 0 || email.length === 0 || password.length === 0) {
@@ -50,8 +50,12 @@ export async function handleRegistration(event) {
   }
 
   // Check if provided image URLs are valid
-  const isValidAvatar = await isValidImageUrl(avatar);
-  const isValidBanner = await isValidImageUrl(banner);
+  const isValidAvatar =
+    avatar.length === 0 ? true : await isValidImageUrl(avatar);
+  const isValidBanner =
+    banner.length === 0 ? true : await isValidImageUrl(banner);
+  // const isValidAvatar = await isValidImageUrl(avatar);
+  // const isValidBanner = await isValidImageUrl(banner);
 
   if (!isValidAvatar || !isValidBanner) {
     message("error", "Invalid image URL.", ".message-fixed");
@@ -63,8 +67,8 @@ export async function handleRegistration(event) {
     name: username,
     email: email,
     password: password,
-    avatar: avatar || null,
-    banner: banner || null,
+    avatar: isValidAvatar ? avatar : null,
+    banner: isValidBanner ? banner : null,
   };
 
   try {
