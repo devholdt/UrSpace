@@ -1,0 +1,54 @@
+.message-container {
+    .message {
+        padding: .25rem 1rem;
+        text-align: center;
+        width: fit-content;
+        border-radius: 3px;
+        background: $white;
+        font-weight: 600;
+    }
+
+    .success {
+        border: 3px solid $success;
+        color: $success-secondary;
+    }
+
+    .error {
+        border: 3px solid $danger;
+        background-color: $danger-secondary;
+    }
+
+    .info {
+        border: 3px solid $info;
+        background-color: $info-secondary;
+    }
+}
+
+.message-post {
+    height: 40px;
+}
+
+.message-fixed {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 100;
+    transform: translate(-50%, -50%);
+
+    &:hover p {
+        cursor: pointer;
+        border-color: $dark;
+    }
+
+    &:hover::before {
+        content: "close";
+        background-color: $danger-secondary;
+        font-weight: 500;
+        position: absolute;
+        margin-top: -7.5%;
+        border: 3px solid $dark;
+        border-radius: 3px;
+        padding: 0 .5em;
+        cursor: pointer;
+    }
+}

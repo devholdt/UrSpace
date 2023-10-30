@@ -1,0 +1,21 @@
+html,
+body,
+.page-columns {
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    img {
+        width: 150px;
+        height: fit-content;
+    }
+}
+
+main {
+    flex: 1 0 auto;
+}

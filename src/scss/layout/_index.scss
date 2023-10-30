@@ -1,0 +1,28 @@
+.forms-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    form div {
+        width: 300px;
+        margin: auto;
+    }
+
+    h1 {
+        color: $primary;
+    }
+}
+
+#logoIndex {
+    display: flex;
+        justify-content: center;
+        max-width: 450px;
+}
+
+.toggle-form {
+    background: transparent;
+    border: none;
+    width: fit-content!important;
+    color: $primary;
+    text-decoration: underline;
+}

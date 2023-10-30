@@ -1,0 +1,50 @@
+// Custom variables
+@import "./variables";
+
+// Bootstrap Sass
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Custom imports
+@import "./layout/main";
+@import "./layout/index";
+@import "./layout/feed";
+@import "./layout/profile";
+@import "./layout/footer";
+@import "./components/nav";
+@import "./components/form";
+@import "./components/card";
+@import "./components/image";
+@import "./components/message";
+
+// Custom Sass
+.link-custom {
+    @extend .nav-link;
+
+    border: 1px solid transparent;
+    font-size: 18px;
+    font-weight: 600;
+    width: fit-content;
+
+    &:hover {
+        color: $secondary;
+    }
+}
+
+.btn-post {
+    @extend .btn-secondary;
+
+    border-radius: 20px;
+    color: white;
+    font-weight: 600;
+    width: 75px;
+
+    &:hover {
+        color: $white;
+    }
+}
+
+.btn-outline-post {
+    @extend .btn-outline-secondary;
+
+    color: $dark;
+}

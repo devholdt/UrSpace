@@ -1,0 +1,27 @@
+form {
+    input {
+        padding: 4px 8px;
+        height: 35px;
+        border-radius: 3px;
+        font-size: 16px;
+    }
+
+    button {
+        width: 200px;
+    }
+
+    div .btn-clear {
+        border-radius: 0 3px 3px 0;
+        width: 35px;
+        height: 35px;
+    }
+
+    .url-input {
+        border-radius: 3px 0 0 3px;
+    }
+}
+
+.form-select {
+    max-width: 125px;
+    height: 40px;
+}
