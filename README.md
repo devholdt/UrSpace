@@ -1,62 +1,64 @@
-![UrSpace Logo](https://github.com/MHerholdt94/js2-ca/assets/81162745/38c11326-d4f9-4aed-abde-522757e89ed0)
-
 <div align="center">
-  <h1>JavaScript 2 - Course Assignment by Mathias B. Herholdt</h1>
+   <img src="https://github.com/MHerholdt94/js2-ca/assets/81162745/38c11326-d4f9-4aed-abde-522757e89ed0" width="450">
 </div>
 
-&nbsp;
+## About UrSpace
 
 <div align="center">
-  <h3>About this project</h3>
-  This is a simple post content based social media website where logged-in users can read posts or post content themselves.
-
-&nbsp;
-
-<a href="https://jazzy-creponne-3f2db0.netlify.app/">Visit on Netlify</a>
-
-&nbsp;
-
-Created by Mathias B. Herholdt as part of the JavaScript 2 course at Noroff.
-
-  <img src="https://github.com/MHerholdt94/js2-ca/assets/81162745/e38b900a-6a65-4199-95ca-c88d668bf8db" />
+  UrSpace is a simple post content based social media website where logged-in users can read posts or post content themselves.
 </div>
 
-&nbsp;
+<br/>
 
-<div>
-  <h4>How to open project</h4>
+<div align="center">
+  
+  [Live site](https://urspace.netlify.app/)
 
-1. Clone repo
+</div>
 
+<br/>
+
+![urspace front page](https://github.com/MHerholdt94/js2-ca/assets/81162745/e38b900a-6a65-4199-95ca-c88d668bf8db)
+
+<br/>
+
+## Features
+
+- **CRUD Operations**: Users can create, read, update, and delete their own posts. These actions are visible both in the main feed and on their personal profiles.
+- **Minimalistic Design**: The platform features a clean and user-friendly layout, ensuring accessibility and ease of use for all users.
+- **API Integration**: Posts are dynamically fetched from the Noroff social media API, allowing users to read, comment, and react to content on their main feed.
+- **Search Functionality**: The feed page includes a search bar that enables users to filter through posts and user profiles effectively.
+
+## Getting Started
+
+### Prerequisites
+
+- [Node.js](https://nodejs.org/en/)
+- [npm](https://www.npmjs.com/)
+
+### Installation
+
+1. **Clone repository:**
+
+```bash
+git clone https://github.com/devholdt/urspace.git
+cd urspace
 ```
-https://github.com/MHerholdt94/js2-ca/tree/js2
-```
 
-2. Install dependencies
+2. **Install the dependencies:**
 
-```
+```bash
 npm install
 ```
 
-3. Run script
+3. **Start the development server:**
 
-```
+```bash
 npm run dev
 ```
 
-  <h4>Languages</h4>
-  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" />
-  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
-  <img src="https://img.shields.io/badge/Sass-CC6699?style=for-the-badge&logo=sass&logoColor=white" />
-  <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E" />
+The application should now be running on http://localhost:3000.
 
-  <h4>Tools, Frameworks & Libraries</h4>
-  <img src="https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white" />
-  <img src="https://img.shields.io/badge/Netlify-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" />
-  <img src="https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white" />
-  <img src="https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white" />
-</div>
+## License
 
-&nbsp;
-
-Link to <a href="https://trello.com/invite/b/bahrHuk4/ATTIa30d567d47bda5ffe3c159c9ef3c9e77F660BA2F/javascript-2-course-assignment">Trello Board</a>
+This project is licensed under the MIT License.
