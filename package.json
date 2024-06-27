@@ -2,11 +2,10 @@
 	"name": "urspace",
 	"version": "1.0.0",
 	"description": "",
-	"main": "src/js/index.js",
+	"main": "dist/js/index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "sass src/scss:dist/css && cp -r src/js dist",
-		"watch": "sass --watch src/scss:dist/css",
+		"build": "sass src/scss:dist/css && cp -r src/js dist/js && cp src/images dist/images",
 		"start": "live-server",
 		"dev": "npm-run-all --parallel watch start",
 		"docs": "jsdoc -c ./conf.json -r"
