@@ -10,7 +10,7 @@
 		"copy-images": "cp -R images dist/",
 		"build": "npm-run-all build-css copy-html copy-images",
 		"start": "live-server dist",
-		"dev": "npm-run-all --parallel watch start",
+		"dev": "env-cmd -f .env.development npm-run-all --parallel watch start",
 		"docs": "jsdoc -c ./conf.json -r"
 	},
 	"keywords": [],
