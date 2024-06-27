@@ -10,6 +10,7 @@
 		"render-html": "node src/js/utilities/render-html.js",
 		"copy-images": "cp -R images dist/",
 		"build": "npm-run-all build-css build-js render-html copy-images",
+		"watch": "sass --watch src/scss:dist/css",
 		"start": "live-server dist",
 		"dev": "npm-run-all --parallel watch start",
 		"docs": "jsdoc -c ./conf.json -r"
