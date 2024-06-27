@@ -5,7 +5,7 @@
 	"main": "dist/js/index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1",
-		"build": "sass src/scss:dist/css && cp -r src/js dist/js && cp src/images dist/images",
+		"build": "sass src/scss:dist/css && cp -r src/js dist/js && cp -r images dist/images",
 		"start": "live-server",
 		"dev": "npm-run-all --parallel watch start",
 		"docs": "jsdoc -c ./conf.json -r"
