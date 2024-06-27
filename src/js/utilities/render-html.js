@@ -1,7 +1,6 @@
 const ejs = require("ejs");
 const fs = require("fs");
 const path = require("path");
-require("dotenv").config();
 
 const renderFile = (templatePath, outputPath) => {
 	const template = fs.readFileSync(templatePath, "utf-8");
